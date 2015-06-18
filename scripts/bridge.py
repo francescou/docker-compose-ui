@@ -11,8 +11,14 @@ def ps_(project):
     """
     logging.debug('ps ' + project.name)
     containers = project.containers(stopped=True) + project.containers(one_off=True)
-    rows = map(lambda container: {'name': container.name, 'command': container.human_readable_command, 'state': container.human_readable_state, 'ports': container.human_readable_ports, 'is_running': container.is_running}, containers)
-    return rows
+    items = map(lambda container: {
+        'name': container.name,
+        'command': container.human_readable_command,
+        'state': container.human_readable_state,
+        'ports': container.human_readable_ports,
+        'is_running': container.is_running}, containers)
+
+    return items
 
 def get_project(path):
     """

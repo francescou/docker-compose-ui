@@ -9,6 +9,7 @@ from json import loads
 import logging
 
 # Flask Application
+API_V1 = '/api/v1/'
 logging.basicConfig(level=logging.DEBUG)
 app = Flask(__name__, static_url_path='')
 
@@ -16,7 +17,6 @@ app = Flask(__name__, static_url_path='')
 projects = find_yml_files('/opt/definitions')
 logging.debug(projects)
 
-API_V1 = '/api/v1/'
 
 def get_project_with_name(name):
     """
@@ -42,18 +42,6 @@ def container(name):
     project = get_project_with_name(name)
     the_container = ps_(project)
     return jsonify(info=the_container)
-
-@app.route(API_V1 + "logs/<name>", defaults={'limit': "all"}, methods=['GET'])
-@app.route(API_V1 + "logs/<name>/<int:limit>", methods=['GET'])
-def logs(name, limit):
-    """
-    docker-compose logs
-    """
-    lines = {}
-    for k in get_project_with_name(name).containers(stopped=True):
-        lines[k.name] = k.logs(timestamps=True, tail=limit).split('\n')
-
-    return jsonify(logs=lines)
 
 @app.route(API_V1 + "containers/<name>", methods=['DELETE'])
 def kill(name):
@@ -81,6 +69,18 @@ def up_():
     outcome = get_project_with_name(name).up()
     logging.debug(outcome)
     return jsonify(info=len(outcome))
+
+@app.route(API_V1 + "logs/<name>", defaults={'limit': "all"}, methods=['GET'])
+@app.route(API_V1 + "logs/<name>/<int:limit>", methods=['GET'])
+def logs(name, limit):
+    """
+    docker-compose logs
+    """
+    lines = {}
+    for k in get_project_with_name(name).containers(stopped=True):
+        lines[k.name] = k.logs(timestamps=True, tail=limit).split('\n')
+
+    return jsonify(logs=lines)
 
 # static resources
 @app.route("/")
