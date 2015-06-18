@@ -14,14 +14,14 @@ docker run --rm --name docker-compose-ui -p 5000:5000 -v /var/run/docker.sock:/v
 
 # API
 
-curl http://localhost:5000/api/v1/containers
+curl http://localhost:5000/api/v1/projects
 
-curl http://localhost:5000/api/v1/containers/compose-mongo
+curl http://localhost:5000/api/v1/projects/compose-mongo
 
-curl -X POST http://localhost:5000/api/v1/containers --data '{"id":"compose-mongo"}' -H'Content-type: application/json'
+curl -X POST http://localhost:5000/api/v1/projects --data '{"id":"compose-mongo"}' -H'Content-type: application/json'
 
-curl -X PUT http://localhost:5000/api/v1/containers --data '{"id":"compose-mongo"}' -H'Content-type: application/json'
+curl -X PUT http://localhost:5000/api/v1/projects --data '{"id":"compose-mongo"}' -H'Content-type: application/json'
 
-curl -X DELETE http://localhost:5000/api/v1/containers/compose-mongo
+curl -X DELETE http://localhost:5000/api/v1/projects/compose-mongo
 
 curl http://localhost:5000/api/v1/logs/compose-mongo/100

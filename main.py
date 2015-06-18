@@ -27,15 +27,15 @@ def get_project_with_name(name):
 
 # REST endpoints
 
-@app.route(API_V1 + "containers", methods=['GET'])
-def containers():
+@app.route(API_V1 + "projects", methods=['GET'])
+def list_projects():
     """
     List docker compose projects
     """
     return jsonify(projects=projects)
 
-@app.route(API_V1 + "containers/<name>", methods=['GET'])
-def container(name):
+@app.route(API_V1 + "projects/<name>", methods=['GET'])
+def project_containers(name):
     """
     get project details
     """
@@ -43,15 +43,15 @@ def container(name):
     containers = ps_(project)
     return jsonify(containers=containers)
 
-@app.route(API_V1 + "containers/<name>", methods=['DELETE'])
+@app.route(API_V1 + "projects/<name>", methods=['DELETE'])
 def kill(name):
     """
     docker-compose kill
     """
-    outcome = get_project_with_name(name).kill()
+    get_project_with_name(name).kill()
     return jsonify(command='kill')
 
-@app.route(API_V1 + "containers", methods=['PUT'])
+@app.route(API_V1 + "projects", methods=['PUT'])
 def pull():
     """
     docker-compose pull
@@ -60,7 +60,7 @@ def pull():
     get_project_with_name(name).pull()
     return jsonify(command='pull')
 
-@app.route(API_V1 + "containers", methods=['POST'])
+@app.route(API_V1 + "projects", methods=['POST'])
 def up_():
     """
     docker-compose up
