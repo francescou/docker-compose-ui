@@ -3,14 +3,14 @@
     docker run \
     --name docker-compose-ui \
     -p 5000:5000 \
-    -v /home/user/docker-compose-projects:/opt/definitions \
+    -v /home/user/docker-compose-projects:/opt/docker-compose-projects \
     -e DOCKER_HOST=my-host:5915 \
     docker-compose-ui
 
 
 # Temp
 
-docker run --rm --name docker-compose-ui -p 5000:5000 -v /var/run/docker.sock:/var/run/docker.sock -v /home/francesco/foobar/:/opt/definitions docker-compose-ui
+docker run --rm --name docker-compose-ui -p 5000:5000 -v /var/run/docker.sock:/var/run/docker.sock -v /home/francesco/foobar/:/opt/docker-compose-projects:ro docker-compose-ui
 
 # API
 

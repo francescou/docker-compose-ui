@@ -8,7 +8,5 @@ ADD requirements.txt /app/requirements.txt
 RUN /env/bin/pip install -r requirements.txt
 ADD . /app
 
-VOLUME /opt/docker-compose-projects
-
 CMD []
 ENTRYPOINT ["/env/bin/python", "/app/main.py"]
