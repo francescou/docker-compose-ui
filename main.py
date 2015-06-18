@@ -16,6 +16,8 @@ app = Flask(__name__, static_url_path='')
 projects = find_yml_files('/opt/definitions')
 logging.debug(projects)
 
+API_V1 = '/api/v1/'
+
 def get_project_with_name(name):
     """
     get docker compose project given a project name
@@ -25,14 +27,14 @@ def get_project_with_name(name):
 
 # REST endpoints
 
-@app.route("/api/containers", methods=['GET'])
+@app.route(API_V1 + "containers", methods=['GET'])
 def containers():
     """
     List docker compose projects
     """
     return jsonify(compose=projects)
 
-@app.route("/api/containers/<name>", methods=['GET'])
+@app.route(API_V1 + "containers/<name>", methods=['GET'])
 def container(name):
     """
     get project details
@@ -41,8 +43,8 @@ def container(name):
     the_container = ps_(project)
     return jsonify(info=the_container)
 
-@app.route("/api/logs/<name>", defaults={'limit': "all"}, methods=['GET'])
-@app.route("/api/logs/<name>/<int:limit>", methods=['GET'])
+@app.route(API_V1 + "logs/<name>", defaults={'limit': "all"}, methods=['GET'])
+@app.route(API_V1 + "logs/<name>/<int:limit>", methods=['GET'])
 def logs(name, limit):
     """
     docker-compose logs
@@ -53,7 +55,7 @@ def logs(name, limit):
 
     return jsonify(logs=lines)
 
-@app.route("/api/containers/<name>", methods=['DELETE'])
+@app.route(API_V1 + "containers/<name>", methods=['DELETE'])
 def kill(name):
     """
     docker-compose kill
@@ -61,7 +63,7 @@ def kill(name):
     outcome = get_project_with_name(name).kill()
     return jsonify(info=outcome)
 
-@app.route("/api/containers", methods=['PUT'])
+@app.route(API_V1 + "containers", methods=['PUT'])
 def pull():
     """
     docker-compose pull
@@ -70,7 +72,7 @@ def pull():
     outcome = get_project_with_name(name).pull()
     return jsonify(info=outcome)
 
-@app.route("/api/containers", methods=['POST'])
+@app.route(API_V1 + "containers", methods=['POST'])
 def up_():
     """
     docker-compose up
@@ -86,7 +88,7 @@ def index():
     """
     index.html
     """
-    return app.send_static_file('app/index.html')
+    return app.send_static_file('index.html')
 
 # run app
 if __name__ == "__main__":
