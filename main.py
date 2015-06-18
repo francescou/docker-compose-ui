@@ -14,7 +14,7 @@ logging.basicConfig(level=logging.DEBUG)
 app = Flask(__name__, static_url_path='')
 
 # load project definitions
-projects = find_yml_files('/opt/definitions')
+projects = find_yml_files('/opt/docker-compose-projects')
 logging.debug(projects)
 
 
@@ -32,7 +32,7 @@ def containers():
     """
     List docker compose projects
     """
-    return jsonify(compose=projects)
+    return jsonify(projects=projects)
 
 @app.route(API_V1 + "containers/<name>", methods=['GET'])
 def container(name):
@@ -40,8 +40,8 @@ def container(name):
     get project details
     """
     project = get_project_with_name(name)
-    the_container = ps_(project)
-    return jsonify(info=the_container)
+    containers = ps_(project)
+    return jsonify(containers=containers)
 
 @app.route(API_V1 + "containers/<name>", methods=['DELETE'])
 def kill(name):
@@ -49,7 +49,7 @@ def kill(name):
     docker-compose kill
     """
     outcome = get_project_with_name(name).kill()
-    return jsonify(info=outcome)
+    return jsonify(command='kill')
 
 @app.route(API_V1 + "containers", methods=['PUT'])
 def pull():
@@ -57,8 +57,8 @@ def pull():
     docker-compose pull
     """
     name = loads(request.data)["id"]
-    outcome = get_project_with_name(name).pull()
-    return jsonify(info=outcome)
+    get_project_with_name(name).pull()
+    return jsonify(command='pull')
 
 @app.route(API_V1 + "containers", methods=['POST'])
 def up_():
@@ -66,9 +66,13 @@ def up_():
     docker-compose up
     """
     name = loads(request.data)["id"]
-    outcome = get_project_with_name(name).up()
-    logging.debug(outcome)
-    return jsonify(info=len(outcome))
+    containers = get_project_with_name(name).up()
+    logging.debug(containers)
+    return jsonify(
+        {
+            'command': 'up',
+            'containers': map(lambda container: container.name, containers)
+        })
 
 @app.route(API_V1 + "logs/<name>", defaults={'limit': "all"}, methods=['GET'])
 @app.route(API_V1 + "logs/<name>/<int:limit>", methods=['GET'])
