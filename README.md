@@ -1,33 +1,46 @@
 # Docker Compose UI
 
+## What is it
+
+Docker Compose UI is a web interface for Docker Compose.
+Disclaimer: the software is still under heavy development and might not be ready for production use.
+
+## Getting started
+
+Put some docker-compose projects in a directory (e.g. /home/user/docker-compose-projects/) and then run:
+
     docker run \
     --name docker-compose-ui \
     -p 5000:5000 \
-    -v /home/user/docker-compose-projects:/opt/docker-compose-projects \
-    -e DOCKER_HOST=my-host:5915 \
+    -v /home/user/docker-compose-projects:/opt/docker-compose-projects:ro \
+    -v /var/run/docker.sock:/var/run/docker.sock
     docker-compose-ui
 
+Open your browser to `http://localhost:5000`
 
-# Temp
+## Technologies
 
-docker run --rm --name docker-compose-ui -p 5000:5000 -v /var/run/docker.sock:/var/run/docker.sock -v /home/francesco/foobar/:/opt/docker-compose-projects:ro docker-compose-ui
+Docker Compose UI has been developed using Flask (python microframework) to provide RESTful services and AngularJS to implement the Single Page Application web ui.
 
-# API
-
-curl http://localhost:5000/api/v1/projects
-
-curl http://localhost:5000/api/v1/projects/compose-mongo
-
-curl -X POST http://localhost:5000/api/v1/projects --data '{"id":"compose-mongo"}' -H'Content-type: application/json'
-
-curl -X PUT http://localhost:5000/api/v1/projects --data '{"id":"compose-mongo"}' -H'Content-type: application/json'
-
-curl -X DELETE http://localhost:5000/api/v1/projects/compose-mongo
-
-curl http://localhost:5000/api/v1/logs/compose-mongo/100
+The application uses (Docker Compose)[https://docs.docker.com/compose] to monitor and edit the state of a set of docker compose projects (*docker-compose.yml* files).
 
 
-# License - MIT
+## API
+
+    curl http://localhost:5000/api/v1/projects
+
+    curl http://localhost:5000/api/v1/projects/compose-mongo
+
+    curl -X POST http://localhost:5000/api/v1/projects --data '{"id":"compose-mongo"}' -H'Content-type: application/json'
+
+    curl -X PUT http://localhost:5000/api/v1/projects --data '{"id":"compose-mongo"}' -H'Content-type: application/json'
+
+    curl -X DELETE http://localhost:5000/api/v1/projects/compose-mongo
+
+    curl http://localhost:5000/api/v1/logs/compose-mongo/100
+
+
+## License - MIT
 
 The Docker Compose UI code is licensed under the MIT license.
 
