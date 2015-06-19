@@ -13,10 +13,7 @@ angular.module('staticApp')
         logs: '='
       },
       templateUrl: 'views/actions.html',
-      link: function (scope, element, attrs) {
-
-      },
-      controller: function($scope, $element, $attrs, $transclude) {
+      controller: function($scope) {
 
         var Project = $resource('api/v1/projects/:id', null, {
           'update': { method:'PUT' }
@@ -26,9 +23,11 @@ angular.module('staticApp')
 
         $scope.kill = function () {
           $scope.working = true;
-          Project.delete({id: $scope.projectId}, function () {
+          var id = $scope.projectId;
+          Project.delete({id: id}, function () {
             $scope.output = 'killed';
             $scope.working = false;
+            $scope.project = Project.get({id: id});
           });
         };
         $scope.pull = function () {
@@ -40,9 +39,11 @@ angular.module('staticApp')
         };
         $scope.up = function () {
           $scope.working = true;
-          Project.save({id: $scope.projectId}, function (data) {
+          var id = $scope.projectId;
+          Project.save({id: id}, function (data) {
             $scope.output = data.containers.length + ' container(s) started';
             $scope.working = false;
+            $scope.project = Project.get({id: id});
           });
         };
 
