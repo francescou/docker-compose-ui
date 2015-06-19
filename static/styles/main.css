@@ -4,7 +4,8 @@ body {
 
 .projects {
   border-bottom: 5px solid #E1F5FE;
-  background: white
+  background: white;
+  margin-top: 30px
 }
 
 .project-label {

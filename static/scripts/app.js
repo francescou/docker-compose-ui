@@ -10,12 +10,8 @@
  */
 angular
   .module('staticApp', [
-    'ngAnimate',
-    'ngCookies',
     'ngResource',
-    'ngRoute',
-    'ngSanitize',
-    'ngTouch'
+    'ngRoute'
   ], function($provide, $httpProvider) {
 
   $httpProvider.interceptors.push(function($q, $rootScope) {

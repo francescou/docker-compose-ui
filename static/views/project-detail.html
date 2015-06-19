@@ -1,5 +1,7 @@
 <div ng-show="highlighted">
-  <h1 ng-show="working"><i class="fa fa-spinner fa-spin"></i></h1>
+  <h1 ng-show="working">
+    <div class="plus-loader"></div>
+  </h1>
   <actions project-id="projectId" project="project" output="output" working="working" logs="logs"></actions>
   <br>
   <strong ng-hide="working">{{output}}</strong>
