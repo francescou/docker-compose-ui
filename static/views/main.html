@@ -1,29 +1,9 @@
 <div class="row text-center">
-
   <ul class="list-unstyled projects">
-    <li ng-repeat="(id, _) in projects.projects" ng-class="{active: active === id}" class="project">
-      <a href="" ng-click="working || select(id)" ng-hide="active === id" class="project-label">{{id}}</a>
+    <li ng-repeat="(id, path) in projects.projects" ng-class="{active: active === id}" class="project">
+      <a href="" ng-click="$parent.active = id" ng-hide="active === id" class="project-label">{{id}}</a>
       <span ng-show="active === id" class="project-label">{{id}}</span>
-      <div ng-show="active === id">
-        <h1 ng-show="working"><i class="fa fa-spinner fa-spin"></i></h1>
-        <div class="btn-group" role="group" aria-label="actions" ng-hide="working">
-          <button ng-click="kill(id)" class="btn btn-default"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> kill</button>
-          <button ng-click="pull(id)" class="btn btn-default"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> pull</button>
-          <button ng-click="up(id)" class="btn btn-default"><span class="glyphicon glyphicon-play" aria-hidden="true"></span> up</button>
-          <button ng-click="displayLogs(id)" class="btn btn-default"><span class="glyphicon glyphicon-inbox" aria-hidden="true"></span> logs</button>
-        </div>
-        <br>
-        <span ng-hide="working" class="label label-default">{{output}}</span>
-
-        <div ng-hide="working" class="container-detail" ng-repeat="container in project.containers">
-          <span ng-class="{'label': true, 'label-success': container.is_running, 'label-default': !container.is_running}">
-            <b>{{container.name}}</b>
-            <span ng-show="container.is_running">[ports: {{container.ports}}]</span>
-            <span ng-hide="container.is_running">{{container.state}}</span>
-          </span>
-          <log log-data="logs.logs[container.name]"></log>
-        </div>
-      </div>
+      <project-detail project-id="id" highlighted="active === id"></project-detail>
     </li>
   </ul>
 </div>
