@@ -11,6 +11,13 @@ angular.module('staticApp')
   .controller('MainCtrl', function ($scope, $resource) {
 
     var Projects = $resource('api/v1/projects');
-    $scope.projects = Projects.get();
+
+    function reload() {
+      $scope.projects = Projects.get();
+    }
+
+    $scope.reload = reload;
+
+    reload();
 
   });

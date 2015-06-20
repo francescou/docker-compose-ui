@@ -10,11 +10,13 @@ import logging
 
 # Flask Application
 API_V1 = '/api/v1/'
+YML_PATH='/opt/docker-compose-projects'
 logging.basicConfig(level=logging.DEBUG)
 app = Flask(__name__, static_url_path='')
 
 # load project definitions
-projects = find_yml_files('/opt/docker-compose-projects')
+projects = find_yml_files(YML_PATH)
+
 logging.debug(projects)
 
 
@@ -32,6 +34,7 @@ def list_projects():
     """
     List docker compose projects
     """
+    projects = find_yml_files(YML_PATH)
     return jsonify(projects=projects)
 
 @app.route(API_V1 + "projects/<name>", methods=['GET'])
