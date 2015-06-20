@@ -34,6 +34,7 @@ def list_projects():
     """
     List docker compose projects
     """
+    global projects
     projects = find_yml_files(YML_PATH)
     return jsonify(projects=projects)
 
@@ -76,6 +77,15 @@ def up_():
             'command': 'up',
             'containers': map(lambda container: container.name, containers)
         })
+
+@app.route(API_V1 + "build", methods=['POST'])
+def build():
+    """
+    docker-compose build
+    """
+    name = loads(request.data)["id"]
+    data = get_project_with_name(name).build()
+    return jsonify(command='build')
 
 @app.route(API_V1 + "logs/<name>", defaults={'limit': "all"}, methods=['GET'])
 @app.route(API_V1 + "logs/<name>/<int:limit>", methods=['GET'])

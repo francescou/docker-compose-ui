@@ -16,7 +16,11 @@ angular.module('staticApp')
       controller: function($scope) {
 
         var Project = $resource('api/v1/projects/:id', null, {
-          'update': { method:'PUT' }
+          'update': { method:'PUT' },
+          'build': {
+            url: 'api/v1/build',
+            method: 'POST'
+          }
         });
 
         var Logs = $resource('api/v1/logs/:id/:limit');
@@ -49,6 +53,15 @@ angular.module('staticApp')
 
         $scope.displayLogs = function () {
           $scope.logs = Logs.get({id: $scope.projectId, limit: 100});
+        };
+
+        $scope.build = function () {
+          $scope.working = true;
+          var id = $scope.projectId;
+          Project.build({id: id}, function () {
+            $scope.output = 'build terminated';
+            $scope.working = false;
+          });
         };
 
 
