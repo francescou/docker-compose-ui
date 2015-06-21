@@ -2,31 +2,6 @@ body {
   background-color: #F9F9F9
 }
 
-.projects {
-  border-bottom: 5px solid #E1F5FE;
-  background: white;
-  margin-top: 30px
-}
-
-.project-label {
-  font-size: 20px;
-  display: block;
-  padding: 20px;
-}
-
-.project-label:hover {
-  text-decoration: none;
-}
-
-.project{
-  border: 5px solid #E1F5FE;
-  border-bottom: 0
-}
-
-.project.active {
-  background-color: #E1F5FE;
-}
-
 .logs{
   max-height: 300px;
   margin: 20px 10px;

@@ -1,18 +1,22 @@
-<div ng-show="highlighted">
-  <h1 ng-show="working">
-    <div class="plus-loader"></div>
-  </h1>
-  <actions project-id="projectId" project="project" output="output" working="working" logs="logs"></actions>
-  <br>
-  <strong ng-hide="working">{{output}}</strong>
-  <br>
+<h2>Project: {{projectId}}</h2>
 
-  <div ng-hide="working" class="container-detail" ng-repeat="container in project.containers">
-    <strong ng-class="{'text-success': container.is_running, 'text-warning': !container.is_running}">
-      <b>{{container.name}}</b>
-      <span ng-show="container.is_running">[ports: {{container.ports}}]</span>
-      <span ng-hide="container.is_running">{{container.state}}</span>
-    </strong>
-    <log log-data="logs.logs[container.name]"></log>
-  </div>
+<h1 ng-show="working">
+  <div class="plus-loader"></div>
+</h1>
+
+<h3>Actions</h3>
+<actions project-id="projectId" project="project" output="output" working="working" logs="logs"></actions>
+<br>
+<strong ng-hide="working">{{output}}</strong>
+
+<h3>Containers</h3>
+<div ng-hide="working" class="container-detail" ng-repeat="container in project.containers">
+  <strong ng-class="{'text-success': container.is_running, 'text-warning': !container.is_running}">
+    <b>{{container.name}}</b>
+    <span ng-show="container.is_running">[ports: {{container.ports}}]</span>
+    <span ng-hide="container.is_running">{{container.state}}</span>
+  </strong>
+  <log log-data="logs.logs[container.name]"></log>
 </div>
+
+<span ng-show="project.containers.length === 0">no containers found</span>

@@ -6,19 +6,17 @@ angular.module('staticApp')
       restrict: 'E',
       scope: {
         projectId: '=',
-        path: '=',
-        highlighted: '='
+        path: '='
       },
       templateUrl: 'views/project-detail.html',
       controller: function($scope) {
 
         var Project = $resource('api/v1/projects/:id');
 
-        $scope.$watch('highlighted', function (val) {
+        $scope.$watch('projectId', function (val) {
           if (val) {
-            var id = $scope.projectId;
-            $log.debug('refresh ' + id);
-            $scope.project = Project.get({id: id});
+            $log.debug('refresh ' + val);
+            $scope.project = Project.get({id: val});
           }
 
         });
