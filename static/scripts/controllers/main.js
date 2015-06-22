@@ -18,6 +18,10 @@ angular.module('staticApp')
 
     $scope.reload = reload;
 
+    $scope.isEmpty = function (obj) {
+      return angular.equals({}, obj);
+    };
+
     reload();
 
   });

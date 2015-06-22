@@ -4,6 +4,10 @@
     <div class="btn-group-vertical projects">
       <button ng-repeat="(id, path) in projects.projects" class="btn btn-default btn-block" ng-class="{active: $parent.id === id}" ng-click="$parent.id = id">{{id}}</button>
     </div>
+    <span ng-show="isEmpty(projects.projects)">
+      no projects configured, please run the container with the option
+      <pre>-v /home/francesco/docker-compose-ui/demo-projects:/opt/docker-compose-projects:ro</pre>
+    </span>
     <br>
     <br>
     <button class="btn btn-primary btn-block" ng-click="reload()"><i class="glyphicon glyphicon-refresh"></i> Reload projects</button>
