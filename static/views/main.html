@@ -1,13 +1,12 @@
 <div class="row text-center">
   <div class="col-md-4">
     <h2>Projects</h2>
-    <ul class="list-group">
-      <li ng-repeat="(id, path) in projects.projects" ng-class="{active: active === id}" class="list-group-item">
-        <a href="" ng-click="$parent.id = id" ng-hide="active === id" class="project-label">{{id}}</a>
-        <span ng-show="active === id" class="project-label">{{id}}</span>
-      </li>
-    </ul>
-    <button class="btn btn-default btn-block" ng-click="reload()"><i class="glyphicon glyphicon-refresh"></i> Reload projects</button>
+    <div class="btn-group-vertical projects">
+      <button ng-repeat="(id, path) in projects.projects" class="btn btn-default btn-block" ng-class="{active: $parent.id === id}" ng-click="$parent.id = id">{{id}}</button>
+    </div>
+    <br>
+    <br>
+    <button class="btn btn-primary btn-block" ng-click="reload()"><i class="glyphicon glyphicon-refresh"></i> Reload projects</button>
   </div>
   <div class="col-md-8">
     <project-detail ng-show="id" project-id="id"></project-detail>

@@ -1,5 +1,5 @@
 body {
-  background-color: #F9F9F9
+  background-color: #F9F9F9;
 }
 
 .logs{
@@ -9,4 +9,12 @@ body {
   border: 0;
   background: white;
   border-radius: 0;
+}
+
+.projects {
+  width: 100%;
+}
+
+footer {
+  margin: 30px 0;
 }
