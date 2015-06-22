@@ -7,6 +7,8 @@ from scripts.bridge import ps_, get_project
 from scripts.find_yml import find_yml_files
 from json import loads
 import logging
+import requests
+import docker
 
 # Flask Application
 API_V1 = '/api/v1/'
@@ -106,6 +108,16 @@ def index():
     index.html
     """
     return app.send_static_file('index.html')
+
+## basic exception handling
+
+@app.errorhandler(requests.exceptions.ConnectionError)
+def handleServerError(e):
+    return 'docker host not found: ' + str(e), 500
+
+@app.errorhandler(docker.errors.DockerException)
+def handleServerError(e):
+    return 'docker exception: ' + str(e), 500
 
 # run app
 if __name__ == "__main__":

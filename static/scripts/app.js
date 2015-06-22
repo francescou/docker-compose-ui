@@ -17,7 +17,7 @@ angular
   $httpProvider.interceptors.push(function($q, $rootScope) {
     return {
       responseError: function(rejection) {
-        window.alert('HTTP error code: ' + rejection.status);
+        window.alert('HTTP error code: ' + rejection.status + ' ' + rejection.data);
         $rootScope.working = false;
         return $q.reject(rejection);
       }
