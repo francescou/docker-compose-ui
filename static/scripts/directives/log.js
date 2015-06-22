@@ -9,14 +9,14 @@ angular.module('staticApp')
         logData: '='
       },
       template: '<pre ng-show="logData" class="text-left logs">{{logData.join("\n")}}</pre>',
-      link: function (scope, element, attrs) {
+      link: function (scope, element) {
 
-        scope.$watch('logData', function (v) {
+        scope.$watch('logData', function () {
           scope.$applyAsync(function () {
             var pre = element.children()[0];
             pre.scrollTop = pre.scrollHeight;
           });
-        })
+        });
       }
     };
   });

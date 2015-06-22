@@ -86,7 +86,7 @@ def build():
     docker-compose build
     """
     name = loads(request.data)["id"]
-    data = get_project_with_name(name).build()
+    get_project_with_name(name).build()
     return jsonify(command='build')
 
 @app.route(API_V1 + "logs/<name>", defaults={'limit': "all"}, methods=['GET'])
@@ -112,12 +112,18 @@ def index():
 ## basic exception handling
 
 @app.errorhandler(requests.exceptions.ConnectionError)
-def handleServerError(e):
-    return 'docker host not found: ' + str(e), 500
+def handle_connection_error(err):
+    """
+    connection exception handler
+    """
+    return 'docker host not found: ' + str(err), 500
 
 @app.errorhandler(docker.errors.DockerException)
-def handleServerError(e):
-    return 'docker exception: ' + str(e), 500
+def handle_docker_error(err):
+    """
+    docker exception handler
+    """
+    return 'docker exception: ' + str(err), 500
 
 # run app
 if __name__ == "__main__":
