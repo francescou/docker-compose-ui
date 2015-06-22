@@ -1,3 +1,4 @@
+# https://github.com/francescou/docker-compose-ui
 # DOCKER-VERSION 1.6.2
 FROM google/python
 MAINTAINER Francesco Uliana <francesco@uliana.it>

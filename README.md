@@ -9,14 +9,14 @@ Disclaimer: the software is still under heavy development and might not be ready
 
 ## Getting started
 
-Put some docker-compose projects in a directory (e.g. /home/user/docker-compose-projects/) and then run:
+Put some docker-compose projects in a directory (you can checkout my example projects into /home/user/docker-compose-ui/demo-projects/ from https://github.com/francescou/docker-compose-ui/tree/master/demo-projects) and then run:
 
     docker run \
     --name docker-compose-ui \
     -p 5000:5000 \
-    -v /home/francesco/docker-compose-ui/demo-projects:/opt/docker-compose-projects:ro \
+    -v /home/user/docker-compose-ui/demo-projects:/opt/docker-compose-projects:ro \
     -v /var/run/docker.sock:/var/run/docker.sock \
-    docker-compose-ui
+    francescou/docker-compose-ui
 
 Open your browser to `http://localhost:5000`
 
@@ -27,9 +27,9 @@ You can also run containers on a remote docker host, e.g.
     docker run \
         --name docker-compose-ui \
         -p 5000:5000 \
-        -v /home/francesco/docker-compose-ui/demo-projects:/opt/docker-compose-projects:ro \
+        -v /home/user/docker-compose-ui/demo-projects:/opt/docker-compose-projects:ro \
         -e DOCKER_HOST=remote-docker-host:2375 \
-        docker-compose-ui
+        francescou/docker-compose-ui
 
 ## Technologies
 
