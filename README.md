@@ -12,7 +12,7 @@ Put some docker-compose projects in a directory (e.g. /home/user/docker-compose-
     docker run \
     --name docker-compose-ui \
     -p 5000:5000 \
-    -v /home/user/docker-compose-projects:/opt/docker-compose-projects:ro \
+    -v /home/francesco/docker-compose-ui/demo-projects:/opt/docker-compose-projects:ro \
     -v /var/run/docker.sock:/var/run/docker.sock \
     docker-compose-ui
 
@@ -25,7 +25,7 @@ You can also run containers on a remote docker host, e.g.
     docker run \
         --name docker-compose-ui \
         -p 5000:5000 \
-        -v /home/user/docker-compose-projects:/opt/docker-compose-projects:ro \
+        -v /home/francesco/docker-compose-ui/demo-projects:/opt/docker-compose-projects:ro \
         -e DOCKER_HOST=remote-docker-host:2375 \
         docker-compose-ui
 

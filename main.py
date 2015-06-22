@@ -10,7 +10,7 @@ import logging
 
 # Flask Application
 API_V1 = '/api/v1/'
-YML_PATH='/opt/docker-compose-projects'
+YML_PATH='/home/francesco/docker-compose-ui/demo-projects'
 logging.basicConfig(level=logging.DEBUG)
 app = Flask(__name__, static_url_path='')
 
