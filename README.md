@@ -35,22 +35,24 @@ You can also run containers on a remote docker host, e.g.
 
 Docker Compose UI has been developed using Flask (python microframework) to provide RESTful services and AngularJS to implement the Single Page Application web ui.
 
-The application uses (Docker Compose)[https://docs.docker.com/compose] to monitor and edit the state of a set of docker compose projects (*docker-compose.yml* files).
+The application uses [Docker Compose](https://docs.docker.com/compose) to monitor and edit the state of a set of docker compose projects (*docker-compose.yml* files).
 
 
 ## API
 
     curl http://localhost:5000/api/v1/projects
 
-    curl http://localhost:5000/api/v1/projects/compose-mongo
+    curl http://localhost:5000/api/v1/projects/hello-node
 
-    curl -X POST http://localhost:5000/api/v1/projects --data '{"id":"compose-mongo"}' -H'Content-type: application/json'
+    curl -X POST http://localhost:5000/api/v1/projects --data '{"id":"hello-node"}' -H'Content-type: application/json'
 
-    curl -X PUT http://localhost:5000/api/v1/projects --data '{"id":"compose-mongo"}' -H'Content-type: application/json'
+    curl -X POST http://localhost:5000/api/v1/build --data '{"id":"hello-node"}' -H'Content-type: application/json'
 
-    curl -X DELETE http://localhost:5000/api/v1/projects/compose-mongo
+    curl -X PUT http://localhost:5000/api/v1/projects --data '{"id":"hello-node"}' -H'Content-type: application/json'
 
-    curl http://localhost:5000/api/v1/logs/compose-mongo/100
+    curl -X DELETE http://localhost:5000/api/v1/projects/hello-node
+
+    curl http://localhost:5000/api/v1/logs/hello-node/100
 
 
 ## License - MIT
