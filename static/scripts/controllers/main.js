@@ -12,6 +12,10 @@ angular.module('staticApp')
 
     var Projects = $resource('api/v1/projects');
 
+    $resource('api/v1/host').get(function (data) {
+      $scope.dockerHost = data.host.split(':')[0];
+    });
+
     function reload() {
       $scope.projects = Projects.get();
     }

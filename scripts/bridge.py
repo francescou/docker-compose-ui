@@ -15,7 +15,7 @@ def ps_(project):
         'name': container.name,
         'command': container.human_readable_command,
         'state': container.human_readable_state,
-        'ports': container.human_readable_ports,
+        'ports': container.ports,
         'is_running': container.is_running}, containers)
 
     return items

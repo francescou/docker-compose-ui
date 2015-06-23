@@ -13,7 +13,8 @@
     <button class="btn btn-primary btn-block" ng-click="reload()"><i class="glyphicon glyphicon-refresh"></i> Reload projects</button>
   </div>
   <div class="col-md-8">
-    <project-detail ng-show="id" project-id="id"></project-detail>
+    <h2 ng-hide="id">host: {{dockerHost}}</h2>
+    <project-detail ng-show="id" project-id="id" docker-host="dockerHost"></project-detail>
   </div>
 
 </div>

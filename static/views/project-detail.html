@@ -1,7 +1,7 @@
 <h2>Project: {{projectId}}</h2>
 
 <h1 ng-show="working">
-  <div class="plus-loader"></div>
+  <div class="spinner-loader"></div>
 </h1>
 
 <actions project-id="projectId" project="project" output="output" working="working" logs="logs" ng-hide="working"></actions>
@@ -13,7 +13,13 @@
   <div class="container-detail" ng-repeat="container in project.containers">
     <strong ng-class="{'text-success': container.is_running, 'text-warning': !container.is_running}">
       <b>{{container.name}}</b>
-      <span ng-show="container.is_running">[ports: {{container.ports}}]</span>
+      <span ng-show="container.is_running">
+        <p ng-repeat="(internal, host) in container.ports">
+          <span ng-repeat="mapping in host">
+            <a ng-href="http://{{dockerHost}}:{{mapping.HostPort}}">{{mapping.HostIp}}:{{mapping.HostPort}}</a> (mapping of {{internal}})
+          </span>
+        </p>
+      </span>
       <span ng-hide="container.is_running">{{container.state}}</span>
     </strong>
     <log log-data="logs.logs[container.name]"></log>

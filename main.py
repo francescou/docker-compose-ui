@@ -9,6 +9,7 @@ from json import loads
 import logging
 import requests
 import docker
+import os
 
 # Flask Application
 API_V1 = '/api/v1/'
@@ -100,6 +101,14 @@ def logs(name, limit):
         lines[k.name] = k.logs(timestamps=True, tail=limit).split('\n')
 
     return jsonify(logs=lines)
+
+@app.route(API_V1 + "host", methods=['GET'])
+def host():
+    """
+    docker host info
+    """
+    host = os.getenv('DOCKER_HOST', 'localhost')
+    return jsonify(host=host)
 
 # static resources
 @app.route("/")

@@ -6,7 +6,8 @@ angular.module('staticApp')
       restrict: 'E',
       scope: {
         projectId: '=',
-        path: '='
+        path: '=',
+        dockerHost: '='
       },
       templateUrl: 'views/project-detail.html',
       controller: function($scope) {
