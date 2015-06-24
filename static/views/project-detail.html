@@ -16,7 +16,7 @@
       <span ng-show="container.is_running">
         <p ng-repeat="(internal, host) in container.ports">
           <span ng-repeat="mapping in host">
-            <a ng-href="http://{{dockerHost}}:{{mapping.HostPort}}">{{mapping.HostIp}}:{{mapping.HostPort}}</a> (mapping of {{internal}})
+            <a ng-href="http://{{dockerHost}}:{{mapping.HostPort}}">{{mapping.HostIp}}:{{mapping.HostPort}}</a> (internal port: {{internal}})
           </span>
         </p>
       </span>
