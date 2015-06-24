@@ -14,9 +14,32 @@
   </head>
   <body ng-app="staticApp">
 
-    <div class="container">
+    <div class="container" ng-controller="MainCtrl">
         <h1 class="text-center">Docker Compose UI</h1>
-        <div ng-view=""></div>
+
+        <div class="row text-center">
+          <div class="col-md-4">
+            <h2>Projects</h2>
+            <div class="btn-group-vertical projects">
+              <a ng-repeat="(id, path) in projects.projects" class="btn btn-default btn-block" ng-class="{active: $parent.id === id}" ng-href="#/project/{{id}}">{{id}}</a>
+            </div>
+            <span ng-show="isEmpty(projects.projects)">
+              no projects configured, please run the container with the option
+              <pre>-v /home/user/docker-compose-ui/demo-projects:/opt/docker-compose-projects:ro</pre>
+            </span>
+            <br>
+            <br>
+            <button class="btn btn-default btn-block" ng-click="reload()"><i class="glyphicon glyphicon-refresh"></i> Reload projects</button>
+            <a class="btn btn-primary btn-block" ng-href="#/"><i class="glyphicon glyphicon-refresh"></i> Select Host</a>
+          </div>
+          <div class="col-md-8">
+              <div ng-view=""></div>
+          </div>
+
+        </div>
+
+
+
         <footer class="text-center">
             <small class="text-muted">Docker Compose UI v.0.2. Licensed under the MIT license.</small>
         </footer>
@@ -30,6 +53,8 @@
 
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers/home.js"></script>
+    <script src="scripts/controllers/project.js"></script>
     <script src="scripts/directives/log.js"></script>
     <script src="scripts/directives/actions.js"></script>
     <script src="scripts/directives/project-detail.js"></script>
