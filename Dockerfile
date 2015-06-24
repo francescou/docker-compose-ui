@@ -1,6 +1,6 @@
 # https://github.com/francescou/docker-compose-ui
 # DOCKER-VERSION 1.6.2
-FROM google/python
+FROM python:2.7-slim
 MAINTAINER Francesco Uliana <francesco@uliana.it>
 
 WORKDIR /app
