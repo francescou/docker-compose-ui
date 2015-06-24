@@ -19,7 +19,7 @@
 
         <div class="row text-center">
           <div class="col-md-4">
-            <h2>Projects</h2>
+            <h3>Projects</h3>
             <div class="btn-group-vertical projects">
               <a ng-repeat="(id, path) in projects.projects" class="btn btn-default btn-block" ng-class="{active: $parent.id === id}" ng-href="#/project/{{id}}">{{id}}</a>
             </div>
@@ -30,7 +30,7 @@
             <br>
             <br>
             <button class="btn btn-default btn-block" ng-click="reload()"><i class="glyphicon glyphicon-refresh"></i> Reload projects</button>
-            <a class="btn btn-primary btn-block" ng-href="#/"><i class="glyphicon glyphicon-refresh"></i> Select Host</a>
+            <a class="btn btn-primary btn-block" ng-href="#/"><i class="glyphicon glyphicon-wrench"></i> Select Host</a>
           </div>
           <div class="col-md-8">
               <div ng-view=""></div>

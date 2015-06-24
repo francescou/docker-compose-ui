@@ -1,1 +1,16 @@
-<h2>host: {{dockerHost}}</h2>
+<h3>docker host: {{dockerHost}}</h3>
+
+
+<form class="form-inline" ng-submit="add(newHost)">
+  <div class="form-group">
+    <label for="new-host">new host:</label>
+    <input name="new-host" type="text" ng-model="newHost" class="form-control">
+  </div>
+  <button class="btn btn-default">add</button>
+</form>
+
+<br>
+
+<div class="btn-group-vertical">
+  <button ng-repeat="host in hosts" class="btn btn-default btn-block" ng-class="{active: host === dockerHost}" ng-click="select(host)">{{host}}</button>
+</div>
