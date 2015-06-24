@@ -7,7 +7,6 @@ angular.module('staticApp')
       restrict: 'E',
       scope: {
         project: '=',
-        output: '=',
         projectId: '=',
         working: '=',
         logs: '='
@@ -29,25 +28,35 @@ angular.module('staticApp')
           $scope.working = true;
           var id = $scope.projectId;
           Project.delete({id: id}, function () {
-            $scope.output = 'killed';
+            alertify.log(id + ' killed');
             $scope.working = false;
             $scope.project = Project.get({id: id});
+          }, function (err) {
+            $scope.working = false;
+            alertify.alert(err.data);
           });
         };
         $scope.pull = function () {
           $scope.working = true;
-          Project.update({id: $scope.projectId}, function () {
-            $scope.output = 'pull terminated';
+          var id = $scope.projectId;
+          Project.update({id: id}, function () {
+            alertify.log(id + ' pull terminated');
             $scope.working = false;
+          }, function (err) {
+            $scope.working = false;
+            alertify.alert(err.data);
           });
         };
         $scope.up = function () {
           $scope.working = true;
           var id = $scope.projectId;
           Project.save({id: id}, function (data) {
-            $scope.output = data.containers.length + ' container(s) started';
+            alertify.log(data.containers.length + ' container(s) started');
             $scope.working = false;
             $scope.project = Project.get({id: id});
+          }, function (err) {
+            $scope.working = false;
+            alertify.alert(err.data);
           });
         };
 
@@ -59,8 +68,11 @@ angular.module('staticApp')
           $scope.working = true;
           var id = $scope.projectId;
           Project.build({id: id}, function () {
-            $scope.output = 'build terminated';
+            alertify.log(id + ' build terminated');
             $scope.working = false;
+          }, function (err) {
+            $scope.working = false;
+            alertify.alert(err.data);
           });
         };
 

@@ -13,11 +13,18 @@ angular.module('staticApp')
     var Projects = $resource('api/v1/projects');
 
     $resource('api/v1/host').get(function (data) {
-      $scope.dockerHost = data.host.split(':')[0];
+      var host = data.host.split(':')[0];
+      $scope.dockerHost = host;
+      alertify.log('Host: ' + host);
     });
 
-    function reload() {
-      $scope.projects = Projects.get();
+    function reload(init) {
+      Projects.get(function (data) {
+        $scope.projects = data;
+        if (!init) {
+          alertify.log('reloadeded ' + Object.keys(data.projects).length + ' projects');
+        }
+      });
     }
 
     $scope.reload = reload;
@@ -26,6 +33,6 @@ angular.module('staticApp')
       return angular.equals({}, obj);
     };
 
-    reload();
+    reload(true);
 
   });

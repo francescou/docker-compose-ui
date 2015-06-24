@@ -1,5 +1,6 @@
 {
   "globals": {
-    "angular": false
+    "angular": false,
+    "alertify": false
   }
 }

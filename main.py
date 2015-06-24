@@ -134,6 +134,13 @@ def handle_docker_error(err):
     """
     return 'docker exception: ' + str(err), 500
 
+@app.errorhandler(Exception)
+def handle_generic_error(err):
+    """
+    default exception handler
+    """
+    return 'error: ' + str(err), 500
+
 # run app
 if __name__ == "__main__":
     app.run(host='0.0.0.0', debug=True, threaded=True)

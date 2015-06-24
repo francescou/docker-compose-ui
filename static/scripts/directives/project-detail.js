@@ -17,7 +17,11 @@ angular.module('staticApp')
         $scope.$watch('projectId', function (val) {
           if (val) {
             $log.debug('refresh ' + val);
-            $scope.project = Project.get({id: val});
+            Project.get({id: val}, function (data) {
+              $scope.project = data;
+            }, function (err) {
+              alertify.alert(err.data);
+            });
           }
 
         });
