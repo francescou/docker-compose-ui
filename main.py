@@ -110,6 +110,17 @@ def host():
     host = os.getenv('DOCKER_HOST', 'localhost')
     return jsonify(host=host)
 
+
+@app.route(API_V1 + "host", methods=['POST'])
+def set_host():
+    """
+    set docker host
+    """
+    new_host = loads(request.data)["id"]
+    logging.debug(new_host)
+    os.environ['DOCKER_HOST'] = new_host
+    return jsonify(host=new_host)
+
 # static resources
 @app.route("/")
 def index():

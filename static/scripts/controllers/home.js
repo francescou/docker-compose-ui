@@ -10,12 +10,15 @@
 angular.module('staticApp')
   .controller('HomeCtrl', function ($scope, $resource) {
 
+    var Host = $resource('api/v1/host');
+
     function setHost(host) {
-      alertify.log('Host: ' + host);
+      alertify.success('Docker Host: ' + host);
       $scope.dockerHost = host;
+      Host.save({id:host});
     }
 
-    $resource('api/v1/host').get(function (data) {
+    Host.get(function (data) {
       var host = data.host.split(':')[0];
       setHost(host);
       $scope.hosts = [host];
