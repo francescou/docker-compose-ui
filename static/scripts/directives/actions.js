@@ -28,7 +28,7 @@ angular.module('staticApp')
           $scope.working = true;
           var id = $scope.projectId;
           Project.delete({id: id}, function () {
-            alertify.log(id + ' killed');
+            alertify.success(id + ' killed');
             $scope.working = false;
             $scope.project = Project.get({id: id});
           }, function (err) {
@@ -40,7 +40,7 @@ angular.module('staticApp')
           $scope.working = true;
           var id = $scope.projectId;
           Project.update({id: id}, function () {
-            alertify.log(id + ' pull terminated');
+            alertify.success(id + ' pull terminated');
             $scope.working = false;
           }, function (err) {
             $scope.working = false;
@@ -51,7 +51,7 @@ angular.module('staticApp')
           $scope.working = true;
           var id = $scope.projectId;
           Project.save({id: id}, function (data) {
-            alertify.log(data.containers.length + ' container(s) started');
+            alertify.success(data.containers.length + ' container(s) started');
             $scope.working = false;
             $scope.project = Project.get({id: id});
           }, function (err) {
@@ -68,7 +68,7 @@ angular.module('staticApp')
           $scope.working = true;
           var id = $scope.projectId;
           Project.build({id: id}, function () {
-            alertify.log(id + ' build terminated');
+            alertify.success(id + ' build terminated');
             $scope.working = false;
           }, function (err) {
             $scope.working = false;
