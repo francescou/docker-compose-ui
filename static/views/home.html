@@ -1,1 +1,14 @@
-<h2>host: {{dockerHost}}</h2>
+<h3>Docker host: {{dockerHost || unixSocket}}</h3>
+
+<form class="form-inline" ng-submit="select($event, newHost)">
+  <div class="form-group">
+    <label for="new-host">remote Docker Host:</label>
+  </div>
+  <div class="input-group">
+    <input name="new-host" type="text" ng-model="newHost" class="form-control">
+    <span class="input-group-btn">
+      <input type="submit" class="btn btn-default" value="submit"></input>
+    </span>
+  </div>
+  <button class="btn btn-primary" ng-click="select($event)" ng-show="dockerHost">use {{unixSocket}}</button>
+</form>

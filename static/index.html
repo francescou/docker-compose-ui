@@ -10,16 +10,17 @@
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="http://css-spinners.com/css/spinner/spinner.css">
     <link rel="stylesheet" href="https://rawgithub.com/fabien-d/alertify.js/0.3.11/themes/alertify.core.css">
-    <link rel="stylesheet" href="https://rawgithub.com/fabien-d/alertify.js/0.3.11/themes/alertify.bootstrap.css">
+    <link rel="stylesheet" href="https://rawgithub.com/fabien-d/alertify.js/0.3.11/themes/alertify.default.css">
+    <link rel="stylesheet" href="https://rawgithub.com/designmodo/Flat-UI/2.2.2/dist/css/flat-ui.min.css">
   </head>
   <body ng-app="staticApp">
 
     <div class="container" ng-controller="MainCtrl">
-        <h1 class="text-center">Docker Compose UI</h1>
+        <h1 class="text-center">Docker Compose UI v.0.3</h1>
 
         <div class="row text-center">
           <div class="col-md-4">
-            <h2>Projects</h2>
+            <h3>Projects</h3>
             <div class="btn-group-vertical projects">
               <a ng-repeat="(id, path) in projects.projects" class="btn btn-default btn-block" ng-class="{active: $parent.id === id}" ng-href="#/project/{{id}}">{{id}}</a>
             </div>
@@ -30,7 +31,7 @@
             <br>
             <br>
             <button class="btn btn-default btn-block" ng-click="reload()"><i class="glyphicon glyphicon-refresh"></i> Reload projects</button>
-            <a class="btn btn-primary btn-block" ng-href="#/"><i class="glyphicon glyphicon-refresh"></i> Select Host</a>
+            <a class="btn btn-primary btn-block" ng-href="#/"><i class="glyphicon glyphicon-wrench"></i> Settings</a>
           </div>
           <div class="col-md-8">
               <div ng-view=""></div>
@@ -38,10 +39,8 @@
 
         </div>
 
-
-
         <footer class="text-center">
-            <small class="text-muted">Docker Compose UI v.0.2. Licensed under the MIT license.</small>
+            <small class="text-muted">Licensed under the MIT license.</small>
         </footer>
     </div>
 
