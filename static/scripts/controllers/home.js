@@ -12,8 +12,12 @@ angular.module('staticApp')
 
     var Host = $resource('api/v1/host');
 
+    var label = "local Unix socket";
+
+    $scope.unixSocket = label;
+
     Host.get(function (data) {
-      alertify.success('Docker Host: ' + (data.host || 'local socket'));
+      alertify.success('Docker Host: ' + (data.host || label));
       $scope.dockerHost = data.host;
     });
 
@@ -21,7 +25,7 @@ angular.module('staticApp')
       if (host === undefined) {
         $event.preventDefault();
       }
-      alertify.success('set Docker Host: ' + (host || 'local socket'));
+      alertify.success('set Docker Host: ' + (host || label));
       Host.save({id:host || null});
       $scope.dockerHost = host;
     };
