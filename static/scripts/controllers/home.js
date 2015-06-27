@@ -12,22 +12,18 @@ angular.module('staticApp')
 
     var Host = $resource('api/v1/host');
 
-    function setHost(host) {
-      alertify.success('Docker Host: ' + host);
-      $scope.dockerHost = host;
-      Host.save({id:host});
-    }
-
     Host.get(function (data) {
-      var host = data.host.split(':')[0];
-      setHost(host);
-      $scope.hosts = [host];
+      alertify.success('Docker Host: ' + (data.host || 'local socket'));
+      $scope.dockerHost = data.host;
     });
 
-    $scope.select = setHost;
-
-    $scope.add = function(h) {
-      $scope.hosts.push(h);
+    $scope.select = function ($event, host) {
+      if (host === undefined) {
+        $event.preventDefault();
+      }
+      alertify.success('set Docker Host: ' + (host || 'local socket'));
+      Host.save({id:host || null});
+      $scope.dockerHost = host;
     };
 
   });
