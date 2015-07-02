@@ -6,13 +6,13 @@ angular.module('staticApp')
       restrict: 'E',
       scope: {
         projectId: '=',
-        path: '=',
-        dockerHost: '='
+        path: '='
       },
       templateUrl: 'views/project-detail.html',
       controller: function($scope) {
 
         var Project = $resource('api/v1/projects/:id');
+        var Host = $resource('api/v1/host');
 
         $scope.$watch('projectId', function (val) {
           if (val) {
@@ -21,6 +21,11 @@ angular.module('staticApp')
               $scope.project = data;
             }, function (err) {
               alertify.alert(err.data);
+            });
+
+            Host.get(function (data) {
+              var host = data.host;
+              $scope.hostName = host ? host.split(':')[0] : 'localhost';
             });
           }
 
