@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('staticApp')
+angular.module('composeUiApp')
   .directive('projectDetail', function($resource, $log){
     return {
       restrict: 'E',

@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name staticApp.controller:ProjectCtrl
+ * @name composeUiApp.controller:ProjectCtrl
  * @description
  * # ProjectCtrl
- * Controller of the staticApp
+ * Controller of the composeUiApp
  */
-angular.module('staticApp')
+angular.module('composeUiApp')
   .controller('ProjectCtrl', function ($scope, $routeParams) {
 
     $scope.id = $routeParams.id;

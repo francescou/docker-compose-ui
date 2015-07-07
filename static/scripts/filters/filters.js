@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('staticApp')
+angular.module('composeUiApp')
   .filter('filterByName', function () {
     return function (projects, query) {
 

@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name staticApp.controller:HomeCtrl
+ * @name composeUiApp.controller:HomeCtrl
  * @description
  * # HomeCtrl
- * Controller of the staticApp
+ * Controller of the composeUiApp
  */
-angular.module('staticApp')
+angular.module('composeUiApp')
   .controller('HomeCtrl', function ($scope, $resource) {
 
     var Host = $resource('api/v1/host');

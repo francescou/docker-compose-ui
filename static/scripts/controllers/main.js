@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name staticApp.controller:MainCtrl
+ * @name composeUiApp.controller:MainCtrl
  * @description
  * # MainCtrl
- * Controller of the staticApp
+ * Controller of the composeUiApp
  */
-angular.module('staticApp')
+angular.module('composeUiApp')
   .controller('MainCtrl', function ($scope, $resource) {
 
     var Projects = $resource('api/v1/projects');

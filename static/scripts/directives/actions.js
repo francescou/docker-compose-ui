@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('staticApp')
+angular.module('composeUiApp')
   .directive('actions', function ($resource) {
 
     return {

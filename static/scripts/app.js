@@ -2,14 +2,14 @@
 
 /**
  * @ngdoc overview
- * @name staticApp
+ * @name composeUiApp
  * @description
- * # staticApp
+ * # composeUiApp
  *
  * Main module of the application.
  */
 angular
-  .module('staticApp', [
+  .module('composeUiApp', [
     'ngResource',
     'ngRoute'
   ])
