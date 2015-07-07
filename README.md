@@ -44,17 +44,31 @@ The application uses [Docker Compose](https://docs.docker.com/compose) to monito
 
 ## API
 
+### list docker compose projects
+
     curl http://localhost:5000/api/v1/projects
+
+### show docker compose "hello-node" project details
 
     curl http://localhost:5000/api/v1/projects/hello-node
 
+### docker-compose up of project "hello-node"
+
     curl -X POST http://localhost:5000/api/v1/projects --data '{"id":"hello-node"}' -H'Content-type: application/json'
+
+### docker-compose build of project "hello-node"
 
     curl -X POST http://localhost:5000/api/v1/build --data '{"id":"hello-node"}' -H'Content-type: application/json'
 
+### docker-compose update of project "hello-node"
+
     curl -X PUT http://localhost:5000/api/v1/projects --data '{"id":"hello-node"}' -H'Content-type: application/json'
 
+### docker-compose kill of project "hello-node"
+
     curl -X DELETE http://localhost:5000/api/v1/projects/hello-node
+
+### docker-compose logs of project "hello-node"
 
     curl http://localhost:5000/api/v1/logs/hello-node/100
 
