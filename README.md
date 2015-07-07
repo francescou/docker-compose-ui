@@ -5,7 +5,9 @@
 Docker Compose UI is a web interface for Docker Compose.
 Disclaimer: the software is still under heavy development and might not be ready for production use.
 
-![screenshot](/screenshots/project-detail.png)
+![screenshot project detail](/screenshots/project-detail.png)
+
+![screenshot remote docker host](/screenshots/remote-host.png)
 
 # Requirements
 
