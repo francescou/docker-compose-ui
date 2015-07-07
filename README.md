@@ -7,6 +7,10 @@ Disclaimer: the software is still under heavy development and might not be ready
 
 ![screenshot](/screenshots/project-detail.png)
 
+# Requirements
+
+Docker 1.6.0 or later
+
 ## Getting started
 
 Put some docker-compose projects in a directory (you can checkout my example projects into /home/user/docker-compose-ui/demo-projects/ from https://github.com/francescou/docker-compose-ui/tree/master/demo-projects) and then run:
