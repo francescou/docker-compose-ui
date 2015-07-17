@@ -7,6 +7,7 @@ Disclaimer: the software is still under heavy development and might not be ready
 
 ![screenshot project detail](/screenshots/project-detail.png)
 
+
 ![screenshot remote docker host](/screenshots/remote-host.png)
 
 # Requirements
