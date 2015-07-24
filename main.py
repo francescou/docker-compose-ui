@@ -5,7 +5,7 @@ Docker Compose UI, flask based application
 from flask import Flask, jsonify, request
 from scripts.bridge import ps_, get_project
 from scripts.find_yml import find_yml_files
-from scripts.requires_auth import requires_auth
+from scripts.requires_auth import requires_auth, authentication_enabled, disable_authentication, set_authentication
 from json import loads
 import logging
 import requests
@@ -131,6 +131,30 @@ def set_host():
     else:
         os.environ['DOCKER_HOST'] = new_host
         return jsonify(host=new_host)
+
+@app.route(API_V1 + "authentication", methods=['GET'])
+def authentication():
+    """
+    check if basic authentication is enabled
+    """
+    return jsonify(enabled=authentication_enabled())
+
+@app.route(API_V1 + "authentication", methods=['DELETE'])
+def disable_basic_authentication():
+    """
+    disable basic authentication
+    """
+    disable_authentication()
+    return jsonify(enabled=False)
+
+@app.route(API_V1 + "authentication", methods=['POST'])
+def enable_basic_authentication():
+    """
+    set up basic authentication
+    """
+    data = loads(request.data)
+    set_authentication(data["username"], data["password"])
+    return jsonify(enabled=True)
 
 # static resources
 @app.route("/")
