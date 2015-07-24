@@ -5,6 +5,7 @@ Docker Compose UI, flask based application
 from flask import Flask, jsonify, request
 from scripts.bridge import ps_, get_project
 from scripts.find_yml import find_yml_files
+from scripts.requires_auth import requires_auth
 from json import loads
 import logging
 import requests
@@ -51,6 +52,7 @@ def project_containers(name):
     return jsonify(containers=containers)
 
 @app.route(API_V1 + "projects/<name>", methods=['DELETE'])
+@requires_auth
 def kill(name):
     """
     docker-compose kill
@@ -59,6 +61,7 @@ def kill(name):
     return jsonify(command='kill')
 
 @app.route(API_V1 + "projects", methods=['PUT'])
+@requires_auth
 def pull():
     """
     docker-compose pull
@@ -68,6 +71,7 @@ def pull():
     return jsonify(command='pull')
 
 @app.route(API_V1 + "projects", methods=['POST'])
+@requires_auth
 def up_():
     """
     docker-compose up
@@ -82,6 +86,7 @@ def up_():
         })
 
 @app.route(API_V1 + "build", methods=['POST'])
+@requires_auth
 def build():
     """
     docker-compose build
@@ -113,6 +118,7 @@ def host():
 
 
 @app.route(API_V1 + "host", methods=['POST'])
+@requires_auth
 def set_host():
     """
     set docker host
