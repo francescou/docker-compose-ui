@@ -75,6 +75,17 @@ The application uses [Docker Compose](https://docs.docker.com/compose) to monito
 
     curl http://localhost:5000/api/v1/logs/hello-node/100
 
+### authentication status
+
+    curl http://localhost:5000/api/v1/authentication
+
+### set password
+
+    curl -X POST -u admin  http://localhost:5000/api/v1/authentication -H 'Content-type: application/json' --data  '{"username":"admin", "password":"password"}'
+
+### disable basic authentication
+
+    curl -X DELETE -u admin  http://localhost:5000/api/v1/authentication
 
 ## License - MIT
 
