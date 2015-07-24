@@ -48,7 +48,7 @@ angular.module('composeUiApp')
         password: password
       }, function (data) {
         $scope.authentication = data.enabled;
-        alertify.success('enabled authentication disabled for user ' + username);
+        alertify.success('enabled authentication for user ' + username);
       });
     };
 
