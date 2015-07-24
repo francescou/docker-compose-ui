@@ -140,6 +140,7 @@ def authentication():
     return jsonify(enabled=authentication_enabled())
 
 @app.route(API_V1 + "authentication", methods=['DELETE'])
+@requires_auth
 def disable_basic_authentication():
     """
     disable basic authentication
@@ -148,6 +149,7 @@ def disable_basic_authentication():
     return jsonify(enabled=False)
 
 @app.route(API_V1 + "authentication", methods=['POST'])
+@requires_auth
 def enable_basic_authentication():
     """
     set up basic authentication
