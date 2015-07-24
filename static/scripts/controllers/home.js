@@ -38,6 +38,7 @@ angular.module('composeUiApp')
     $scope.disableAuthentication = function () {
       Authentication.remove(function (data) {
         $scope.authentication = data.enabled;
+        alertify.success('basic authentication disabled');
       });
     };
 
@@ -47,6 +48,7 @@ angular.module('composeUiApp')
         password: password
       }, function (data) {
         $scope.authentication = data.enabled;
+        alertify.success('enabled authentication disabled for user ' + username);
       });
     };
 
