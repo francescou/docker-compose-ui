@@ -11,8 +11,9 @@ angular.module('composeUiApp')
   .controller('HomeCtrl', function ($scope, $resource) {
 
     var Host = $resource('api/v1/host');
+    var Authentication = $resource('api/v1/authentication');
 
-    var label = "local Unix socket";
+    var label = 'local Unix socket';
 
     $scope.unixSocket = label;
 
@@ -28,6 +29,25 @@ angular.module('composeUiApp')
       alertify.success('set Docker Host: ' + (host || label));
       Host.save({id:host || null});
       $scope.dockerHost = host;
+    };
+
+    Authentication.get(function (data) {
+      $scope.authentication = data.enabled;
+    });
+
+    $scope.disableAuthentication = function () {
+      Authentication.remove(function (data) {
+        $scope.authentication = data.enabled;
+      });
+    };
+
+    $scope.setCredentials = function (username, password) {
+      Authentication.save({
+        username: username,
+        password: password
+      }, function (data) {
+        $scope.authentication = data.enabled;
+      });
     };
 
   });
