@@ -31,9 +31,6 @@ angular.module('composeUiApp')
 
         });
 
-        $scope.isEmpty = function (obj) {
-          return angular.equals({}, obj);
-        };
       }
     };
   });

@@ -26,11 +26,19 @@ def ps_(project):
     return items
 
 def get_volumes(container):
+    """
+    retrieve container volumes details
+    """
     volumes = container.get('Volumes')
+    config_volumes = container.get('Config.Volumes')
     volumes_rw = container.get('VolumesRW')
-    return dict(map(lambda (dest, source):
-        [dest, dict(write=volumes_rw[dest],source=source)],
-        volumes.iteritems()))
+
+    filtered_volumes = filter(lambda volume: not volume in config_volumes, volumes)
+    items = map(lambda volume: \
+        dict(write=volumes_rw[volume], dest=volume, src=volumes[volume]), \
+        filtered_volumes)
+
+    return items
 
 def get_project(path):
     """
