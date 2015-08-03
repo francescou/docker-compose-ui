@@ -9,19 +9,29 @@
 
 <div ng-hide="working">
   <h4>Containers</h4>
-  <div class="container-detail" ng-repeat="container in project.containers">
-    <strong ng-class="{'text-success': container.is_running, 'text-warning': !container.is_running}">
-      <b>{{container.name}}</b>
-      <span ng-show="container.is_running">
-        <p ng-repeat="(internal, host) in container.ports">
-          <span ng-repeat="mapping in host">
-            <a ng-href="http://{{hostName}}:{{mapping.HostPort}}">{{hostName}}:{{mapping.HostPort}}</a> (internal port: {{internal}})
-          </span>
-        </p>
-      </span>
-      <span ng-hide="container.is_running">{{container.state}}</span>
-    </strong>
-    <log log-data="logs.logs[container.name]"></log>
+
+  <div class="row">
+    <div class="col-md-6" ng-repeat="container in project.containers">
+      <div class="container-detail">
+        <h5 ng-class="{'text-success': container.is_running, 'text-warning': !container.is_running}">{{container.name_without_project}}</h5>
+        <h6 ng-hide="isEmpty(container.volumes)"><span class="glyphicon glyphicon glyphicon-hdd"></span> Volumes</h6>
+        <ul class="list-unstyled">
+          <li ng-repeat="(guest, host) in container.volumes">
+            {{host.source}} : {{guest}}
+            <span class="label label-default">{{host.write ? "read-write" : "readonly"}}</span>
+          </li>
+        </ul>
+        <span ng-show="container.is_running">
+          <p ng-repeat="(internal, host) in container.ports">
+            <span ng-repeat="mapping in host">
+              <a ng-href="http://{{hostName}}:{{mapping.HostPort}}">{{hostName}}:{{mapping.HostPort}}</a> (internal port: {{internal}})
+            </span>
+          </p>
+        </span>
+        <span ng-hide="container.is_running">{{container.state}}</span>
+        <log log-data="logs.logs[container.name]"></log>
+      </div>
+    </div>
   </div>
   <span ng-show="project.containers.length === 0">no containers found</span>
 </div>

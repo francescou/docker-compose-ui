@@ -22,3 +22,8 @@ footer {
 .vertical-margin {
   margin: 20px 0;
 }
+
+.container-detail {
+  border: 2px solid #bdc3c7;
+  border-radius: 6px;
+}
