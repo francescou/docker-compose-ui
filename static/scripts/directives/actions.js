@@ -8,8 +8,7 @@ angular.module('composeUiApp')
       scope: {
         project: '=',
         projectId: '=',
-        working: '=',
-        logs: '='
+        working: '='
       },
       templateUrl: 'views/actions.html',
       controller: function($scope) {
@@ -22,7 +21,6 @@ angular.module('composeUiApp')
           }
         });
 
-        var Logs = $resource('api/v1/logs/:id/:limit');
 
         $scope.kill = function () {
           $scope.working = true;
@@ -58,10 +56,6 @@ angular.module('composeUiApp')
             $scope.working = false;
             alertify.alert(err.data);
           });
-        };
-
-        $scope.displayLogs = function () {
-          $scope.logs = Logs.get({id: $scope.projectId, limit: 100});
         };
 
         $scope.build = function () {

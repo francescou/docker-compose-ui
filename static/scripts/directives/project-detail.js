@@ -31,6 +31,16 @@ angular.module('composeUiApp')
 
         });
 
+        var Logs = $resource('api/v1/logs/:id/:limit');
+
+        $scope.displayLogs = function (id) {
+          Logs.get({id: $scope.projectId, limit: 100}, function (data) {
+            $scope.showDialog = true;
+            $scope.logs = data.logs[id];
+          });
+        };
+
+
       }
     };
   });

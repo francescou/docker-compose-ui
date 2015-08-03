@@ -3,12 +3,10 @@ body {
 }
 
 .logs{
-  max-height: 300px;
-  margin: 20px 10px;
+  max-height: 500px;
   display: block;
   border: 0;
   background: white;
-  border-radius: 0;
 }
 
 .projects {

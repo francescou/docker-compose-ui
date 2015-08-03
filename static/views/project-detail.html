@@ -4,7 +4,7 @@
   <div class="spinner-loader"></div>
 </h1>
 
-<actions project-id="projectId" project="project" working="working" logs="logs" ng-hide="working"></actions>
+<actions project-id="projectId" project="project" working="working" ng-hide="working"></actions>
 <br><br>
 
 <div ng-hide="working">
@@ -13,7 +13,10 @@
   <div class="row">
     <div class="col-md-6" ng-repeat="container in project.containers">
       <div class="container-detail">
-        <h5 ng-class="{'text-success': container.is_running, 'text-warning': !container.is_running}">{{container.name_without_project}}</h5>
+        <h5 ng-class="{'text-success': container.is_running, 'text-warning': !container.is_running}">
+          {{container.name_without_project}}
+          <button class="btn btn-info btn-xs" ng-click="displayLogs(container.name)">logs</button>
+        </h5>
         <h6 ng-hide="container.volumes.length === 0"><span class="glyphicon glyphicon glyphicon-hdd"></span> Volumes</h6>
         <ul class="list-unstyled">
           <li ng-repeat="volume in container.volumes">
@@ -29,7 +32,15 @@
           </p>
         </span>
         <span ng-hide="container.is_running">{{container.state}}</span>
-        <log log-data="logs.logs[container.name]"></log>
+      </div>
+    </div>
+    <div modal-show="showDialog" class="modal fade" tabindex="-1">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+          <pre class="text-left logs">{{logs.join("\n")}}</pre>
+          </div>
+        </div>
       </div>
     </div>
   </div>
