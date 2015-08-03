@@ -15,7 +15,8 @@ def ps_(project):
     containers = project.containers(stopped=True) + project.containers(one_off=True)
 
     items = map(lambda container: {
-        'name': container.name_without_project,
+        'name': container.name,
+        'name_without_project': container.name_without_project,
         'command': container.human_readable_command,
         'state': container.human_readable_state,
         'ports': container.ports,
