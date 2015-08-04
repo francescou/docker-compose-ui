@@ -38,17 +38,11 @@ def get_volumes(container):
     retrieve container volumes details
     """
     volumes = container.get('Volumes')
-    config_volumes = container.get('Config.Volumes')
     volumes_rw = container.get('VolumesRW')
-
-    if config_volumes != None:
-        filtered_volumes = filter(lambda volume: not volume in config_volumes, volumes)
-    else:
-        filtered_volumes = volumes
 
     items = map(lambda volume: \
         dict(write=volumes_rw[volume], dest=volume, src=volumes[volume]), \
-        filtered_volumes)
+        volumes)
 
     return items
 
