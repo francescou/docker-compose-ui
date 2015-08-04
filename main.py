@@ -64,6 +64,7 @@ def project_container(name, container_id):
         short_id=container.short_id,
         human_readable_command=container.human_readable_command,
         name=container.name,
+        name_without_project=container.name_without_project,
         number=container.number,
         ports=container.ports,
         labels=container.labels,

@@ -40,16 +40,6 @@ angular.module('composeUiApp')
           });
         };
 
-        $scope.displayDetails = function (name) {
-
-          var data = $.grep($scope.project.containers, function (item) {
-            return item.name == name;
-          })[0];
-
-          console.log(data);
-
-        };
-
       }
     };
   });

@@ -16,7 +16,7 @@
         <h5 ng-class="{'text-success': container.is_running, 'text-warning': !container.is_running}">
           {{container.name_without_project}}
           <button class="btn btn-xs btn-info" ng-click="displayLogs(container.name)">logs</button>
-          <button class="btn btn-xs btn-default" ng-click="displayDetails(container.name)">details</button>
+          <a class="btn btn-xs btn-default" ng-href="#/project/{{projectId}}/{{container.name}}">details</a>
         </h5>
         <h6 ng-hide="container.volumes.length === 0"><span class="glyphicon glyphicon glyphicon-hdd"></span> Volumes</h6>
         <ul class="list-unstyled">

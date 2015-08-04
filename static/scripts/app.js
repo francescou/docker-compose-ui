@@ -23,6 +23,10 @@ angular
         templateUrl: 'views/project.html',
         controller: 'ProjectCtrl'
       })
+      .when('/project/:id/:container', {
+        templateUrl: 'views/container.html',
+        controller: 'ContainerCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
