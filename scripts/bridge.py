@@ -25,12 +25,6 @@ def ps_(project):
 
     return items
 
-def get_container_logs(project, container_id, limit):
-    """
-    get container logs
-    """
-    container = get_container_from_id(project.client, container_id)
-    return container.logs(timestamps=True, tail=limit).split('\n')
 
 def get_container_from_id(client, container_id):
     """

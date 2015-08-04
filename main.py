@@ -3,7 +3,7 @@ Docker Compose UI, flask based application
 """
 
 from flask import Flask, jsonify, request
-from scripts.bridge import ps_, get_project, get_container_logs
+from scripts.bridge import ps_, get_project, get_container_from_id
 from scripts.find_yml import find_yml_files
 from scripts.requires_auth import requires_auth, authentication_enabled, disable_authentication, set_authentication
 from json import loads
@@ -50,6 +50,28 @@ def project_containers(name):
     project = get_project_with_name(name)
     containers = ps_(project)
     return jsonify(containers=containers)
+
+
+@app.route(API_V1 + "projects/<name>/<container_id>", methods=['GET'])
+def project_container(name, container_id):
+    """
+    get container details
+    """
+    project = get_project_with_name(name)
+    container = get_container_from_id(project.client, container_id)
+    return jsonify(
+        id=container.id,
+        short_id=container.short_id,
+        human_readable_command=container.human_readable_command,
+        name=container.name,
+        number=container.number,
+        ports=container.ports,
+        labels=container.labels,
+        log_config=container.log_config,
+        image=container.image,
+        links=container.links(),
+        environment=container.environment
+        )
 
 @app.route(API_V1 + "projects/<name>", methods=['DELETE'])
 @requires_auth
@@ -107,14 +129,15 @@ def logs(name, limit):
 
     return jsonify(logs=lines)
 
-@app.route(API_V1 + "logs/<name>/<container>", defaults={'limit': "all"}, methods=['GET'])
-@app.route(API_V1 + "logs/<name>/<container>/<int:limit>", methods=['GET'])
-def container_logs(name, container, limit):
+@app.route(API_V1 + "logs/<name>/<container_id>", defaults={'limit': "all"}, methods=['GET'])
+@app.route(API_V1 + "logs/<name>/<container_id>/<int:limit>", methods=['GET'])
+def container_logs(name, container_id, limit):
     """
     docker-compose logs of a specific container
     """
     project = get_project_with_name(name)
-    lines = get_container_logs(project, container, limit)
+    container = get_container_from_id(project.client, container_id)
+    lines = container.logs(timestamps=True, tail=limit).split('\n')
     return jsonify(logs=lines)
 
 @app.route(API_V1 + "host", methods=['GET'])
