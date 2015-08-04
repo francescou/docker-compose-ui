@@ -71,9 +71,13 @@ The application uses [Docker Compose](https://docs.docker.com/compose) to monito
 
     curl -X DELETE http://localhost:5000/api/v1/projects/hello-node
 
-### docker-compose logs of project "hello-node"
+### docker-compose logs of project "hello-node", 100 lines limit
 
     curl http://localhost:5000/api/v1/logs/hello-node/100
+
+### docker-compose logs of container hellonode_hello_1 in project "hello-node", 100 lines limit
+
+    curl http://localhost:5000/api/v1/logs/hello-node/hellonode_hello_1/100
 
 ### authentication status
 
