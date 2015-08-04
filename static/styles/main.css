@@ -27,6 +27,33 @@ footer {
   margin-bottom: 30px;
 }
 
-.container-detail-active {
-  border-color: #2ecc71;
+/* service colors */
+.service-0 .active {
+  border-color: #F44336;
+  color: #F44336;
 }
+.service-1 .active {
+  border-color: #E91E63;
+  color: #E91E63;
+}
+.service-2 .active {
+  border-color: #9C27B0;
+  color: #9C27B0;
+}
+.service-3 .active {
+  border-color: #673AB7;
+  color: #673AB7;
+}
+.service-4 .active {
+  border-color: #3F51B5;
+  color: #3F51B5;
+}
+.service-5 .active {
+  border-color: #2196F3;
+  color: #2196F3;
+}
+.service-6 .active {
+  border-color: #03A9F4;
+  color: #03A9F4;
+}
+/* END service colors */

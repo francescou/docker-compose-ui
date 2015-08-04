@@ -17,10 +17,10 @@
         <button class="btn btn-sm btn-default" ng-click="scale(id)"><span class="glyphicon glyphicon-resize-full"></span> scale</button>
       </h5>
     </div>
-    <div class="row">
-      <div class="col-md-6" ng-repeat="container in service">
-        <div class="container-detail" ng-class="{'container-detail-active': container.is_running}">
-          <h5 ng-class="{'text-success': container.is_running, 'text-muted': !container.is_running}">
+    <div class="row service-{{$index % 7}}">
+      <div class="col-md-6"  ng-repeat="container in service">
+        <div class="container-detail" ng-class="{'active': container.is_running}">
+          <h5 ng-class="{'text-muted': !container.is_running}">
             {{container.name_without_project}}
             <button class="btn btn-xs btn-default" ng-click="displayLogs(container.name)">logs</button>
             <a class="btn btn-xs btn-default" ng-href="#/project/{{projectId}}/{{container.name}}">details</a>
