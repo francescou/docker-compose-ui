@@ -16,7 +16,7 @@ Docker 1.6.0 or later
 
 ## Getting started
 
-Put some docker-compose projects in a directory (you can checkout my example projects into /home/user/docker-compose-ui/demo-projects/ from https://github.com/francescou/docker-compose-ui/tree/master/demo-projects) and then run:
+Run the following command in terminal:
 
     docker run \
     --name docker-compose-ui \
@@ -25,7 +25,22 @@ Put some docker-compose projects in a directory (you can checkout my example pro
     -v /var/run/docker.sock:/var/run/docker.sock \
     francescou/docker-compose-ui
 
-Open your browser to `http://localhost:5000`
+You have to wait while Docker pulls the container from the Docker Hub: https://registry.hub.docker.com/u/francescou/docker-compose-ui
+
+Then open your browser to `http://localhost:5000`
+
+## Add your own docker-compose projects
+
+If you want to use your own docker-compose projects, put them into a directory */home/user/docker-compose-ui/demo-projects* and then run:
+
+    docker run \
+        --name docker-compose-ui \
+        -p 5000:5000 \
+        -v /home/user/docker-compose-ui/demo-projects:/opt/docker-compose-projects:ro \
+        -v /var/run/docker.sock:/var/run/docker.sock \
+        francescou/docker-compose-ui
+
+you can download my example projects into */home/user/docker-compose-ui/demo-projects/* from https://github.com/francescou/docker-compose-ui/tree/master/demo-projects
 
 ### Remote docker host
 
@@ -55,9 +70,17 @@ The application uses [Docker Compose](https://docs.docker.com/compose) to monito
 
     curl http://localhost:5000/api/v1/projects/hello-node
 
+### docker inspect the container "hellonode_hello_1" in project "hello-node"
+
+    curl http://localhost:5000/api/v1/projects/hello-node/hellonode_hello_1
+
 ### docker-compose up of project "hello-node"
 
     curl -X POST http://localhost:5000/api/v1/projects --data '{"id":"hello-node"}' -H'Content-type: application/json'
+
+### docker-compose scale redis=2, project "node-redis"
+
+    curl -X PUT http://localhost:5000/api/v1/services --data '{"service":"redis","project":"node-redis","num":"2"}' -H'Content-type: application/json'
 
 ### docker-compose build of project "hello-node"
 
@@ -90,6 +113,11 @@ The application uses [Docker Compose](https://docs.docker.com/compose) to monito
 ### disable basic authentication
 
     curl -X DELETE -u admin  http://localhost:5000/api/v1/authentication
+
+
+## Issues
+
+If you have any problems with or questions about this image, please open a GitHub issue on https://github.com/francescou/docker-compose-ui
 
 ## License - MIT
 
