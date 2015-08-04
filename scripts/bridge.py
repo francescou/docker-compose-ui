@@ -19,6 +19,7 @@ def ps_(project):
         'name_without_project': container.name_without_project,
         'command': container.human_readable_command,
         'state': container.human_readable_state,
+        'labels': container.labels,
         'ports': container.ports,
         'volumes': get_volumes(get_container_from_id(project.client, container.id)),
         'is_running': container.is_running}, containers)
@@ -40,7 +41,11 @@ def get_volumes(container):
     config_volumes = container.get('Config.Volumes')
     volumes_rw = container.get('VolumesRW')
 
-    filtered_volumes = filter(lambda volume: not volume in config_volumes, volumes)
+    if config_volumes != None:
+        filtered_volumes = filter(lambda volume: not volume in config_volumes, volumes)
+    else:
+        filtered_volumes = volumes
+
     items = map(lambda volume: \
         dict(write=volumes_rw[volume], dest=volume, src=volumes[volume]), \
         filtered_volumes)
