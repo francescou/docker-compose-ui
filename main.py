@@ -11,6 +11,7 @@ import logging
 import requests
 import docker
 import os
+import traceback
 
 # Flask Application
 API_V1 = '/api/v1/'
@@ -92,6 +93,21 @@ def pull():
     name = loads(request.data)["id"]
     get_project_with_name(name).pull()
     return jsonify(command='pull')
+
+@app.route(API_V1 + "services", methods=['PUT'])
+@requires_auth
+def scale():
+    """
+    docker-compose scale
+    """
+    req = loads(request.data)
+    name = req['project']
+    service_name = req['service']
+    num = req['num']
+
+    project = get_project_with_name(name)
+    project.get_service(service_name).scale(desired_num=int(num))
+    return jsonify(command='scale')
 
 @app.route(API_V1 + "projects", methods=['POST'])
 @requires_auth
@@ -221,6 +237,7 @@ def handle_generic_error(err):
     """
     default exception handler
     """
+    traceback.print_exc()
     return 'error: ' + str(err), 500
 
 # run app
