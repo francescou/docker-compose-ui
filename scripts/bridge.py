@@ -20,10 +20,23 @@ def ps_(project):
         'command': container.human_readable_command,
         'state': container.human_readable_state,
         'ports': container.ports,
-        'volumes': get_volumes(Container.from_id(project.client, container.id)),
+        'volumes': get_volumes(get_container_from_id(project.client, container.id)),
         'is_running': container.is_running}, containers)
 
     return items
+
+def get_container_logs(project, container_id, limit):
+    """
+    get container logs
+    """
+    container = get_container_from_id(project.client, container_id)
+    return container.logs(timestamps=True, tail=limit).split('\n')
+
+def get_container_from_id(client, container_id):
+    """
+    return the docker container from a given id
+    """
+    return Container.from_id(client, container_id)
 
 def get_volumes(container):
     """

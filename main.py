@@ -3,7 +3,7 @@ Docker Compose UI, flask based application
 """
 
 from flask import Flask, jsonify, request
-from scripts.bridge import ps_, get_project
+from scripts.bridge import ps_, get_project, get_container_logs
 from scripts.find_yml import find_yml_files
 from scripts.requires_auth import requires_auth, authentication_enabled, disable_authentication, set_authentication
 from json import loads
@@ -105,6 +105,16 @@ def logs(name, limit):
     for k in get_project_with_name(name).containers(stopped=True):
         lines[k.name] = k.logs(timestamps=True, tail=limit).split('\n')
 
+    return jsonify(logs=lines)
+
+@app.route(API_V1 + "logs/<name>/<container>", defaults={'limit': "all"}, methods=['GET'])
+@app.route(API_V1 + "logs/<name>/<container>/<int:limit>", methods=['GET'])
+def container_logs(name, container, limit):
+    """
+    docker-compose logs of a specific container
+    """
+    project = get_project_with_name(name)
+    lines = get_container_logs(project, container, limit)
     return jsonify(logs=lines)
 
 @app.route(API_V1 + "host", methods=['GET'])

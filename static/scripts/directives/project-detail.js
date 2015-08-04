@@ -31,15 +31,14 @@ angular.module('composeUiApp')
 
         });
 
-        var Logs = $resource('api/v1/logs/:id/:limit');
+        var Logs = $resource('api/v1/logs/:id/:container/:limit');
 
         $scope.displayLogs = function (id) {
-          Logs.get({id: $scope.projectId, limit: 100}, function (data) {
+          Logs.get({id: $scope.projectId, limit: 100, container: id}, function (data) {
             $scope.showDialog = true;
-            $scope.logs = data.logs[id];
+            $scope.logs = data.logs;
           });
         };
-
 
       }
     };
