@@ -28,14 +28,17 @@
           <h6 ng-hide="container.volumes.length === 0"><span class="glyphicon glyphicon glyphicon-hdd"></span> Volumes</h6>
           <ul class="list-unstyled">
             <li ng-repeat="volume in container.volumes">
-              {{volume.src}} : {{volume.dest}}
+              <span ng-attr-title="{{volume.src}}">{{volume.src | trim : 12}}</span> :
+              <span ng-attr-title="{{volume.dest}}">{{volume.dest | trim : 12}}</span>
               <span class="label label-default">{{volume.write ? "read-write" : "readonly"}}</span>
             </li>
           </ul>
           <span ng-show="container.is_running">
+            <h6 ng-show="container.ports"><span class="glyphicon glyphicon glyphicon-transfer"></span> Network</h6>
             <p ng-repeat="(internal, host) in container.ports">
+              <span ng-hide="host">{{internal}}</span>
               <span ng-repeat="mapping in host">
-                <a ng-href="http://{{hostName}}:{{mapping.HostPort}}">{{hostName}}:{{mapping.HostPort}}</a> (internal port: {{internal}})
+                {{hostName}}:{{mapping.HostPort}} : {{internal}}
               </span>
             </p>
           </span>
