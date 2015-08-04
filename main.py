@@ -68,6 +68,7 @@ def project_container(name, container_id):
         name_without_project=container.name_without_project,
         number=container.number,
         ports=container.ports,
+        ip=container.get('NetworkSettings.IPAddress'),
         labels=container.labels,
         log_config=container.log_config,
         image=container.image,
