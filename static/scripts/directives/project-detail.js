@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('composeUiApp')
-  .directive('projectDetail', function($resource, $log){
+  .directive('projectDetail', function($resource, $log, projectService){
     return {
       restrict: 'E',
       scope: {
@@ -18,9 +18,7 @@ angular.module('composeUiApp')
           if (val) {
             $log.debug('refresh ' + val);
             Project.get({id: val}, function (data) {
-
-              $scope.services = _.groupBy(data.containers, "labels['com.docker.compose.service']");
-
+              $scope.services = projectService.groupByService(data);
             }, function (err) {
               alertify.alert(err.data);
             });
@@ -50,8 +48,22 @@ angular.module('composeUiApp')
 
         $scope.scale = function (service) {
           var num = window.prompt('how many instances of service ' + service + '?');
+
+          $scope.working = true;
+
           Service.scale({service: service, project: $scope.projectId, num: num}, function () {
-            //TODO: refresh
+
+            Project.get({id: $scope.projectId}, function (data) {
+              $scope.services = projectService.groupByService(data);
+              $scope.working = false;
+            }, function (err) {
+              $scope.working = false;
+              alertify.alert(err.data);
+            });
+
+          }, function (err) {
+            $scope.working = false;
+            alertify.alert(err.data);
           });
         };
 

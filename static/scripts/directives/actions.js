@@ -1,12 +1,12 @@
 'use strict';
 
 angular.module('composeUiApp')
-  .directive('actions', function ($resource) {
+  .directive('actions', function ($resource, projectService) {
 
     return {
       restrict: 'E',
       scope: {
-        project: '=',
+        services: '=',
         projectId: '=',
         working: '='
       },
@@ -28,7 +28,9 @@ angular.module('composeUiApp')
           Project.delete({id: id}, function () {
             alertify.success(id + ' killed');
             $scope.working = false;
-            $scope.project = Project.get({id: id});
+            Project.get({id: id}, function (data) {
+              $scope.services = projectService.groupByService(data);
+            });
           }, function (err) {
             $scope.working = false;
             alertify.alert(err.data);
@@ -51,7 +53,9 @@ angular.module('composeUiApp')
           Project.save({id: id}, function (data) {
             alertify.success(data.containers.length + ' container(s) started');
             $scope.working = false;
-            $scope.project = Project.get({id: id});
+            Project.get({id: id}, function (data) {
+              $scope.services = projectService.groupByService(data);
+            });
           }, function (err) {
             $scope.working = false;
             alertify.alert(err.data);
