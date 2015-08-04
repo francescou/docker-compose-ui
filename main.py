@@ -5,7 +5,8 @@ Docker Compose UI, flask based application
 from flask import Flask, jsonify, request
 from scripts.bridge import ps_, get_project, get_container_from_id
 from scripts.find_yml import find_yml_files
-from scripts.requires_auth import requires_auth, authentication_enabled, disable_authentication, set_authentication
+from scripts.requires_auth import requires_auth, authentication_enabled, \
+  disable_authentication, set_authentication
 from json import loads
 import logging
 import requests
@@ -163,9 +164,9 @@ def host():
     """
     docker host info
     """
-    host = os.getenv('DOCKER_HOST')
+    host_value = os.getenv('DOCKER_HOST')
 
-    return jsonify(host=host)
+    return jsonify(host=host_value)
 
 
 @app.route(API_V1 + "host", methods=['POST'])
