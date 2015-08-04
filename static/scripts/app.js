@@ -36,6 +36,6 @@ angular
       var sTrim = s.trim();
       var sLimit = sTrim.substring(0, n);
       return sLimit.length < sTrim.length ? sLimit + '...' : sLimit;
-    }
+    };
 
   });

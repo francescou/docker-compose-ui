@@ -13,7 +13,7 @@ angular.module('composeUiApp')
                         $(elem).modal("show");
                     else
                         $(elem).modal("hide");
-                }
+                };
 
                 //Watch for changes to the modal-visible attribute
                 scope.$watch(attrs.modalShow, function (newValue, oldValue) {

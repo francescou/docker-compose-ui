@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('composeUiApp')
-  .directive('projectDetail', function($resource, $log, projectService){
+  .directive('projectDetail', function($resource, $log, projectService, $window){
     return {
       restrict: 'E',
       scope: {
@@ -47,7 +47,7 @@ angular.module('composeUiApp')
         });
 
         $scope.scale = function (service) {
-          var num = window.prompt('how many instances of service ' + service + '?');
+          var num = $window.prompt('how many instances of service ' + service + '?');
 
           $scope.working = true;
 
