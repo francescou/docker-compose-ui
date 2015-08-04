@@ -8,42 +8,50 @@
 <br><br>
 
 <div ng-hide="working">
-  <h4>Containers</h4>
+  <h4>Services</h4>
 
-  <div class="row">
-    <div class="col-md-6" ng-repeat="container in project.containers">
-      <div class="container-detail">
-        <h5 ng-class="{'text-success': container.is_running, 'text-warning': !container.is_running}">
-          {{container.name_without_project}}
-          <button class="btn btn-xs btn-info" ng-click="displayLogs(container.name)">logs</button>
-          <a class="btn btn-xs btn-default" ng-href="#/project/{{projectId}}/{{container.name}}">details</a>
-        </h5>
-        <h6 ng-hide="container.volumes.length === 0"><span class="glyphicon glyphicon glyphicon-hdd"></span> Volumes</h6>
-        <ul class="list-unstyled">
-          <li ng-repeat="volume in container.volumes">
-            {{volume.src}} : {{volume.dest}}
-            <span class="label label-default">{{volume.write ? "read-write" : "readonly"}}</span>
-          </li>
-        </ul>
-        <span ng-show="container.is_running">
-          <p ng-repeat="(internal, host) in container.ports">
-            <span ng-repeat="mapping in host">
-              <a ng-href="http://{{hostName}}:{{mapping.HostPort}}">{{hostName}}:{{mapping.HostPort}}</a> (internal port: {{internal}})
-            </span>
-          </p>
-        </span>
-        <span ng-hide="container.is_running">{{container.state}}</span>
-      </div>
+  <div ng-repeat="(id, service) in services">
+    <div class="row">
+      <h5>
+        {{id}}
+        <button class="btn btn-sm btn-default" ng-click="scale(id)"><span class="glyphicon glyphicon-resize-full"></span> scale</button>
+      </h5>
     </div>
-    <div modal-show="showDialog" class="modal fade" tabindex="-1">
-      <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-          <div class="modal-body">
-            <pre class="text-left logs">{{logs.join("\n")}}</pre>
-          </div>
+    <div class="row">
+      <div class="col-md-6" ng-repeat="container in service">
+        <div class="container-detail" ng-class="{'container-detail-active': container.is_running}">
+          <h5 ng-class="{'text-success': container.is_running, 'text-muted': !container.is_running}">
+            {{container.name_without_project}}
+            <button class="btn btn-xs btn-default" ng-click="displayLogs(container.name)">logs</button>
+            <a class="btn btn-xs btn-default" ng-href="#/project/{{projectId}}/{{container.name}}">details</a>
+          </h5>
+          <h6 ng-hide="container.volumes.length === 0"><span class="glyphicon glyphicon glyphicon-hdd"></span> Volumes</h6>
+          <ul class="list-unstyled">
+            <li ng-repeat="volume in container.volumes">
+              {{volume.src}} : {{volume.dest}}
+              <span class="label label-default">{{volume.write ? "read-write" : "readonly"}}</span>
+            </li>
+          </ul>
+          <span ng-show="container.is_running">
+            <p ng-repeat="(internal, host) in container.ports">
+              <span ng-repeat="mapping in host">
+                <a ng-href="http://{{hostName}}:{{mapping.HostPort}}">{{hostName}}:{{mapping.HostPort}}</a> (internal port: {{internal}})
+              </span>
+            </p>
+          </span>
+          <span ng-hide="container.is_running">{{container.state}}</span>
         </div>
       </div>
     </div>
   </div>
-  <span ng-show="project.containers.length === 0">no containers found</span>
+  <div modal-show="showDialog" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <pre class="text-left logs">{{logs.join("\n")}}</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span ng-show="isEmpty(services)">no containers found</span>
 </div>

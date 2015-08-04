@@ -18,7 +18,9 @@ angular.module('composeUiApp')
           if (val) {
             $log.debug('refresh ' + val);
             Project.get({id: val}, function (data) {
-              $scope.project = data;
+
+              $scope.services = _.groupBy(data.containers, "labels['com.docker.compose.service']");
+
             }, function (err) {
               alertify.alert(err.data);
             });
@@ -40,6 +42,23 @@ angular.module('composeUiApp')
           });
         };
 
+        var Service = $resource('api/v1/services', null, {
+          scale: {
+            method: 'PUT'
+          }
+        });
+
+        $scope.scale = function (service) {
+          var num = window.prompt('how many instances of service ' + service + '?');
+          Service.scale({service: service, project: $scope.projectId, num: num}, function () {
+            //TODO: refresh
+          });
+        };
+
+
+        $scope.isEmpty = function (obj) {
+          return angular.equals({}, obj);
+        };
       }
     };
   });

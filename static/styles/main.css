@@ -26,3 +26,7 @@ footer {
   border-radius: 6px;
   margin-bottom: 30px;
 }
+
+.container-detail-active {
+  border-color: #2ecc71;
+}
