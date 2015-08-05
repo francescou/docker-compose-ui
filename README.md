@@ -41,6 +41,12 @@ If you want to use your own docker-compose projects, put them into a directory *
 
 you can download my example projects into */home/user/docker-compose-ui/demo-projects/* from https://github.com/francescou/docker-compose-ui/tree/master/demo-projects
 
+## Note about scaling services
+
+Note that some of the services provided by the demo projects are not "scalable" with `docker-compose scale SERVICE=NUM` because of published ports conflicts.
+
+Check out this project if you are interested in scaling up and down a docker-compose service without having any down time: https://github.com/francescou/consul-template-docker-compose
+
 ### Remote docker host
 
 You can also run containers on a remote docker host, e.g.
