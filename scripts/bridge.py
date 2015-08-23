@@ -2,8 +2,9 @@
 bridge to docker-compose
 """
 
-from compose.cli.main import TopLevelCommand
+from compose.cli.command import Command
 from compose.container import Container
+from compose.config import get_config_path
 
 import logging
 
@@ -51,7 +52,7 @@ def get_project(path):
     get docker project given file path
     """
     logging.debug('get project ' + path)
-    command = TopLevelCommand()
-    command.base_dir = path
-    project = command.get_project(command.get_config_path())
+    command = Command()
+    config_path = get_config_path(path)
+    project = command.get_project(config_path)
     return project
