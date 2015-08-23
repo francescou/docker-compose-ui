@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('composeUiApp')
-  .directive('actions', function ($resource, projectService) {
+  .directive('actions', function ($resource, projectService, logService) {
 
     return {
       restrict: 'E',
@@ -21,6 +21,7 @@ angular.module('composeUiApp')
           }
         });
 
+        var Logs = $resource('api/v1/logs/:id/:limit');
 
         $scope.kill = function () {
           $scope.working = true;
@@ -75,6 +76,12 @@ angular.module('composeUiApp')
         };
 
 
+        $scope.combinedLogs = function () {
+          Logs.get({id: $scope.projectId, limit: 100}, function (data) {
+            $scope.logs = logService.formatLogs(data.logs);
+            $scope.showCombinedLogsDialog = true;
+          });
+        };
       }
     };
   });

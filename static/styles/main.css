@@ -57,3 +57,40 @@ footer {
   color: #03A9F4;
 }
 /* END service colors */
+
+/* combined logs modal */
+.combined-logs {
+  overflow-x: scroll;
+  height: 500px
+}
+
+.combined-logs-line {
+  display: block;
+  white-space: pre;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  font-size: 12px;
+  word-wrap: normal;
+}
+
+.logs-0 {
+  color: #F44336;
+}
+.logs-1 {
+  color: #E91E63;
+}
+.logs-2 {
+  color: #9C27B0;
+}
+.logs-3 {
+  color: #673AB7;
+}
+.logs-4 {
+  color: #3F51B5;
+}
+.logs-5 {
+  color: #2196F3;
+}
+.logs-6 {
+  color: #03A9F4;
+}
+/* END combined logs modal */
