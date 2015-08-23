@@ -13,6 +13,10 @@
         <div class="modal-body combined-logs">
           <span class="text-left combined-logs-line " ng-repeat="line in logs"><span class="logs-{{line.color}}">{{line.container}}:</span> {{line.text}}</span>
         </div>
+        <div class="modal-footer">
+          <button ng-click="combinedLogs()" class="btn btn-default"><span class="glyphicon glyphicon-refresh"></span> refresh</button>
+          <button ng-click="scrollToBottom()" class="btn btn-default"><span class="glyphicon glyphicon-arrow-down"></span> scroll to bottom</button>
+        </div>
       </div>
     </div>
   </div>

@@ -82,6 +82,12 @@ angular.module('composeUiApp')
             $scope.showCombinedLogsDialog = true;
           });
         };
+
+        $scope.scrollToBottom = function () {
+          var objDiv = $(".combined-logs")[0];
+          objDiv.scrollTop = objDiv.scrollHeight;
+        };
+
       }
     };
   });
