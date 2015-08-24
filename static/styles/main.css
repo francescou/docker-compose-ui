@@ -94,3 +94,15 @@ footer {
   color: #03A9F4;
 }
 /* END combined logs modal */
+
+.spinner {
+  animation-name: rotation;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes rotation {
+  from { transform: scale( 1 ) rotate( 0deg );   }
+  to   { transform: scale( 1 ) rotate( 360deg ); }
+}
