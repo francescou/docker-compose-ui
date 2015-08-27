@@ -18,7 +18,7 @@
       </h5>
     </div>
     <div class="row service-{{$index % 7}}">
-      <div class="col-md-6"  ng-repeat="container in service">
+      <div class="col-md-6" ng-class="{'col-md-offset-3': service.length === 1}"  ng-repeat="container in service">
         <div class="container-detail" ng-class="{'active': container.is_running}">
           <h5 ng-class="{'text-muted': !container.is_running}">
             {{container.name_without_project}}
