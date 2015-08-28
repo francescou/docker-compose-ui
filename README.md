@@ -10,6 +10,8 @@ Disclaimer: the software is still under heavy development and might not be ready
 
 ![screenshot remote docker host](https://raw.githubusercontent.com/francescou/docker-compose-ui/master/screenshots/remote-host.png)
 
+![screenshot project logs](https://raw.githubusercontent.com/francescou/docker-compose-ui/master/screenshots/logs.png)
+
 ## Requirements
 
 [Docker 1.7.1 or later](https://github.com/docker/compose/releases/tag/1.4.0)
