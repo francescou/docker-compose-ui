@@ -18,24 +18,22 @@ angular.module('composeUiApp')
           'build': {
             url: 'api/v1/build',
             method: 'POST'
+          },
+          'start': {
+            url: 'api/v1/start',
+            method: 'POST'
+          },
+          'stop': {
+            url: 'api/v1/stop',
+            method: 'POST'
           }
         });
 
         var Logs = $resource('api/v1/logs/:id/:limit');
 
         $scope.kill = function () {
-          $scope.working = true;
           var id = $scope.projectId;
-          Project.delete({id: id}, function () {
-            alertify.success(id + ' killed');
-            $scope.working = false;
-            Project.get({id: id}, function (data) {
-              $scope.services = projectService.groupByService(data);
-            });
-          }, function (err) {
-            $scope.working = false;
-            alertify.alert(err.data);
-          });
+          updateProjectStatus(Project.delete, id + ' killed');
         };
         $scope.pull = function () {
           $scope.working = true;
@@ -49,10 +47,22 @@ angular.module('composeUiApp')
           });
         };
         $scope.up = function () {
+          updateProjectStatus(Project.save, 'project is up');
+        };
+
+        $scope.start = function () {
+          updateProjectStatus(Project.start, 'project started');
+        };
+
+        $scope.stop = function () {
+          updateProjectStatus(Project.stop, 'project stopped');
+        };
+
+        function updateProjectStatus(fn, msg) {
           $scope.working = true;
           var id = $scope.projectId;
-          Project.save({id: id}, function (data) {
-            alertify.success(data.containers.length + ' container(s) started');
+          fn({id: id}, function () {
+            alertify.success(msg);
             $scope.working = false;
             Project.get({id: id}, function (data) {
               $scope.services = projectService.groupByService(data);
@@ -61,7 +71,9 @@ angular.module('composeUiApp')
             $scope.working = false;
             alertify.alert(err.data);
           });
-        };
+
+        }
+
 
         $scope.build = function () {
           $scope.working = true;

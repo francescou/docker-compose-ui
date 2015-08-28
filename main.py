@@ -136,6 +136,26 @@ def build():
     get_project_with_name(name).build()
     return jsonify(command='build')
 
+@app.route(API_V1 + "start", methods=['POST'])
+@requires_auth
+def start():
+    """
+    docker-compose start
+    """
+    name = loads(request.data)["id"]
+    get_project_with_name(name).start()
+    return jsonify(command='start')
+
+@app.route(API_V1 + "stop", methods=['POST'])
+@requires_auth
+def stop():
+    """
+    docker-compose stop
+    """
+    name = loads(request.data)["id"]
+    get_project_with_name(name).stop()
+    return jsonify(command='stop')
+
 @app.route(API_V1 + "logs/<name>", defaults={'limit': "all"}, methods=['GET'])
 @app.route(API_V1 + "logs/<name>/<int:limit>", methods=['GET'])
 def logs(name, limit):

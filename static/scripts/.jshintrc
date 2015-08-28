@@ -2,6 +2,8 @@
   "globals": {
     "angular": false,
     "alertify": false,
-    "_": false
-  }
+    "_": false,
+    "$": false
+  },
+  "globalstrict": true
 }

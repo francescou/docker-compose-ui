@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('composeUiApp')
     .directive("modalShow", function ($parse) {
         return {

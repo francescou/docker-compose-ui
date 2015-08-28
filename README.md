@@ -87,6 +87,14 @@ The application uses [Docker Compose](https://docs.docker.com/compose) to monito
 
     curl -X PUT http://localhost:5000/api/v1/services --data '{"service":"redis","project":"node-redis","num":"2"}' -H'Content-type: application/json'
 
+### docker-compose start of project "hello-node"
+
+    curl -X POST http://localhost:5000/api/v1/start --data '{"id":"hello-node"}' -H'Content-type: application/json'
+
+### docker-compose stop of project "hello-node"
+
+    curl -X POST http://localhost:5000/api/v1/stop --data '{"id":"hello-node"}' -H'Content-type: application/json'
+
 ### docker-compose build of project "hello-node"
 
     curl -X POST http://localhost:5000/api/v1/build --data '{"id":"hello-node"}' -H'Content-type: application/json'
