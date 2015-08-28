@@ -35,6 +35,7 @@ angular.module('composeUiApp')
 
         $scope.displayLogs = function (id) {
           Logs.get({id: $scope.projectId, limit: 100, container: id}, function (data) {
+            $scope.containerLogs = id;
             $scope.showDialog = true;
             $scope.logs = data.logs;
           });
