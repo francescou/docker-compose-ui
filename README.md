@@ -1,4 +1,4 @@
-# Docker Compose UI
+![Docker Compose UI](https://raw.githubusercontent.com/francescou/docker-compose-ui/master/static/images/logo.png)
 
 ## What is it
 
@@ -10,9 +10,9 @@ Disclaimer: the software is still under heavy development and might not be ready
 
 ![screenshot remote docker host](https://raw.githubusercontent.com/francescou/docker-compose-ui/master/screenshots/remote-host.png)
 
-# Requirements
+## Requirements
 
-Docker 1.6.0 or later
+[Docker 1.7.1 or later](https://github.com/docker/compose/releases/tag/1.4.0)
 
 ## Getting started
 
@@ -28,7 +28,7 @@ You have to wait while Docker pulls the container from the Docker Hub: https://r
 
 Then open your browser to `http://localhost:5000`
 
-## Add your own docker-compose projects
+### Add your own docker-compose projects
 
 If you want to use your own docker-compose projects, put them into a directory */home/user/docker-compose-ui/demo-projects* and then run:
 
@@ -41,13 +41,18 @@ If you want to use your own docker-compose projects, put them into a directory *
 
 you can download my example projects into */home/user/docker-compose-ui/demo-projects/* from https://github.com/francescou/docker-compose-ui/tree/master/demo-projects
 
-## Note about scaling services
+### Note about scaling services
 
 Note that some of the services provided by the demo projects are not "scalable" with `docker-compose scale SERVICE=NUM` because of published ports conflicts.
 
 Check out this project if you are interested in scaling up and down a docker-compose service without having any down time: https://github.com/francescou/consul-template-docker-compose
 
-### Remote docker host
+
+### Note about volumes
+
+since you're running docker-compose inside a container you must pay attention to volumes mounted with relative paths, see [Issue #6](https://github.com/francescou/docker-compose-ui/issues/6)
+
+## Remote docker host
 
 You can also run containers on a remote docker host, e.g.
 
@@ -57,6 +62,11 @@ You can also run containers on a remote docker host, e.g.
         -v /home/user/docker-compose-ui/demo-projects:/opt/docker-compose-projects:ro \
         -e DOCKER_HOST=remote-docker-host:2375 \
         francescou/docker-compose-ui
+
+
+### HTTPS Remote docker host
+
+You need to add two environment properties to use an HTTPS remote docker host: `DOCKER_CERT_PATH` and `DOCKER_TLS_VERIFY`, see [example by @ymote](https://github.com/francescou/docker-compose-ui/issues/5#issuecomment-135697832)
 
 ## Technologies
 
