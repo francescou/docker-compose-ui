@@ -10,19 +10,19 @@
 </div>
 
 <div modal-show="showCombinedLogsDialog" class="modal fade" tabindex="-1">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">{{projectId}} logs</h4>
-        </div>
-        <div class="modal-body combined-logs">
-          <span class="text-left combined-logs-line " ng-repeat="line in logs"><span class="logs-{{line.color}}">{{line.container}}:</span> {{line.text}}</span>
-        </div>
-        <div class="modal-footer">
-          <button ng-click="combinedLogs()" class="btn btn-default"><span class="glyphicon glyphicon-refresh"></span> refresh</button>
-          <button ng-click="scrollToBottom()" class="btn btn-default"><span class="glyphicon glyphicon-arrow-down"></span> scroll to bottom</button>
-        </div>
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">{{projectId}} logs</h4>
+      </div>
+      <div class="modal-body combined-logs">
+        <span class="text-left combined-logs-line " ng-repeat="line in logs"><span class="logs-{{line.color}}">{{line.container}}:</span> {{line.text}}</span>
+      </div>
+      <div class="modal-footer">
+        <button ng-click="combinedLogs()" class="btn btn-default"><span class="glyphicon glyphicon-refresh"></span> refresh</button>
+        <button ng-click="scrollToBottom()" class="btn btn-default"><span class="glyphicon glyphicon-arrow-down"></span> scroll to bottom</button>
       </div>
     </div>
   </div>
+</div>
