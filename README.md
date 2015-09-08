@@ -3,7 +3,8 @@
 ## What is it
 
 Docker Compose UI is a web interface for Docker Compose.
-Disclaimer: the software is still under heavy development and might not be ready for production use.
+
+Docker Compose authors warning: _Compose is great for development environments, staging servers, and CI. We don’t recommend that you use it in production yet.__
 
 ![screenshot project detail](https://raw.githubusercontent.com/francescou/docker-compose-ui/master/screenshots/project-detail.png)
 
