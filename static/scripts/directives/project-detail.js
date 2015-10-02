@@ -13,6 +13,7 @@ angular.module('composeUiApp')
 
         var Project = $resource('api/v1/projects/:id');
         var Host = $resource('api/v1/host');
+        var Yml = $resource('api/v1/projects/yml/:id');
 
         $scope.$watch('projectId', function (val) {
           if (val) {
@@ -72,6 +73,16 @@ angular.module('composeUiApp')
         $scope.isEmpty = function (obj) {
           return angular.equals({}, obj);
         };
+
+        $scope.yml = function () {
+          Yml.get({
+            id: $scope.projectId
+          }, function (data) {
+            $scope.ymlData = data.yml;
+          });
+
+        };
+
       }
     };
   });

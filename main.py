@@ -3,7 +3,7 @@ Docker Compose UI, flask based application
 """
 
 from flask import Flask, jsonify, request
-from scripts.bridge import ps_, get_project, get_container_from_id
+from scripts.bridge import ps_, get_project, get_container_from_id, get_yml_path
 from scripts.find_yml import find_yml_files
 from scripts.requires_auth import requires_auth, authentication_enabled, \
   disable_authentication, set_authentication
@@ -53,6 +53,15 @@ def project_containers(name):
     containers = ps_(project)
     return jsonify(containers=containers)
 
+
+@app.route(API_V1 + "projects/yml/<name>", methods=['GET'])
+def project_yml(name):
+    """
+    get yml content
+    """
+    path = get_yml_path(projects[name])
+    with open(path) as data_file:
+        return jsonify(yml=data_file.read())
 
 @app.route(API_V1 + "projects/<name>/<container_id>", methods=['GET'])
 def project_container(name, container_id):

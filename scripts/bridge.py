@@ -47,12 +47,15 @@ def get_volumes(container):
 
     return items
 
+def get_yml_path(path):
+    return get_config_path(path)
+
 def get_project(path):
     """
     get docker project given file path
     """
     logging.debug('get project ' + path)
     command = Command()
-    config_path = get_config_path(path)
+    config_path = get_yml_path(path)
     project = command.get_project(config_path)
     return project

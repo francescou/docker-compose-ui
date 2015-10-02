@@ -1,5 +1,12 @@
 <h3>{{projectId}}</h3>
 
+<button class="btn btn-xs btn-default" ng-hide="ymlData" ng-click="yml()">view yml</button>
+<button class="btn btn-xs btn-default" ng-show="ymlData" ng-click="ymlData = null">close yml</button>
+
+<pre class="text-left" ng-show="ymlData">
+  {{ymlData}}
+</pre>
+
 <h1 ng-show="working">
   <span class="spinner glyphicon glyphicon-refresh"></span>
 </h1>

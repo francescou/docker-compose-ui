@@ -88,6 +88,10 @@ The application uses [Docker Compose](https://docs.docker.com/compose) to monito
 
     curl http://localhost:5000/api/v1/projects/hello-node
 
+### get the content of docker-compose.yml in project "hello-node"
+
+    curl http://localhost:5000/api/v1/projects/yml/hello-node
+
 ### docker inspect the container "hellonode_hello_1" in project "hello-node"
 
     curl http://localhost:5000/api/v1/projects/hello-node/hellonode_hello_1
