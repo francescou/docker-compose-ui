@@ -16,25 +16,3 @@
 
   </form>
 </div>
-<div class="row">
-
-
-  <h4>Authentication</h4>
-
-  <form class="form-inline" ng-submit="setCredentials(username, password)">
-    <div class="form-group">
-      <label for="username">username</label>
-      <input type="text" class="form-control" id="username" ng-model="username">
-    </div>
-    <div class="form-group">
-      <label for="password">password</label>
-      <input type="password" class="form-control" id="password" ng-model="password">
-    </div>
-    <button class="btn btn-lg btn-info">{{authentication ? "update" : "save"}}</button>
-  </form>
-
-  <br>
-
-  <button class="btn btn-lg btn-warning" ng-show="authentication" ng-click="disableAuthentication()">disable authentication</button>
-
-</div>

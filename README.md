@@ -128,15 +128,15 @@ The application uses [Docker Compose](https://docs.docker.com/compose) to monito
 
     curl http://localhost:5000/api/v1/logs/hello-node/hellonode_hello_1/100
 
-### authentication status
+### authentication status (DEPRECATED)
 
     curl http://localhost:5000/api/v1/authentication
 
-### set password
+### set password (DEPRECATED)
 
     curl -X POST -u admin  http://localhost:5000/api/v1/authentication -H 'Content-type: application/json' --data  '{"username":"admin", "password":"password"}'
 
-### disable basic authentication
+### disable basic authentication (DEPRECATED)
 
     curl -X DELETE -u admin  http://localhost:5000/api/v1/authentication
 
