@@ -15,7 +15,7 @@ If you plan to use Docker Compose UI in a production environment please check th
 
 ## Requirements
 
-[Docker 1.7.1 or later](https://github.com/docker/compose/releases/tag/1.4.0)
+[Docker 1.7.1 or later](https://github.com/docker/compose/releases/tag/1.4.2)
 
 ## Getting started
 
