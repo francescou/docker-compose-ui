@@ -17,6 +17,9 @@ angular.module('composeUiApp')
       }
     });
 
+    var Search = $resource('api/v1/search');
+    var Yml = $resource('api/v1/yml');
+
     $scope.create = function (name, yml) {
 
       //TODO: check if name is alphanumeric
@@ -33,6 +36,31 @@ angular.module('composeUiApp')
       });
 
 
+    };
+
+
+    $scope.search = function (query) {
+
+      Search.save({
+        query: query
+      }, function (res) {
+        $scope.items = res.items;
+      }, function (res) {
+        alertify.alert('search error: ' + res.data.error);
+      });
+
+    };
+
+    $scope.load = function (name, url) {
+
+      $scope.yml = 'get content from ' + url;
+      Yml.save({
+        id: url
+      }, function (data) {
+        $scope.yml = data;
+      });
+      $scope.name = name;
+      $scope.items = [];
     };
 
 

@@ -13,6 +13,7 @@ import requests
 import docker
 import os
 import traceback
+import requests
 
 # Flask Application
 API_V1 = '/api/v1/'
@@ -162,6 +163,37 @@ def create():
     out_file.close()
 
     return jsonify(path=file)
+
+
+@app.route(API_V1 + "search", methods=['POST'])
+def search():
+    """
+    search for a project on www.composeregistry.com
+    """
+    query = loads(request.data)['query']
+    r = requests.get('http://www.composeregistry.com/api/v1/search',
+        params={'query': query}, headers={'x-key': 'foobar'})
+    logging.info(r.status_code)
+    if r.status_code == 200:
+        return jsonify(r.json())
+    else:
+        response = jsonify(r.json())
+        response.status_code = r.status_code
+        return response
+
+
+@app.route(API_V1 + "yml", methods=['POST'])
+def yml():
+    """
+    get yml content from www.composeregistry.com
+    """
+    id = loads(request.data)['id']
+    logging.info(id)
+
+    r = requests.get('http://www.composeregistry.com/details',
+        params={'id': id})
+    return jsonify(r.text)
+
 
 @app.route(API_V1 + "start", methods=['POST'])
 @requires_auth
