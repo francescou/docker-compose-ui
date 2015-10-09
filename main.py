@@ -145,6 +145,24 @@ def build():
     get_project_with_name(name).build()
     return jsonify(command='build')
 
+@app.route(API_V1 + "create", methods=['POST'])
+@requires_auth
+def create():
+    """
+    create new project
+    """
+    data = loads(request.data)
+
+    directory = YML_PATH + '/' + data["name"]
+    os.makedirs(directory)
+
+    file = directory + "/docker-compose.yml"
+    out_file = open(file, "w")
+    out_file.write(data["yml"])
+    out_file.close()
+
+    return jsonify(path=file)
+
 @app.route(API_V1 + "start", methods=['POST'])
 @requires_auth
 def start():

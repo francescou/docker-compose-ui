@@ -27,6 +27,10 @@ angular
         templateUrl: 'views/container.html',
         controller: 'ContainerCtrl'
       })
+      .when('/create', {
+        templateUrl: 'views/create.html',
+        controller: 'CreateCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
