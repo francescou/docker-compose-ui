@@ -1,12 +1,11 @@
 
-<h3>Create project</h3>
+<h3>Create new project</h3>
 
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
 
     <form class="form-horizontal" ng-submit="search(query)">
       <div class="form-group">
-        <label for="query">search</label>
         <input type="text" ng-model="query" class="form-control" id="query" placeholder="search for an application stack" required>
       </div>
       <button type="submit" class="btn btn-primary">search</button>
@@ -14,7 +13,7 @@
 
       <ul class="list-unstyled">
         <li ng-repeat="item in items">
-          <a ng-click="load(item.name, item.url)" ng-attr-title="{{item.description}}">{{item.name}} {{item.stars}} stars</a>
+          <button class="btn btn-link" ng-click="load(item.name, item.id)" ng-attr-title="{{item.description}}">{{item.name}} by {{item.owner}}</button> {{item.stars}} <i class="glyphicon glyphicon-star"></i>
         </li>
       </ul>
 
@@ -31,7 +30,7 @@
         <textarea class="form-control" ng-model="yml" id="yml" rows="20" required></textarea>
 
       </div>
-      <button type="submit" class="btn btn-primary">Create project</button>
+      <button type="submit" class="btn btn-primary">Create new project</button>
     </form>
   </div>
 </div>

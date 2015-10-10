@@ -51,13 +51,12 @@ angular.module('composeUiApp')
 
     };
 
-    $scope.load = function (name, url) {
+    $scope.load = function (name, id) {
 
-      $scope.yml = 'get content from ' + url;
       Yml.save({
-        id: url
+        id: id
       }, function (data) {
-        $scope.yml = data;
+        $scope.yml = data.content;
       });
       $scope.name = name;
       $scope.items = [];

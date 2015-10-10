@@ -171,7 +171,7 @@ def search():
     search for a project on www.composeregistry.com
     """
     query = loads(request.data)['query']
-    r = requests.get('http://www.composeregistry.com/api/v1/search',
+    r = requests.get('http://localhost:3000/api/v1/search',
         params={'query': query}, headers={'x-key': 'foobar'})
     logging.info(r.status_code)
     if r.status_code == 200:
@@ -190,9 +190,9 @@ def yml():
     id = loads(request.data)['id']
     logging.info(id)
 
-    r = requests.get('http://www.composeregistry.com/details',
+    r = requests.get('http://localhost:3000/api/v1/yml',
         params={'id': id})
-    return jsonify(r.text)
+    return jsonify(r.json())
 
 
 @app.route(API_V1 + "start", methods=['POST'])
