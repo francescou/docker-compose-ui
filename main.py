@@ -173,7 +173,6 @@ def search():
     query = loads(request.data)['query']
     r = requests.get('http://localhost:3000/api/v1/search',
         params={'query': query}, headers={'x-key': 'foobar'})
-    logging.info(r.status_code)
     if r.status_code == 200:
         return jsonify(r.json())
     else:
@@ -188,8 +187,6 @@ def yml():
     get yml content from www.composeregistry.com
     """
     id = loads(request.data)['id']
-    logging.info(id)
-
     r = requests.get('http://localhost:3000/api/v1/yml',
         params={'id': id})
     return jsonify(r.json())

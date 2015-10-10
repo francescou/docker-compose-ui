@@ -4,21 +4,32 @@
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
 
-    <form class="form-horizontal" ng-submit="search(query)">
-      <div class="form-group">
-        <input type="text" ng-model="query" class="form-control" id="query" placeholder="search for an application stack" required>
+    <div class="panel panel-default">
+      <div class="panel-heading">project from template</div>
+      <div class="panel-body">
+        <form class="form-inline" ng-submit="search(query)">
+          <div class="form-group">
+            <input type="text" ng-model="query" class="form-control" id="query" placeholder="search for an application stack" required>
+          </div>
+          <button type="submit" class="btn btn-primary">search</button>
+
+
+          <ul class="list-unstyled">
+            <li ng-repeat="item in items">
+              <button class="btn btn-link" ng-click="load(item.name, item.id)" ng-attr-title="{{item.description}}">{{item.name}} by {{item.owner}}</button> {{item.stars}} <i class="glyphicon glyphicon-star"></i>
+            </li>
+          </ul>
+
+        </form>
+
+        search provided by <a href="http://www.composeregistry.com">composeregistry.com</a>
       </div>
-      <button type="submit" class="btn btn-primary">search</button>
+    </div>
 
-
-      <ul class="list-unstyled">
-        <li ng-repeat="item in items">
-          <button class="btn btn-link" ng-click="load(item.name, item.id)" ng-attr-title="{{item.description}}">{{item.name}} by {{item.owner}}</button> {{item.stars}} <i class="glyphicon glyphicon-star"></i>
-        </li>
-      </ul>
-
-    </form>
-
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
     <form class="form-horizontal" ng-submit="create(name, yml)">
       <div class="form-group">
         <label for="projectName">Name</label>
