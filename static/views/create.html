@@ -16,7 +16,8 @@
 
           <ul class="list-unstyled">
             <li ng-repeat="item in items">
-              <button class="btn btn-link" ng-click="load(item.name, item.id)" ng-attr-title="{{item.description}}">{{item.name}} by {{item.owner}}</button> {{item.stars}} <i class="glyphicon glyphicon-star"></i>
+              <button class="btn btn-link" ng-click="load(item.name, item.id)">{{item.name}} by {{item.owner}}</button>{{item.stars}} <i class="glyphicon glyphicon-star"></i>
+              <a ng-href="http://www.composeregistry.com/details?id={{item.id}}" class="btn btn-sm btn-link">info</a>
             </li>
           </ul>
 
