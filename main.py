@@ -13,6 +13,7 @@ import requests
 import docker
 import os
 import traceback
+import requests
 
 # Flask Application
 API_V1 = '/api/v1/'
@@ -144,6 +145,52 @@ def build():
     name = loads(request.data)["id"]
     get_project_with_name(name).build()
     return jsonify(command='build')
+
+@app.route(API_V1 + "create", methods=['POST'])
+@requires_auth
+def create():
+    """
+    create new project
+    """
+    data = loads(request.data)
+
+    directory = YML_PATH + '/' + data["name"]
+    os.makedirs(directory)
+
+    file = directory + "/docker-compose.yml"
+    out_file = open(file, "w")
+    out_file.write(data["yml"])
+    out_file.close()
+
+    return jsonify(path=file)
+
+
+@app.route(API_V1 + "search", methods=['POST'])
+def search():
+    """
+    search for a project on www.composeregistry.com
+    """
+    query = loads(request.data)['query']
+    r = requests.get('http://www.composeregistry.com/api/v1/search',
+        params={'query': query}, headers={'x-key': 'default'})
+    if r.status_code == 200:
+        return jsonify(r.json())
+    else:
+        response = jsonify(r.json())
+        response.status_code = r.status_code
+        return response
+
+
+@app.route(API_V1 + "yml", methods=['POST'])
+def yml():
+    """
+    get yml content from www.composeregistry.com
+    """
+    id = loads(request.data)['id']
+    r = requests.get('http://www.composeregistry.com/api/v1/yml',
+        params={'id': id}, headers={'x-key': 'default'})
+    return jsonify(r.json())
+
 
 @app.route(API_V1 + "start", methods=['POST'])
 @requires_auth
