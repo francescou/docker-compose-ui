@@ -5,7 +5,7 @@
   <div class="col-md-8 col-md-offset-2">
 
     <div class="panel panel-default">
-      <div class="panel-heading">project from template</div>
+      <div class="panel-heading">create project from template</div>
       <div class="panel-body">
         <form class="form-inline" ng-submit="search(query)">
           <div class="form-group">
@@ -14,10 +14,10 @@
           <button type="submit" class="btn btn-primary">search</button>
 
 
-          <ul class="list-unstyled">
+          <ul class="list-unstyled search-items">
             <li ng-repeat="item in items">
               <button class="btn btn-link" ng-click="load(item.name, item.id)">{{item.name}} by {{item.owner}}</button>{{item.stars}} <i class="glyphicon glyphicon-star"></i>
-              <a ng-href="http://www.composeregistry.com/details?id={{item.id}}" class="btn btn-sm btn-link">info</a>
+              <a ng-href="http://www.composeregistry.com/details?id={{item.id}}" target="_blank" class="btn btn-xs btn-info">info</a>
             </li>
           </ul>
 
@@ -31,18 +31,24 @@
 </div>
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
-    <form class="form-horizontal" ng-submit="create(name, yml)">
-      <div class="form-group">
-        <label for="projectName">Name</label>
-        <input type="text" ng-model="name" class="form-control" id="projectName" placeholder="Project Name" required>
-      </div>
-      <div class="form-group">
-        <label for="yml">YML Content</label>
 
-        <textarea class="form-control" ng-model="yml" id="yml" rows="20" required></textarea>
+  <div class="panel panel-default">
+      <div class="panel-heading">project metadata</div>
+      <div class="panel-body project-wizard">
+        <form class="form-horizontal" ng-submit="create(name, yml)">
+          <div class="form-group">
+            <label for="projectName">Name</label>
+            <input type="text" ng-model="name" class="form-control" id="projectName" placeholder="Project Name" required>
+          </div>
+          <div class="form-group">
+            <label for="yml">YML Content</label>
 
+            <textarea class="form-control" ng-model="yml" id="yml" rows="20" required></textarea>
+
+          </div>
+          <button type="submit" class="btn btn-primary">Create new project</button>
+        </form>
       </div>
-      <button type="submit" class="btn btn-primary">Create new project</button>
-    </form>
+    </div>
   </div>
 </div>
