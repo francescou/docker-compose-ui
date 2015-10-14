@@ -171,8 +171,8 @@ def search():
     search for a project on www.composeregistry.com
     """
     query = loads(request.data)['query']
-    r = requests.get('http://localhost:3000/api/v1/search',
-        params={'query': query}, headers={'x-key': 'foobar'})
+    r = requests.get('http://www.composeregistry.com/api/v1/search',
+        params={'query': query}, headers={'x-key': 'default'})
     if r.status_code == 200:
         return jsonify(r.json())
     else:
@@ -187,8 +187,8 @@ def yml():
     get yml content from www.composeregistry.com
     """
     id = loads(request.data)['id']
-    r = requests.get('http://localhost:3000/api/v1/yml',
-        params={'id': id})
+    r = requests.get('http://www.composeregistry.com/api/v1/yml',
+        params={'id': id}, headers={'x-key': 'default'})
     return jsonify(r.json())
 
 
