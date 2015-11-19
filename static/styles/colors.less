@@ -1,0 +1,28 @@
+.generate-columns(6);
+
+.generate-columns(@n, @i: 0) when (@i =< @n) {
+
+
+.-(@i); 
+.-(1)  {@color: #F44336}
+.-(2)  {@color: #E91E63}
+.-(3)  {@color: #9C27B0}
+.-(4)  {@color: #673AB7}
+.-(5)  {@color: #3F51B5}
+.-(6)  {@color: #2196F3}
+.-(0)  {@color: #03A9F4}
+  
+.service-@{i} .active.panel{
+  border-color: @color;
+  color: @color;
+}
+
+.service-@{i} .active.panel > .panel-heading {
+  background-color: lighten(@color, 50%);
+  border-color: @color;
+}
+  
+  .generate-columns(@n, (@i + 1));
+}
+
+
