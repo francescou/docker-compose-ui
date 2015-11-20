@@ -1,4 +1,0 @@
-hello:
-  build: app
-  ports:
-  - 1338:1337
