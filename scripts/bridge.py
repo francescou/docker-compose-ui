@@ -4,6 +4,7 @@ bridge to docker-compose
 
 from compose.container import Container
 from compose.cli.command import get_project as compose_get_project, get_config_path
+from compose.config.config import get_default_config_files
 
 import logging
 
@@ -47,13 +48,13 @@ def get_volumes(container):
     return items
 
 def get_yml_path(path):
-    return get_config_path(path)
+    return get_default_config_files(path)[0]
 
 def get_project(path):
     """
     get docker project given file path
     """
     logging.debug('get project ' + path)
-    config_path = get_yml_path(path)
+    config_path = get_config_path(path)
     project = compose_get_project(config_path)
     return project
