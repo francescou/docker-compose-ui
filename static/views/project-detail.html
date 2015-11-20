@@ -24,7 +24,7 @@
         <button class="btn btn-sm btn-default" ng-click="scale(id)"><span class="glyphicon glyphicon-resize-full"></span> scale</button>
       </h5>
     </div>
-    <div class="row service service-{{$index % 7}}">
+    <div class="row service service-{{$index % 16}}">
       <div class="col-md-5" ng-class="{'col-md-offset-3': service.length === 1}"  ng-repeat="container in service">
 
       <div class="panel" ng-class="{'active': container.is_running, 'off': !container.is_running}">

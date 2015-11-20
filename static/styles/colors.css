@@ -1,56 +1,128 @@
 .service-0 .active.panel {
-  border-color: #03A9F4;
-  color: #03A9F4;
+  border-color: #f44336;
+  color: #f44336;
 }
 .service-0 .active.panel > .panel-heading {
-  background-color: #f7fcff;
-  border-color: #03A9F4;
+  background-color: #ffffff;
+  border-color: #f44336;
 }
 .service-1 .active.panel {
-  border-color: #F44336;
-  color: #F44336;
+  border-color: #ff5722;
+  color: #ff5722;
 }
 .service-1 .active.panel > .panel-heading {
   background-color: #ffffff;
-  border-color: #F44336;
+  border-color: #ff5722;
 }
 .service-2 .active.panel {
-  border-color: #E91E63;
-  color: #E91E63;
+  border-color: #ff9800;
+  color: #ff9800;
 }
 .service-2 .active.panel > .panel-heading {
   background-color: #ffffff;
-  border-color: #E91E63;
+  border-color: #ff9800;
 }
 .service-3 .active.panel {
-  border-color: #9C27B0;
-  color: #9C27B0;
+  border-color: #ffc107;
+  color: #ffc107;
 }
 .service-3 .active.panel > .panel-heading {
-  background-color: #f4def8;
-  border-color: #9C27B0;
+  background-color: #ffffff;
+  border-color: #ffc107;
 }
 .service-4 .active.panel {
-  border-color: #673AB7;
-  color: #673AB7;
+  border-color: #ffeb3b;
+  color: #ffeb3b;
 }
 .service-4 .active.panel > .panel-heading {
-  background-color: #f7f4fc;
-  border-color: #673AB7;
+  background-color: #ffffff;
+  border-color: #ffeb3b;
 }
 .service-5 .active.panel {
-  border-color: #3F51B5;
-  color: #3F51B5;
+  border-color: #cddc39;
+  color: #cddc39;
 }
 .service-5 .active.panel > .panel-heading {
-  background-color: #f7f8fc;
-  border-color: #3F51B5;
+  background-color: #ffffff;
+  border-color: #cddc39;
 }
 .service-6 .active.panel {
-  border-color: #2196F3;
-  color: #2196F3;
+  border-color: #8bc34a;
+  color: #8bc34a;
 }
 .service-6 .active.panel > .panel-heading {
   background-color: #ffffff;
+  border-color: #8bc34a;
+}
+.service-7 .active.panel {
+  border-color: #4caf50;
+  color: #4caf50;
+}
+.service-7 .active.panel > .panel-heading {
+  background-color: #fcfefc;
+  border-color: #4caf50;
+}
+.service-8 .active.panel {
+  border-color: #009688;
+  color: #009688;
+}
+.service-8 .active.panel > .panel-heading {
+  background-color: #96fff5;
+  border-color: #009688;
+}
+.service-9 .active.panel {
+  border-color: #00bcd4;
+  color: #00bcd4;
+}
+.service-9 .active.panel > .panel-heading {
+  background-color: #d4faff;
+  border-color: #00bcd4;
+}
+.service-10 .active.panel {
+  border-color: #03a9f4;
+  color: #03a9f4;
+}
+.service-10 .active.panel > .panel-heading {
+  background-color: #f7fcff;
+  border-color: #03a9f4;
+}
+.service-11 .active.panel {
   border-color: #2196F3;
+  color: #2196F3;
+}
+.service-11 .active.panel > .panel-heading {
+  background-color: #ffffff;
+  border-color: #2196F3;
+}
+.service-12 .active.panel {
+  border-color: #3f51b5;
+  color: #3f51b5;
+}
+.service-12 .active.panel > .panel-heading {
+  background-color: #f7f8fc;
+  border-color: #3f51b5;
+}
+.service-13 .active.panel {
+  border-color: #673ab7;
+  color: #673ab7;
+}
+.service-13 .active.panel > .panel-heading {
+  background-color: #f7f4fc;
+  border-color: #673ab7;
+}
+.service-14 .active.panel {
+  border-color: #9c27b0;
+  color: #9c27b0;
+}
+.service-14 .active.panel > .panel-heading {
+  background-color: #f4def8;
+  border-color: #9c27b0;
+}
+.service-15 .active.panel {
+  border-color: #E91E63;
+  color: #E91E63;
+}
+.service-15 .active.panel > .panel-heading {
+  background-color: #ffffff;
+  border-color: #E91E63;
 }

@@ -1,15 +1,24 @@
-.generate-color(6);
+.generate-color(15w);
 
 .generate-color(@n, @i: 0) when (@i =< @n) {
 
   .-(@i);
-  .-(1)  {@color: #F44336}
-  .-(2)  {@color: #E91E63}
-  .-(3)  {@color: #9C27B0}
-  .-(4)  {@color: #673AB7}
-  .-(5)  {@color: #3F51B5}
-  .-(6)  {@color: #2196F3}
-  .-(0)  {@color: #03A9F4}
+  .-(0)  {@color: #f44336}
+  .-(1)  {@color: #ff5722}
+  .-(2)  {@color: #ff9800}
+  .-(3)  {@color: #ffc107}
+  .-(4)  {@color: #ffeb3b}
+  .-(5)  {@color: #cddc39}
+  .-(6)  {@color: #8bc34a}
+  .-(7)  {@color: #4caf50}
+  .-(8)  {@color: #009688}
+  .-(9)  {@color: #00bcd4}
+  .-(10)  {@color: #03a9f4}
+  .-(11)  {@color: #2196F3}
+  .-(12)  {@color: #3f51b5}
+  .-(13)  {@color: #673ab7}
+  .-(14)  {@color: #9c27b0}
+  .-(15)  {@color: #E91E63}
 
   .service-@{i} .active.panel{
     border-color: @color;
