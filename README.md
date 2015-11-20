@@ -17,8 +17,6 @@ If you plan to use Docker Compose UI in a production environment please check th
 
 [Docker 1.7.1 or later](https://github.com/docker/compose/releases/tag/1.4.2)
 
-__note: this project is not yet compatible with docker compose 1.5__
-
 ## Getting started
 
 Run the following command in terminal:
