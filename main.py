@@ -53,6 +53,25 @@ def project_containers(name):
     containers = ps_(project)
     return jsonify(containers=containers)
 
+@app.route(API_V1 + "projects/<project>/<service_id>", methods=['POST'])
+@requires_auth
+def run_service(project, service_id):
+    """
+    docker-compose run service
+    """
+    json = loads(request.data)
+    command = json["command"] if 'command' in json else None
+    service = get_project_with_name(project).get_service(service_id)
+
+    container_options = {
+        'command': command if command else service.options.get('command')
+    }
+
+    service \
+        .create_container(one_off=True, **container_options) \
+        .start()
+
+    return jsonify(command='run %s/%s' % (project, service_id))
 
 @app.route(API_V1 + "projects/yml/<name>", methods=['GET'])
 def project_yml(name):
