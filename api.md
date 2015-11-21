@@ -32,6 +32,11 @@ layout: main
 
     curl -X POST http://localhost:5000/api/v1/start --data '{"id":"hello-node"}' -H'Content-type: application/json'
 
+### docker-compose run command "date" on service "redis" of project "node-redis"
+
+    curl -X POST http://localhost:5000/api/v1/projects/node-redis/redis -H 'Content-type: application/json' --data '{"command":"date"}'
+
+
 ### docker-compose stop of project "hello-node"
 
     curl -X POST http://localhost:5000/api/v1/stop --data '{"id":"hello-node"}' -H'Content-type: application/json'
