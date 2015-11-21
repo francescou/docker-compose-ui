@@ -60,18 +60,19 @@ def run_service(project, service_id):
     docker-compose run service
     """
     json = loads(request.data)
-    command = json["command"] if 'command' in json else None
     service = get_project_with_name(project).get_service(service_id)
 
-    container_options = {
-        'command': command if command else service.options.get('command')
-    }
+    command = json["command"] if 'command' in json else service.options.get('command')
 
-    service \
-        .create_container(one_off=True, **container_options) \
-        .start()
+    container = service \
+        .create_container(one_off=True, command=command)
+    container.start()
 
-    return jsonify(command='run %s/%s' % (project, service_id))
+    return jsonify(\
+        command='run %s/%s' % (project, service_id), \
+        name=container.name, \
+        id=container.id \
+        )
 
 @app.route(API_V1 + "projects/yml/<name>", methods=['GET'])
 def project_yml(name):
