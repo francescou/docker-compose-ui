@@ -13,7 +13,6 @@ import requests
 import docker
 import os
 import traceback
-import requests
 
 # Flask Application
 API_V1 = '/api/v1/'
@@ -157,12 +156,12 @@ def create():
     directory = YML_PATH + '/' + data["name"]
     os.makedirs(directory)
 
-    file = directory + "/docker-compose.yml"
-    out_file = open(file, "w")
+    file_path = directory + "/docker-compose.yml"
+    out_file = open(file_path, "w")
     out_file.write(data["yml"])
     out_file.close()
 
-    return jsonify(path=file)
+    return jsonify(path=file_path)
 
 
 @app.route(API_V1 + "search", methods=['POST'])
@@ -171,14 +170,14 @@ def search():
     search for a project on www.composeregistry.com
     """
     query = loads(request.data)['query']
-    r = requests.get('http://www.composeregistry.com/api/v1/search',
+    response = requests.get('http://www.composeregistry.com/api/v1/search', \
         params={'query': query}, headers={'x-key': 'default'})
-    if r.status_code == 200:
-        return jsonify(r.json())
+    if response.status_code == 200:
+        return jsonify(response.json())
     else:
-        response = jsonify(r.json())
-        response.status_code = r.status_code
-        return response
+        result = jsonify(response.json())
+        result.status_code = response.status_code
+        return result
 
 
 @app.route(API_V1 + "yml", methods=['POST'])
@@ -186,10 +185,10 @@ def yml():
     """
     get yml content from www.composeregistry.com
     """
-    id = loads(request.data)['id']
-    r = requests.get('http://www.composeregistry.com/api/v1/yml',
-        params={'id': id}, headers={'x-key': 'default'})
-    return jsonify(r.json())
+    item_id = loads(request.data)['id']
+    response = requests.get('http://www.composeregistry.com/api/v1/yml', \
+        params={'id': item_id}, headers={'x-key': 'default'})
+    return jsonify(response.json())
 
 
 @app.route(API_V1 + "start", methods=['POST'])
@@ -252,7 +251,7 @@ def set_host():
     set docker host
     """
     new_host = loads(request.data)["id"]
-    if new_host == None:
+    if new_host is None:
         if os.environ.has_key('DOCKER_HOST'):
             del os.environ['DOCKER_HOST']
         return jsonify()
