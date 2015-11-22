@@ -43,7 +43,7 @@ def get_volumes(container):
 
     items = map(lambda volume: \
         dict(write=volumes_rw[volume], dest=volume, src=volumes[volume]), \
-        volumes)
+        volumes if volumes else [])
 
     return items
 
