@@ -190,7 +190,7 @@ def search():
     search for a project on www.composeregistry.com
     """
     query = loads(request.data)['query']
-    response = requests.get('http://www.composeregistry.com/api/v1/search', \
+    response = requests.get('https://www.composeregistry.com/api/v1/search', \
         params={'query': query}, headers={'x-key': 'default'})
     if response.status_code == 200:
         return jsonify(response.json())
@@ -206,7 +206,7 @@ def yml():
     get yml content from www.composeregistry.com
     """
     item_id = loads(request.data)['id']
-    response = requests.get('http://www.composeregistry.com/api/v1/yml', \
+    response = requests.get('https://www.composeregistry.com/api/v1/yml', \
         params={'id': item_id}, headers={'x-key': 'default'})
     return jsonify(response.json())
 
