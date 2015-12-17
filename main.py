@@ -161,8 +161,13 @@ def build():
     """
     docker-compose build
     """
-    name = loads(request.data)["id"]
-    get_project_with_name(name).build()
+    json = loads(request.data)
+    name = json["id"]
+
+    dic = dict(no_cache=json["no_cache"] if "no_cache" in json else None,  pull=json["pull"] if "pull" in json else None)
+
+    get_project_with_name(name).build(**dic)
+
     return jsonify(command='build')
 
 @app.route(API_V1 + "create", methods=['POST'])
