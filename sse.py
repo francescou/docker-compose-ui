@@ -83,14 +83,15 @@ def subscribe():
 
     return Response(gen(), mimetype="text/event-stream")
 
-def notify(event, data):
+
+def sse_handler(event, data):
+    """
+    default SSE handler for ahab notifications
+    """
     notification = dict(status=event['status'], \
         metadata=data['Config']['Labels'])
     for sub in subscriptions[:]:
         sub.put(dumps(notification))
-
-def sse_handler(event, data):
-    gevent.spawn(notify, event, data)
 
 ahab = Ahab(handlers=[sse_handler])
 
