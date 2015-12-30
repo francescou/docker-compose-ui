@@ -2,17 +2,17 @@
 Docker Compose UI, flask based application
 """
 
+from json import loads
+import logging
+import os
+import traceback
+import docker
+import requests
 from flask import Flask, jsonify, request
 from scripts.bridge import ps_, get_project, get_container_from_id, get_yml_path
 from scripts.find_yml import find_yml_files
 from scripts.requires_auth import requires_auth, authentication_enabled, \
   disable_authentication, set_authentication
-from json import loads
-import logging
-import requests
-import docker
-import os
-import traceback
 
 # Flask Application
 API_V1 = '/api/v1/'
@@ -164,7 +164,8 @@ def build():
     json = loads(request.data)
     name = json["id"]
 
-    dic = dict(no_cache=json["no_cache"] if "no_cache" in json else None,  pull=json["pull"] if "pull" in json else None)
+    dic = dict(no_cache=json["no_cache"] if "no_cache" in json \
+      else None, pull=json["pull"] if "pull" in json else None)
 
     get_project_with_name(name).build(**dic)
 
