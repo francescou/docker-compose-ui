@@ -13,7 +13,7 @@ Docker Compose UI is a web interface for Docker Compose.
 
 ## Requirements
 
-[Docker 1.7.1 or later](https://github.com/docker/compose/releases/tag/1.4.2)
+[Docker 1.7.1 or later](https://github.com/docker/compose/releases/tag/1.5.2)
 
 (only if you need Docker clustering) [Docker Swarm 1.0](https://docs.docker.com/swarm/)
 
