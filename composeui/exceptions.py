@@ -1,4 +1,7 @@
 from composeui import app
+import requests
+import docker
+import traceback
 
 ## basic exception handling
 

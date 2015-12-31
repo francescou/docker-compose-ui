@@ -5,7 +5,6 @@ Docker Compose UI, flask based application
 from json import loads
 import logging
 import os
-import traceback
 import docker
 import requests
 from flask import Flask, jsonify, request

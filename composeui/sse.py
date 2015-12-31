@@ -2,6 +2,7 @@
 experimental integration between ahab and Flask SSE
 """
 
+from composeui import app
 from threading import Thread
 import logging
 from json import dumps
@@ -10,7 +11,7 @@ import gevent
 from gevent.wsgi import WSGIServer
 from gevent.queue import Queue
 from gevent import monkey
-from flask import Flask, Response
+from flask import Response
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -35,38 +36,8 @@ class ServerSentEvent(object):
 
         return "%s\n\n" % "\n".join(lines)
 
-app = Flask(__name__)
+#app = Flask(__name__)
 subscriptions = []
-
-# Client code consumes like this.
-@app.route("/")
-def index():
-    debug_template = """
-     <html>
-       <head>
-       </head>
-       <body>
-         <h1>Server sent events</h1>
-         <div id="event"></div>
-         <script type="text/javascript">
-
-         var eventOutputContainer = document.getElementById("event");
-         var evtSrc = new EventSource("/subscribe");
-
-         evtSrc.onmessage = function(e) {
-             console.log(e.data);
-             eventOutputContainer.innerHTML = e.data;
-         };
-
-         </script>
-       </body>
-     </html>
-    """
-    return debug_template
-
-@app.route("/debug")
-def debug():
-    return "Currently %d subscriptions" % len(subscriptions)
 
 @app.route("/subscribe")
 def subscribe():
@@ -83,7 +54,6 @@ def subscribe():
 
     return Response(gen(), mimetype="text/event-stream")
 
-
 def sse_handler(event, data):
     """
     default SSE handler for ahab notifications
@@ -97,10 +67,4 @@ ahab = Ahab(handlers=[sse_handler])
 
 monkey.patch_all(subprocess=True)
 
-if __name__ == "__main__":
-    app.debug = True
-    Thread(target=ahab.listen).start()
-    server = WSGIServer(("", 5000), app)
-    server.serve_forever()
-    # Then visit http://localhost:5000 to subscribe
-    # and send messages by visiting http://localhost:5000/publish
+Thread(target=ahab.listen).start()
