@@ -83,6 +83,25 @@ angular.module('composeUiApp')
 
         };
 
+
+        //TODO: manage unsubscribe
+        var source = Rx.DOM.fromEventSource('/subscribe').map(function (json) {
+          return JSON.parse(json);
+        });
+
+        source.subscribe(function (e) {
+          var project = e.metadata['com.docker.compose.project'];
+          var service = e.metadata['com.docker.compose.service'];
+          var number = e.metadata['com.docker.compose.container-number'];
+          var msg = project + ': ' + service + '-' + number + ' ' + e.status;
+          alertify.log(msg);
+
+          Project.get({id: $scope.projectId}, function (data) {
+            $scope.services = projectService.groupByService(data);
+          });
+
+        });
+
       }
     };
   });
