@@ -313,12 +313,12 @@ def enable_basic_authentication():
     return jsonify(enabled=True)
 
 # static resources
-# @app.route("/")
-# def index():
-#     """
-#     index.html
-#     """
-#     return app.send_static_file('index.html')
+@app.route("/")
+def index():
+    """
+    index.html
+    """
+    return app.send_static_file('index.html')
 
 ## basic exception handling
 
