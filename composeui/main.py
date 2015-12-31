@@ -2,6 +2,7 @@
 Docker Compose UI, flask based application
 """
 
+from sse import Ahab
 from json import loads
 import logging
 import os
@@ -13,12 +14,12 @@ from scripts.bridge import ps_, get_project, get_container_from_id, get_yml_path
 from scripts.find_yml import find_yml_files
 from scripts.requires_auth import requires_auth, authentication_enabled, \
   disable_authentication, set_authentication
+from composeui import app
 
 # Flask Application
 API_V1 = '/api/v1/'
 YML_PATH = '/opt/docker-compose-projects'
 logging.basicConfig(level=logging.DEBUG)
-app = Flask(__name__, static_url_path='')
 
 # load project definitions
 projects = find_yml_files(YML_PATH)
@@ -312,12 +313,12 @@ def enable_basic_authentication():
     return jsonify(enabled=True)
 
 # static resources
-@app.route("/")
-def index():
-    """
-    index.html
-    """
-    return app.send_static_file('index.html')
+# @app.route("/")
+# def index():
+#     """
+#     index.html
+#     """
+#     return app.send_static_file('index.html')
 
 ## basic exception handling
 
@@ -342,7 +343,3 @@ def handle_generic_error(err):
     """
     traceback.print_exc()
     return 'error: ' + str(err), 500
-
-# run app
-if __name__ == "__main__":
-    app.run(host='0.0.0.0', debug=True, threaded=True)
