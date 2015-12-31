@@ -2,7 +2,6 @@
 Docker Compose UI, flask based application
 """
 
-from sse import Ahab
 from json import loads
 import logging
 import os
@@ -19,6 +18,7 @@ from composeui import app
 # Flask Application
 API_V1 = '/api/v1/'
 YML_PATH = '/opt/docker-compose-projects'
+
 logging.basicConfig(level=logging.DEBUG)
 
 # load project definitions
@@ -261,57 +261,6 @@ def container_logs(name, container_id, limit):
     lines = container.logs(timestamps=True, tail=limit).split('\n')
     return jsonify(logs=lines)
 
-@app.route(API_V1 + "host", methods=['GET'])
-def host():
-    """
-    docker host info
-    """
-    host_value = os.getenv('DOCKER_HOST')
-
-    return jsonify(host=host_value)
-
-
-@app.route(API_V1 + "host", methods=['POST'])
-@requires_auth
-def set_host():
-    """
-    set docker host
-    """
-    new_host = loads(request.data)["id"]
-    if new_host is None:
-        if os.environ.has_key('DOCKER_HOST'):
-            del os.environ['DOCKER_HOST']
-        return jsonify()
-    else:
-        os.environ['DOCKER_HOST'] = new_host
-        return jsonify(host=new_host)
-
-@app.route(API_V1 + "authentication", methods=['GET'])
-def authentication():
-    """
-    check if basic authentication is enabled
-    """
-    return jsonify(enabled=authentication_enabled())
-
-@app.route(API_V1 + "authentication", methods=['DELETE'])
-@requires_auth
-def disable_basic_authentication():
-    """
-    disable basic authentication
-    """
-    disable_authentication()
-    return jsonify(enabled=False)
-
-@app.route(API_V1 + "authentication", methods=['POST'])
-@requires_auth
-def enable_basic_authentication():
-    """
-    set up basic authentication
-    """
-    data = loads(request.data)
-    set_authentication(data["username"], data["password"])
-    return jsonify(enabled=True)
-
 # static resources
 @app.route("/")
 def index():
@@ -319,27 +268,3 @@ def index():
     index.html
     """
     return app.send_static_file('index.html')
-
-## basic exception handling
-
-@app.errorhandler(requests.exceptions.ConnectionError)
-def handle_connection_error(err):
-    """
-    connection exception handler
-    """
-    return 'docker host not found: ' + str(err), 500
-
-@app.errorhandler(docker.errors.DockerException)
-def handle_docker_error(err):
-    """
-    docker exception handler
-    """
-    return 'docker exception: ' + str(err), 500
-
-@app.errorhandler(Exception)
-def handle_generic_error(err):
-    """
-    default exception handler
-    """
-    traceback.print_exc()
-    return 'error: ' + str(err), 500
