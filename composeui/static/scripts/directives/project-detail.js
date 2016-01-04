@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('composeUiApp')
-  .directive('projectDetail', function($resource, $log, projectService, $window){
+  .directive('projectDetail', function($resource, $log, projectService, $window, $rootScope){
     return {
       restrict: 'E',
       scope: {
@@ -54,15 +54,7 @@ angular.module('composeUiApp')
           $scope.working = true;
 
           Service.scale({service: service, project: $scope.projectId, num: num}, function () {
-
-            Project.get({id: $scope.projectId}, function (data) {
-              $scope.services = projectService.groupByService(data);
-              $scope.working = false;
-            }, function (err) {
-              $scope.working = false;
-              alertify.alert(err.data);
-            });
-
+            $scope.working = false;
           }, function (err) {
             $scope.working = false;
             alertify.alert(err.data);
@@ -83,22 +75,45 @@ angular.module('composeUiApp')
 
         };
 
+        var routeChangeSuccess = $rootScope.$eventToObservable('$routeChangeSuccess');
 
-        //TODO: manage unsubscribe
-        var source = Rx.DOM.fromEventSource('/subscribe').map(function (json) {
-          return JSON.parse(json);
-        });
+        Rx.DOM.fromEventSource('/subscribe')
+          .map(function (json) {
+            return JSON.parse(json.data);
+          }).groupBy(function (x) {
+          return x.metadata['com.docker.compose.project'];
+        }, function (x) {
+          return x;
+        }).subscribe(function (obs) {
 
-        source.subscribe(function (e) {
-          var project = e.metadata['com.docker.compose.project'];
-          var service = e.metadata['com.docker.compose.service'];
-          var number = e.metadata['com.docker.compose.container-number'];
-          var msg = project + ': ' + service + '-' + number + ' ' + e.status;
-          alertify.log(msg);
+          var route = $scope.projectId.replace(/-/g, ''); //TODO: hack
 
-          Project.get({id: $scope.projectId}, function (data) {
-            $scope.services = projectService.groupByService(data);
-          });
+          if (obs.key === route) {
+
+            obs.subscribe(function (data) {
+              $log.debug(data);
+              Project.get({id: $scope.projectId}, function (data) {
+                $scope.services = projectService.groupByService(data);
+              });
+            });
+
+          } else {
+            obs.map(function (e) {
+              var service = e.metadata['com.docker.compose.service'];
+              var number = e.metadata['com.docker.compose.container-number'];
+              var msg = service + '-' + number + ' ' + e.status;
+              return msg;
+            }).window(Rx.Observable.interval(2000))
+            .selectMany(function (x) {
+              return x.toArray();
+            }).filter(function (e) {
+              return e.length > 1;
+            }).takeUntil(routeChangeSuccess)
+            .subscribe(function (msg) {
+              alertify.log([].concat(obs.key).concat(msg).join('<br>'));
+            });
+
+          }
 
         });
 

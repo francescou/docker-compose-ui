@@ -64,9 +64,6 @@ angular.module('composeUiApp')
           fn({id: id}, function () {
             alertify.success(msg);
             $scope.working = false;
-            Project.get({id: id}, function (data) {
-              $scope.services = projectService.groupByService(data);
-            });
           }, function (err) {
             $scope.working = false;
             alertify.alert(err.data);

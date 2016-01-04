@@ -11,7 +11,8 @@
 angular
   .module('composeUiApp', [
     'ngResource',
-    'ngRoute'
+    'ngRoute',
+    'rx'
   ])
   .config(function ($routeProvider) {
     $routeProvider
