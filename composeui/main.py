@@ -237,6 +237,18 @@ def stop():
     get_project_with_name(name).stop()
     return jsonify(command='stop')
 
+
+@app.route(API_V1 + "projects/<project>/<service>", methods=['DELETE'])
+@requires_auth
+def stop_service(project, service):
+    """
+    docker-compose stop service
+    """
+    get_project_with_name(project) \
+        .stop(service_names=[service])
+
+    return jsonify(command='stop %s/%s' % (project, service))
+
 @app.route(API_V1 + "logs/<name>", defaults={'limit': "all"}, methods=['GET'])
 @app.route(API_V1 + "logs/<name>/<int:limit>", methods=['GET'])
 def logs(name, limit):
