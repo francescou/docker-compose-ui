@@ -95,12 +95,15 @@ angular.module('composeUiApp')
 
           if (obs.key === route) {
 
-            obs.subscribe(function (data) {
-              $log.debug(data);
-              Project.get({id: $scope.projectId}, function (data) {
-                $scope.services = projectService.groupByService(data);
+            obs
+              .throttle(2000)
+              .delay(2000)
+              .subscribe(function (data) {
+                $log.debug(data);
+                Project.get({id: $scope.projectId}, function (data) {
+                  $scope.services = projectService.groupByService(data);
+                });
               });
-            });
 
           } else {
             obs.map(function (e) {
@@ -108,15 +111,16 @@ angular.module('composeUiApp')
               var number = e.metadata['com.docker.compose.container-number'];
               var msg = service + '-' + number + ' ' + e.status;
               return msg;
-            }).window(Rx.Observable.interval(2000))
-            .selectMany(function (x) {
-              return x.toArray();
-            }).filter(function (e) {
-              return e.length > 1;
-            }).takeUntil(routeChangeSuccess)
-            .subscribe(function (msg) {
-              alertify.log([].concat(obs.key).concat(msg).join('<br>'));
-            });
+            })
+              .windowWithTime(3000)
+              .selectMany(function (x) {
+                return x.toArray();
+              }).filter(function (e) {
+                return e.length > 1;
+              }).takeUntil(routeChangeSuccess)
+              .subscribe(function (msg) {
+                alertify.log([].concat('<b>' + obs.key + '</b>').concat(msg).join('<br>'));
+              });
 
           }
 
