@@ -1,7 +1,10 @@
 # https://github.com/francescou/docker-compose-ui
 # DOCKER-VERSION 1.9.1
-FROM python:2.7-slim
+FROM python:2.7.11-slim
 MAINTAINER Francesco Uliana <francesco@uliana.it>
+
+RUN apt-get update
+RUN apt-get install -y build-essential
 
 WORKDIR /app
 RUN virtualenv /env
@@ -16,4 +19,4 @@ COPY demo-projects /opt/docker-compose-projects
 EXPOSE 5000
 
 CMD []
-ENTRYPOINT ["/env/bin/python", "/app/main.py"]
+ENTRYPOINT ["/env/bin/python", "/app/runserver.py"]

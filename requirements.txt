@@ -1,2 +1,4 @@
 Flask==0.10.1
 docker-compose==1.5.2
+ahab==20151119
+gevent==1.0.2
