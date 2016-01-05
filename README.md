@@ -10,6 +10,7 @@ Docker Compose UI is a web interface for Docker Compose.
 
 ![screenshot project logs](https://raw.githubusercontent.com/francescou/docker-compose-ui/master/screenshots/logs.png)
 
+
 ## Requirements
 
 [Docker 1.7.1 or later](https://github.com/docker/compose/releases/tag/1.5.2)
@@ -29,6 +30,10 @@ Run the following command in terminal:
 You have to wait while Docker pulls the container from the Docker Hub: https://registry.hub.docker.com/u/francescou/docker-compose-ui
 
 Then open your browser to `http://localhost:5000`
+
+### Real time notifications (Experimental)
+
+use `francescou/docker-compose-ui:1.0.RC1` if you want to try the new real time notification system, more info on issue #14
 
 ### Add your own docker-compose projects
 
