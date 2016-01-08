@@ -26,7 +26,7 @@ angular.module('composeUiApp')
 
             Host.get(function (data) {
               var host = data.host;
-              $scope.hostName = host ? host.split(':')[0] : 'localhost';
+              $scope.hostName = host ? host.split(':')[0] : null;
             });
           }
 
