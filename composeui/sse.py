@@ -58,8 +58,9 @@ def sse_handler(event, data):
     """
     default SSE handler for ahab notifications
     """
+    label = data['Config']['Labels'] if ('Config' in data and 'Labels' in data['Config']) else None
     notification = dict(status=event['status'], \
-        metadata=data['Config']['Labels'])
+        metadata=label)
     for sub in subscriptions[:]:
         sub.put(dumps(notification))
 
