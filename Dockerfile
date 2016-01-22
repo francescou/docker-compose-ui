@@ -5,6 +5,7 @@ MAINTAINER Francesco Uliana <francesco@uliana.it>
 
 RUN apt-get update
 RUN apt-get install -y build-essential
+RUN pip install virtualenv
 
 WORKDIR /app
 RUN virtualenv /env
