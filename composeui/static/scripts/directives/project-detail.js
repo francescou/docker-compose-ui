@@ -96,8 +96,8 @@ angular.module('composeUiApp')
           if (obs.key === route) {
 
             obs
-              .throttle(2000)
-              .delay(2000)
+              .throttle(1000)
+              .delay(1000)
               .subscribe(function (data) {
                 $log.debug(data);
                 Project.get({id: $scope.projectId}, function (data) {
