@@ -3,6 +3,8 @@
 FROM python:2.7-slim
 MAINTAINER Francesco Uliana <francesco@uliana.it>
 
+RUN pip install virtualenv
+
 WORKDIR /app
 RUN virtualenv /env
 ADD requirements.txt /app/requirements.txt
