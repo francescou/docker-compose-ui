@@ -4,7 +4,7 @@ bridge to docker-compose
 
 import logging
 from compose.container import Container
-from compose.cli.command import get_project as compose_get_project, get_config_path
+from compose.cli.command import get_project as compose_get_project, get_config_path_from_options
 from compose.config.config import get_default_config_files
 
 def ps_(project):
@@ -57,6 +57,6 @@ def get_project(path):
     get docker project given file path
     """
     logging.debug('get project ' + path)
-    config_path = get_config_path(path)
+    config_path = get_config_path_from_options(dict([('--file', path)]))
     project = compose_get_project(config_path)
     return project
