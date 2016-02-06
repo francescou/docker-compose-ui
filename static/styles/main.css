@@ -1,7 +1,3 @@
-body {
-  background-color: #F9F9F9;
-}
-
 .logs{
   max-height: 500px;
   display: block;
@@ -95,4 +91,14 @@ footer {
 
 .search-items {
   margin-top: 10px;
+}
+
+.btn-default {
+  background-color: #869198;
+}
+.btn-default:active, .btn-default.active {
+    background: #6d7377;
+}
+.btn-default:hover, .btn-default.hover {
+    background: #939da3;
 }
