@@ -102,7 +102,6 @@ def project_container(name, container_id):
         labels=container.labels,
         log_config=container.log_config,
         image=container.image,
-        links=container.links(),
         environment=container.environment
         )
 
