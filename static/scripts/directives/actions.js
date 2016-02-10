@@ -26,6 +26,10 @@ angular.module('composeUiApp')
           'stop': {
             url: 'api/v1/stop',
             method: 'POST'
+          },
+          'down': {
+            url: 'api/v1/down',
+            method: 'POST'
           }
         });
 
@@ -48,6 +52,9 @@ angular.module('composeUiApp')
         };
         $scope.up = function () {
           updateProjectStatus(Project.save, 'project is up');
+        };
+        $scope.down = function () {
+          updateProjectStatus(Project.down, 'project is down');
         };
 
         $scope.start = function () {

@@ -2,6 +2,7 @@
 Docker Compose UI, flask based application
 """
 
+from compose.service import ImageType
 from json import loads
 import logging
 import os
@@ -235,6 +236,16 @@ def stop():
     name = loads(request.data)["id"]
     get_project_with_name(name).stop()
     return jsonify(command='stop')
+
+@app.route(API_V1 + "down", methods=['POST'])
+@requires_auth
+def down():
+    """
+    docker-compose down
+    """
+    name = loads(request.data)["id"]
+    get_project_with_name(name).down(ImageType.none, None)
+    return jsonify(command='down')
 
 @app.route(API_V1 + "logs/<name>", defaults={'limit': "all"}, methods=['GET'])
 @app.route(API_V1 + "logs/<name>/<int:limit>", methods=['GET'])
