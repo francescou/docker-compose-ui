@@ -50,7 +50,7 @@
               <p ng-repeat="(internal, host) in container.ports">
                 <span ng-hide="host">{{internal}}</span>
                 <span ng-repeat="mapping in host">
-                  {{hostName || mapping.HostIp}}:{{mapping.HostPort}} : {{internal}}
+                  {{mapping.HostPort}} : {{internal}}
                 </span>
               </p>
             </span>
