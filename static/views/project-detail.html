@@ -1,7 +1,9 @@
 <h3>{{projectId}}</h3>
 
-<button class="btn btn-xs btn-default" ng-hide="ymlData" ng-click="yml()">view yml</button>
-<button class="btn btn-xs btn-default" ng-show="ymlData" ng-click="ymlData = null">close yml</button>
+<p>
+  <button class="btn btn-sm btn-info" ng-hide="ymlData" ng-click="yml()">view docker-compose.yml</button>
+  <button class="btn btn-sm btn-info" ng-show="ymlData" ng-click="ymlData = null">close docker-compose.yml</button>
+</p>
 
 <pre class="text-left" ng-show="ymlData">
   {{ymlData}}
