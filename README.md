@@ -77,6 +77,18 @@ The project has been tested on a Docker Swarm 1.0 cluster.
 
 You need to add two environment properties to use an HTTPS remote docker host: `DOCKER_CERT_PATH` and `DOCKER_TLS_VERIFY`, see [example by @ymote](https://github.com/francescou/docker-compose-ui/issues/5#issuecomment-135697832)
 
+### Authenticated docker registries
+
+If your projects require you to pull images from a private docker registry that requires authentication, you will need to provide a `docker.json` file with the necessary configuration options to the docker-compose-ui container at `/root/.docker.config.json`. You can generate the file on any host by performing `docker login [your private registry address]` and copying the resulting file from your ~/.docker directory to where it is needed.
+
+For example:
+
+    docker run \
+        --name docker-compose-ui \
+        -p 5000:5000 \
+        -v /home/user/.docker/config.json:/root/.docker/config.json:ro \
+        francescou/docker-compose-ui:0.14
+
 ## Technologies
 
 Docker Compose UI has been developed using Flask (python microframework) to provide RESTful services and AngularJS to implement the Single Page Application web ui.
