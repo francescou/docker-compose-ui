@@ -79,7 +79,7 @@ You need to add two environment properties to use an HTTPS remote docker host: `
 
 ### Authenticated docker registries
 
-If your projects require you to pull images from a private docker registry that requires authentication, you will need to provide a `docker.json` file with the necessary configuration options to the docker-compose-ui container at `/root/.docker.config.json`. You can generate the file on any host by performing `docker login [your private registry address]` and copying the resulting file from your ~/.docker directory to where it is needed.
+If your projects require you to pull images from a private docker registry that requires authentication, you will need to provide a `config.json` file with the necessary configuration options to the docker-compose-ui container at `/root/.docker/config.json`. You can generate the file on any host by performing `docker login [your private registry address]` and copying the resulting file from your ~/.docker directory to where it is needed.
 
 For example:
 
