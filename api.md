@@ -24,6 +24,14 @@ layout: main
 
     curl -X POST http://localhost:5000/api/v1/projects --data '{"id":"hello-node"}' -H'Content-type: application/json'
 
+### docker-compose down of project "hello-node"
+
+    curl -X POST http://localhost:5000/api/v1/down --data '{"id":"hello-node"}' -H'Content-type: application/json'
+
+### create new docker-compose project "hello-node"
+
+    curl -X POST http://localhost:5000/api/v1/create --data '{"name":"hello-node", "yml": "node:\n    image: node"}' -H'Content-type: application/json'
+
 ### docker-compose scale redis=2, project "node-redis"
 
     curl -X PUT http://localhost:5000/api/v1/services --data '{"service":"redis","project":"node-redis","num":"2"}' -H'Content-type: application/json'
@@ -61,15 +69,20 @@ layout: main
 
     curl http://localhost:5000/api/v1/logs/hello-node/hellonode_hello_1/100
 
-### authentication status (DEPRECATED)
+### search for a project on <https://www.composeregistry.com>
 
-    curl http://localhost:5000/api/v1/authentication
+    curl -X POST http://localhost:5000/api/v1/search -H 'Content-type: application/json' --data '{"query": "elk"}'
 
-### set password (DEPRECATED)
+### get docker-compose.yml file from <https://www.composeregistry.com>
 
-    curl -X POST -u admin  http://localhost:5000/api/v1/authentication -H 'Content-type: application/json' --data  '{"username":"admin", "password":"password"}'
+    curl -X POST http://localhost:5000/api/v1/yml -H 'Content-type: application/json' --data '{"id": "AVBCF9PggLKoASuOwp_8"}'
 
-### disable basic authentication (DEPRECATED)
 
-    curl -X DELETE -u admin  http://localhost:5000/api/v1/authentication
+### get current docker host
+
+    curl http://localhost:5000/api/v1/host
+
+### set docker daemon socket(s) to connect to
+
+    curl -X POST http://localhost:5000/api/v1/host -H 'Content-type: application/json' --data '{"id": "192.168.0.1:2376"}'
 
