@@ -21,11 +21,13 @@ YML_PATH = '/opt/docker-compose-projects'
 logging.basicConfig(level=logging.DEBUG)
 app = Flask(__name__, static_url_path='')
 
+def load_projects():
+    global projects
+    projects = find_yml_files(YML_PATH)
+    logging.debug(projects)
+
 # load project definitions
-projects = find_yml_files(YML_PATH)
-
-logging.debug(projects)
-
+load_projects()
 
 def get_project_with_name(name):
     """
@@ -41,8 +43,7 @@ def list_projects():
     """
     List docker compose projects
     """
-    global projects
-    projects = find_yml_files(YML_PATH)
+    load_projects()
     return jsonify(projects=projects)
 
 @app.route(API_V1 + "projects/<name>", methods=['GET'])
@@ -186,6 +187,8 @@ def create():
     out_file = open(file_path, "w")
     out_file.write(data["yml"])
     out_file.close()
+
+    load_projects()
 
     return jsonify(path=file_path)
 
