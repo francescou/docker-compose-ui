@@ -2,11 +2,11 @@
 Docker Compose UI, flask based application
 """
 
-from compose.service import ImageType
 from json import loads
 import logging
 import os
 import traceback
+from compose.service import ImageType
 import docker
 import requests
 from flask import Flask, jsonify, request
@@ -22,11 +22,13 @@ logging.basicConfig(level=logging.DEBUG)
 app = Flask(__name__, static_url_path='')
 
 def load_projects():
+    """
+    load project definitions (docker-compose.yml files)
+    """
     global projects
     projects = find_yml_files(YML_PATH)
     logging.debug(projects)
 
-# load project definitions
 load_projects()
 
 def get_project_with_name(name):
@@ -153,7 +155,7 @@ def up_():
     return jsonify(
         {
             'command': 'up',
-            'containers': map(lambda container: container.name, containers)
+            'containers': [container.name for container in containers]
         })
 
 @app.route(API_V1 + "build", methods=['POST'])
