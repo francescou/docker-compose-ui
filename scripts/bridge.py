@@ -37,14 +37,8 @@ def get_volumes(container):
     """
     retrieve container volumes details
     """
-    volumes = container.get('Volumes')
-    volumes_rw = container.get('VolumesRW')
+    return container.get('Config.Volumes')
 
-    items = map(lambda volume: \
-        dict(write=volumes_rw[volume], dest=volume, src=volumes[volume]), \
-        volumes if volumes else [])
-
-    return items
 
 def get_yml_path(path):
     """
