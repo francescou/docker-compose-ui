@@ -3,7 +3,7 @@
   color: #f44336;
 }
 .service-0 .active.panel > .panel-heading {
-  background-color: #f8877f;
+  background-color: #fff8f7;
   border-color: #f44336;
 }
 .service-1 .active.panel {
@@ -11,7 +11,7 @@
   color: #ff5722;
 }
 .service-1 .active.panel > .panel-heading {
-  background-color: #ff916f;
+  background-color: #fff2ee;
   border-color: #ff5722;
 }
 .service-2 .active.panel {
@@ -19,7 +19,7 @@
   color: #ff9800;
 }
 .service-2 .active.panel > .panel-heading {
-  background-color: #ffb74d;
+  background-color: #ffeacc;
   border-color: #ff9800;
 }
 .service-3 .active.panel {
@@ -27,7 +27,7 @@
   color: #ffc107;
 }
 .service-3 .active.panel > .panel-heading {
-  background-color: #ffd454;
+  background-color: #fff4d3;
   border-color: #ffc107;
 }
 .service-4 .active.panel {
@@ -35,7 +35,7 @@
   color: #ffeb3b;
 }
 .service-4 .active.panel > .panel-heading {
-  background-color: #fff388;
+  background-color: #ffffff;
   border-color: #ffeb3b;
 }
 .service-5 .active.panel {
@@ -43,7 +43,7 @@
   color: #cddc39;
 }
 .service-5 .active.panel > .panel-heading {
-  background-color: #dde77a;
+  background-color: #f9fbe6;
   border-color: #cddc39;
 }
 .service-6 .active.panel {
@@ -51,7 +51,7 @@
   color: #8bc34a;
 }
 .service-6 .active.panel > .panel-heading {
-  background-color: #b0d683;
+  background-color: #edf6e3;
   border-color: #8bc34a;
 }
 .service-7 .active.panel {
@@ -59,7 +59,7 @@
   color: #4caf50;
 }
 .service-7 .active.panel > .panel-heading {
-  background-color: #80c883;
+  background-color: #d9eeda;
   border-color: #4caf50;
 }
 .service-8 .active.panel {
@@ -67,7 +67,7 @@
   color: #009688;
 }
 .service-8 .active.panel > .panel-heading {
-  background-color: #00e3cd;
+  background-color: #63fff0;
   border-color: #009688;
 }
 .service-9 .active.panel {
@@ -75,7 +75,7 @@
   color: #00bcd4;
 }
 .service-9 .active.panel > .panel-heading {
-  background-color: #21e6ff;
+  background-color: #a1f4ff;
   border-color: #00bcd4;
 }
 .service-10 .active.panel {
@@ -83,23 +83,23 @@
   color: #03a9f4;
 }
 .service-10 .active.panel > .panel-heading {
-  background-color: #47c4fd;
+  background-color: #c5ecfe;
   border-color: #03a9f4;
 }
 .service-11 .active.panel {
-  border-color: #2196F3;
-  color: #2196F3;
+  border-color: #2196f3;
+  color: #2196f3;
 }
 .service-11 .active.panel > .panel-heading {
-  background-color: #6ab8f7;
-  border-color: #2196F3;
+  background-color: #e3f2fd;
+  border-color: #2196f3;
 }
 .service-12 .active.panel {
   border-color: #3f51b5;
   color: #3f51b5;
 }
 .service-12 .active.panel > .panel-heading {
-  background-color: #7280ce;
+  background-color: #d1d6ef;
   border-color: #3f51b5;
 }
 .service-13 .active.panel {
@@ -107,7 +107,7 @@
   color: #673ab7;
 }
 .service-13 .active.panel > .panel-heading {
-  background-color: #916dd1;
+  background-color: #daceef;
   border-color: #673ab7;
 }
 .service-14 .active.panel {
@@ -115,14 +115,14 @@
   color: #9c27b0;
 }
 .service-14 .active.panel > .panel-heading {
-  background-color: #c34cd7;
+  background-color: #e6b5ee;
   border-color: #9c27b0;
 }
 .service-15 .active.panel {
-  border-color: #E91E63;
-  color: #E91E63;
+  border-color: #e91e63;
+  color: #e91e63;
 }
 .service-15 .active.panel > .panel-heading {
-  background-color: #f06493;
-  border-color: #E91E63;
+  background-color: #fbd8e4;
+  border-color: #e91e63;
 }
