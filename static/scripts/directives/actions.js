@@ -95,8 +95,10 @@ angular.module('composeUiApp')
         };
 
 
+        $scope.lineLimit = 80;
         $scope.combinedLogs = function () {
-          Logs.get({id: $scope.projectId, limit: 100}, function (data) {
+
+          Logs.get({id: $scope.projectId, limit: $scope.lineLimit}, function (data) {
             $scope.logs = logService.formatLogs(data.logs);
             $scope.showCombinedLogsDialog = true;
           });

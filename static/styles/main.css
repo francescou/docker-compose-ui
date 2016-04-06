@@ -102,3 +102,7 @@ footer {
 .btn-default:hover, .btn-default.hover {
     background: #939da3;
 }
+
+.lines-input {
+  max-width: 80px
+}

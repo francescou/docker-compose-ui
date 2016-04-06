@@ -25,8 +25,16 @@
         <span class="text-left combined-logs-line " ng-repeat="line in logs"><span class="logs-{{line.color}}">{{line.container}}:</span> {{line.text}}</span>
       </div>
       <div class="modal-footer">
-        <button ng-click="combinedLogs()" class="btn btn-default"><span class="glyphicon glyphicon-refresh"></span> refresh</button>
-        <button ng-click="scrollToBottom()" class="btn btn-default"><span class="glyphicon glyphicon-arrow-down"></span> scroll to bottom</button>
+
+        <form class="form-inline">
+          <div class="form-group">
+            <label for="lineLimit">Lines</label>
+            <input type="number" name="lineLimit" class="form-control lines-input" ng-model="lineLimit" />
+          </div>
+
+          <button ng-click="combinedLogs()" class="btn btn-default"><span class="glyphicon glyphicon-refresh"></span> refresh</button>
+          <button ng-click="scrollToBottom()" class="btn btn-default"><span class="glyphicon glyphicon-arrow-down"></span> scroll to bottom</button>
+        </form>
       </div>
     </div>
   </div>
