@@ -10,14 +10,14 @@ from compose.service import ImageType
 import docker
 import requests
 from flask import Flask, jsonify, request
+from scripts.git_repo import git_pull
 from scripts.bridge import ps_, get_project, get_container_from_id, get_yml_path
-from scripts.find_yml import find_yml_files
+from scripts.find_yml import find_yml_files, YML_PATH
 from scripts.requires_auth import requires_auth, authentication_enabled, \
   disable_authentication, set_authentication
 
 # Flask Application
 API_V1 = '/api/v1/'
-YML_PATH = '/opt/docker-compose-projects'
 logging.basicConfig(level=logging.DEBUG)
 app = Flask(__name__, static_url_path='')
 
@@ -26,7 +26,8 @@ def load_projects():
     load project definitions (docker-compose.yml files)
     """
     global projects
-    projects = find_yml_files(YML_PATH)
+    git_pull()
+    projects = find_yml_files()
     logging.debug(projects)
 
 load_projects()
@@ -360,4 +361,4 @@ def handle_generic_error(err):
 
 # run app
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', debug=True, threaded=True)
+    app.run(host='0.0.0.0', debug=False, threaded=True)
