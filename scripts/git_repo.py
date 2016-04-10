@@ -5,6 +5,9 @@ from scripts.find_yml import YML_PATH
 
 git_repo = os.getenv('GIT_REPO')
 
+if git_repo:
+  YML_PATH = YML_PATH + '-git'
+
 logging.basicConfig(level=logging.DEBUG)
 
 def git_pull():

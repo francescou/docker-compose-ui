@@ -1,9 +1,10 @@
 # https://github.com/francescou/docker-compose-ui
-# DOCKER-VERSION 1.9.1
+# DOCKER-VERSION 1.10.3
 FROM python:2.7-slim
 MAINTAINER Francesco Uliana <francesco@uliana.it>
 
 RUN pip install virtualenv
+RUN apt-get update && apt-get install -y git
 
 WORKDIR /app
 RUN virtualenv /env
