@@ -27,6 +27,8 @@ Run the following command in terminal:
     -v /var/run/docker.sock:/var/run/docker.sock \
     francescou/docker-compose-ui:0.15
 
+or, if you already have docker-compose installed, just `docker-compose up`.
+
 You have to wait while Docker pulls the container from the Docker Hub: https://registry.hub.docker.com/u/francescou/docker-compose-ui
 
 Then open your browser to `http://localhost:5000`
