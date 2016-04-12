@@ -10,9 +10,9 @@ from compose.service import ImageType
 import docker
 import requests
 from flask import Flask, jsonify, request
-from scripts.git_repo import git_pull
+from scripts.git_repo import git_pull, git_repo, GIT_YML_PATH
 from scripts.bridge import ps_, get_project, get_container_from_id, get_yml_path
-from scripts.find_yml import find_yml_files, YML_PATH
+from scripts.find_yml import find_yml_files
 from scripts.requires_auth import requires_auth, authentication_enabled, \
   disable_authentication, set_authentication
 
@@ -21,13 +21,20 @@ API_V1 = '/api/v1/'
 logging.basicConfig(level=logging.DEBUG)
 app = Flask(__name__, static_url_path='')
 
+YML_PATH = '/opt/docker-compose-projects'
+
 def load_projects():
     """
     load project definitions (docker-compose.yml files)
     """
     global projects
     git_pull()
-    projects = find_yml_files()
+
+    if git_repo:
+        projects = find_yml_files(GIT_YML_PATH)
+    else:
+        projects = find_yml_files(YML_PATH)
+
     logging.debug(projects)
 
 load_projects()
