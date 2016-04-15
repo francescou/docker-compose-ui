@@ -6,13 +6,14 @@ import logging
 from compose.container import Container
 from compose.cli.command import get_project as compose_get_project, get_config_path_from_options
 from compose.config.config import get_default_config_files
+from compose.config.environment import Environment
 
 def ps_(project):
     """
     containers status
     """
     logging.debug('ps ' + project.name)
-    containers = project.containers(stopped=True) + project.containers(one_off=True)
+    containers = project.containers(stopped=True)
 
     items = [{
         'name': container.name,
@@ -51,6 +52,7 @@ def get_project(path):
     get docker project given file path
     """
     logging.debug('get project ' + path)
-    config_path = get_config_path_from_options(dict([('--file', path)]))
-    project = compose_get_project(config_path)
+    environment = Environment.from_env_file(path)
+    config_path = get_config_path_from_options(path, dict(), environment)
+    project = compose_get_project(path, config_path)
     return project
