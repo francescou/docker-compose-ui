@@ -1,6 +1,6 @@
 docker_compose_ui:
     restart: always
-    image: francescou/docker-compose-ui:0.15
+    image: francescou/docker-compose-ui:0.16
     container_name: docker_compose_ui
     hostname: docker_compose_ui
     ports:
