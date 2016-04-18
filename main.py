@@ -11,7 +11,7 @@ import docker
 import requests
 from flask import Flask, jsonify, request
 from scripts.bridge import ps_, get_project, get_container_from_id, get_yml_path
-from scripts.find_yml import find_yml_files
+from scripts.find_files import find_yml_files, get_readme_file
 from scripts.requires_auth import requires_auth, authentication_enabled, \
   disable_authentication, set_authentication
 
@@ -86,6 +86,14 @@ def project_yml(name):
     path = get_yml_path(projects[name])
     with open(path) as data_file:
         return jsonify(yml=data_file.read())
+
+@app.route(API_V1 + "projects/readme/<name>", methods=['GET'])
+def get_project_readme(name):
+    """
+    get README.md or readme.md if available
+    """
+    path = projects[name]
+    return jsonify(readme=get_readme_file(path))
 
 @app.route(API_V1 + "projects/<name>/<container_id>", methods=['GET'])
 def project_container(name, container_id):

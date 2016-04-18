@@ -14,6 +14,7 @@ angular.module('composeUiApp')
         var Project = $resource('api/v1/projects/:id');
         var Host = $resource('api/v1/host');
         var Yml = $resource('api/v1/projects/yml/:id');
+        var Readme = $resource('api/v1/projects/readme/:id');
 
         $scope.$watch('projectId', function (val) {
           if (val) {
@@ -28,6 +29,15 @@ angular.module('composeUiApp')
               var host = data.host;
               $scope.hostName = host ? host.split(':')[0] : null;
             });
+
+            Readme.get({
+              id: $scope.projectId
+            }, function (data) {
+              $scope.readmeData = data.readme;
+              $scope.readmeExists = data.readme.length > 0;
+              $scope.readmeShow = false;
+            });
+
           }
 
         });
@@ -82,6 +92,7 @@ angular.module('composeUiApp')
           });
 
         };
+
 
       }
     };
