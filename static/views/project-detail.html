@@ -5,8 +5,17 @@
   <button class="btn btn-sm btn-info" ng-show="ymlData" ng-click="ymlData = null">close docker-compose.yml</button>
 </p>
 
+<p ng-show="readmeExists">
+  <button class="btn btn-sm btn-success" ng-hide="readmeShow" ng-click="readmeShow = true">view readme</button>
+  <button class="btn btn-sm btn-success" ng-show="readmeShow" ng-click="readmeShow = false">close readme</button>
+</p>
+
 <pre class="text-left" ng-show="ymlData">
   {{ymlData}}
+</pre>
+
+<pre class="text-left" ng-show="readmeShow">
+  {{readmeData}}
 </pre>
 
 <h1 ng-show="working">
