@@ -34,7 +34,7 @@ angular.module('composeUiApp')
               id: $scope.projectId
             }, function (data) {
               $scope.readmeData = data.readme;
-              $scope.readmeExists = data.readme.length > 0;
+              $scope.readmeExists = data.readme && data.readme.length > 0;
               $scope.readmeShow = false;
             });
 
@@ -51,6 +51,20 @@ angular.module('composeUiApp')
             $scope.logs = data.logs;
           });
         };
+
+        $scope.rebuild = function(container) {
+          $scope.working = true;
+          var serviceName = container.labels["com.docker.compose.service"]
+          Project.save({id: $scope.projectId, service_names: [serviceName], do_build: true},
+            function(){
+              $scope.working = false;
+              //alertify.alert(serviceName+" update successfully.")
+            },
+            function(err){
+              $scope.working = false;
+              alertify.alert(err.data);
+            })
+        }
 
         var Service = $resource('api/v1/services', null, {
           scale: {
