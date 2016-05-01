@@ -6,7 +6,7 @@ from json import loads
 import logging
 import os
 import traceback
-from compose.service import ImageType
+from compose.service import ImageType, BuildAction
 import docker
 import requests
 from flask import Flask, jsonify, request
@@ -18,6 +18,7 @@ from scripts.requires_auth import requires_auth, authentication_enabled, \
 # Flask Application
 API_V1 = '/api/v1/'
 YML_PATH = '/opt/docker-compose-projects'
+#YML_PATH = os.path.join(os.path.dirname(__file__), 'demo-projects')
 logging.basicConfig(level=logging.DEBUG)
 app = Flask(__name__, static_url_path='')
 
@@ -157,8 +158,15 @@ def up_():
     """
     docker-compose up
     """
-    name = loads(request.data)["id"]
-    containers = get_project_with_name(name).up()
+    req = loads(request.data)
+    name = req["id"]
+    service_names = req.get('service_names',None)
+    do_build = BuildAction.force if req.get('do_build', False) else BuildAction.none
+
+    containers = get_project_with_name(name).up(
+        service_names = service_names,
+        do_build = do_build)
+
     logging.debug(containers)
     return jsonify(
         {
