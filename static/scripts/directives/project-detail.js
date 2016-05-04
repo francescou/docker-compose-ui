@@ -52,13 +52,12 @@ angular.module('composeUiApp')
           });
         };
 
-        $scope.rebuild = function(container) {
+        $scope.rebuild = function(serviceName) {
           $scope.working = true;
-          var serviceName = container.labels["com.docker.compose.service"]
           Project.save({id: $scope.projectId, service_names: [serviceName], do_build: true},
             function(){
               $scope.working = false;
-              //alertify.alert(serviceName+" update successfully.")
+              alertify.success(serviceName + " rebuild successful.")
             },
             function(err){
               $scope.working = false;

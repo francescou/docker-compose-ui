@@ -18,7 +18,6 @@ from scripts.requires_auth import requires_auth, authentication_enabled, \
 # Flask Application
 API_V1 = '/api/v1/'
 YML_PATH = '/opt/docker-compose-projects'
-#YML_PATH = os.path.join(os.path.dirname(__file__), 'demo-projects')
 logging.basicConfig(level=logging.DEBUG)
 app = Flask(__name__, static_url_path='')
 
