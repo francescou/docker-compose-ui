@@ -1,2 +1,2 @@
 Flask==0.10.1
-docker-compose==1.7
+docker-compose==1.7.1
