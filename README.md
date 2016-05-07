@@ -13,7 +13,7 @@ Docker Compose UI is a web interface for Docker Compose.
 
 ## Requirements
 
-[Docker Engine 1.9.1 or later, or 1.10.0 if you're using version 2 of the Compose File format](https://github.com/docker/compose/releases/tag/1.6.2)
+[Docker Engine 1.10.0 or later for version 2 of the Compose File format, and Docker Engine 1.9.1 or later for version 1](https://github.com/docker/compose/releases/tag/1.7.1)
 
 (only if you need Docker clustering) [Docker Swarm 1.0](https://docs.docker.com/swarm/)
 
@@ -25,7 +25,7 @@ Run the following command in terminal:
     --name docker-compose-ui \
     -p 5000:5000 \
     -v /var/run/docker.sock:/var/run/docker.sock \
-    francescou/docker-compose-ui:0.16
+    francescou/docker-compose-ui:0.17
 
 or, if you already have docker-compose installed, just `docker-compose up`.
 
@@ -46,7 +46,7 @@ If you want to use your own docker-compose projects, put them into a directory *
         -p 5000:5000 \
         -v /home/user/docker-compose-ui/demo-projects:/opt/docker-compose-projects:ro \
         -v /var/run/docker.sock:/var/run/docker.sock \
-        francescou/docker-compose-ui:0.16
+        francescou/docker-compose-ui:0.17
 
 you can download my example projects into */home/user/docker-compose-ui/demo-projects/* from https://github.com/francescou/docker-compose-ui/tree/master/demo-projects
 
@@ -70,7 +70,7 @@ You can also run containers on a remote docker host, e.g.
         -p 5000:5000 \
         -v /home/user/docker-compose-ui/demo-projects:/opt/docker-compose-projects:ro \
         -e DOCKER_HOST=remote-docker-host:2375 \
-        francescou/docker-compose-ui:0.16
+        francescou/docker-compose-ui:0.17
 
 
 ### Docker Swarm or HTTPS Remote docker host
@@ -89,7 +89,7 @@ For example:
         --name docker-compose-ui \
         -p 5000:5000 \
         -v /home/user/.docker/config.json:/root/.docker/config.json:ro \
-        francescou/docker-compose-ui:0.16
+        francescou/docker-compose-ui:0.17
 
 ## Technologies
 
