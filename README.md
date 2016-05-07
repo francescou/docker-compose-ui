@@ -110,7 +110,7 @@ If you have any problems with or questions about this image, please open a GitHu
 
 The Docker Compose UI code is licensed under the MIT license.
 
-Docker Compose UI: Copyright (c) 2015 Francesco Uliana. www.uliana.it/francesco
+Docker Compose UI: Copyright (c) 2016 Francesco Uliana. www.uliana.it/francesco
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

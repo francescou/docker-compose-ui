@@ -14,9 +14,9 @@
   {{ymlData}}
 </pre>
 
-<pre class="text-left" ng-show="readmeShow">
-  {{readmeData}}
-</pre>
+<div ng-if="readmeShow">
+  <markdown content="{{readmeData}}"></markdown>
+</div>
 
 <h1 ng-show="working">
   <span class="spinner glyphicon glyphicon-refresh"></span>
