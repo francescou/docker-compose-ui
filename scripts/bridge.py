@@ -8,6 +8,11 @@ from compose.cli.command import get_project as compose_get_project, get_config_p
 from compose.config.config import get_default_config_files
 from compose.config.environment import Environment
 
+from compose.cli.docker_client import docker_client
+from compose.const import API_VERSIONS
+from compose.config.config import V1
+from compose.config.config import V2_0
+
 def ps_(project):
     """
     containers status
@@ -56,3 +61,8 @@ def get_project(path):
     config_path = get_config_path_from_options(path, dict(), environment)
     project = compose_get_project(path, config_path)
     return project
+
+def containers():
+    version = API_VERSIONS[V2_0]
+    client = docker_client(Environment(), version)
+    return client.containers()

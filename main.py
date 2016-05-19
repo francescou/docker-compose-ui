@@ -10,7 +10,7 @@ from compose.service import ImageType, BuildAction
 import docker
 import requests
 from flask import Flask, jsonify, request
-from scripts.bridge import ps_, get_project, get_container_from_id, get_yml_path
+from scripts.bridge import ps_, get_project, get_container_from_id, get_yml_path, containers
 from scripts.find_files import find_yml_files, get_readme_file
 from scripts.requires_auth import requires_auth, authentication_enabled, \
   disable_authentication, set_authentication
@@ -39,14 +39,14 @@ def get_project_with_name(name):
     return get_project(path)
 
 # REST endpoints
-
 @app.route(API_V1 + "projects", methods=['GET'])
 def list_projects():
     """
     List docker compose projects
     """
     load_projects()
-    return jsonify(projects=projects)
+    active = [container['Labels']['com.docker.compose.project'] for container in containers()]
+    return jsonify(projects=projects, active=active)
 
 @app.route(API_V1 + "projects/<name>", methods=['GET'])
 def project_containers(name):

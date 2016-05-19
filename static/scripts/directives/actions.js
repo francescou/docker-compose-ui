@@ -74,6 +74,7 @@ angular.module('composeUiApp')
             Project.get({id: id}, function (data) {
               $scope.services = projectService.groupByService(data);
             });
+            $scope.$parent.$parent.reload();
           }, function (err) {
             $scope.working = false;
             alertify.alert(err.data);
