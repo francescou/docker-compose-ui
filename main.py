@@ -17,7 +17,7 @@ from scripts.requires_auth import requires_auth, authentication_enabled, \
 
 # Flask Application
 API_V1 = '/api/v1/'
-YML_PATH = '/opt/docker-compose-projects'
+YML_PATH = os.getenv('DOCKER_COMPOSE_UI_YML_PATH') or '/opt/docker-compose-projects'
 logging.basicConfig(level=logging.DEBUG)
 app = Flask(__name__, static_url_path='')
 
@@ -47,6 +47,16 @@ def list_projects():
     load_projects()
     active = [container['Labels']['com.docker.compose.project'] for container in containers()]
     return jsonify(projects=projects, active=active)
+
+@app.route(API_V1 + "remove/<name>", methods=['DELETE'])
+@requires_auth
+def rm(name):
+    """
+    remove previous cached containers. docker-compose rm -f
+    """
+    pro = get_project_with_name(name)
+    pro.remove_stopped()
+    return jsonify(command='rm')
 
 @app.route(API_V1 + "projects/<name>", methods=['GET'])
 def project_containers(name):
