@@ -45,17 +45,19 @@ def list_projects():
     List docker compose projects
     """
     load_projects()
-    active = [container['Labels']['com.docker.compose.project'] for container in containers()]
+    active = [container['Labels']['com.docker.compose.project'] \
+        if 'com.docker.compose.project' in container['Labels'] \
+        else [] for container in containers()]
     return jsonify(projects=projects, active=active)
 
 @app.route(API_V1 + "remove/<name>", methods=['DELETE'])
 @requires_auth
-def rm(name):
+def rm_(name):
     """
     remove previous cached containers. docker-compose rm -f
     """
-    pro = get_project_with_name(name)
-    pro.remove_stopped()
+    project = get_project_with_name(name)
+    project.remove_stopped()
     return jsonify(command='rm')
 
 @app.route(API_V1 + "projects/<name>", methods=['GET'])
@@ -64,8 +66,7 @@ def project_containers(name):
     get project details
     """
     project = get_project_with_name(name)
-    containers = ps_(project)
-    return jsonify(containers=containers)
+    return jsonify(containers=ps_(project))
 
 @app.route(API_V1 + "projects/<project>/<service_id>", methods=['POST'])
 @requires_auth
@@ -169,12 +170,12 @@ def up_():
     """
     req = loads(request.data)
     name = req["id"]
-    service_names = req.get('service_names',None)
+    service_names = req.get('service_names', None)
     do_build = BuildAction.force if req.get('do_build', False) else BuildAction.none
 
     containers = get_project_with_name(name).up(
-        service_names = service_names,
-        do_build = do_build)
+        service_names=service_names,
+        do_build=do_build)
 
     logging.debug(containers)
     return jsonify(
