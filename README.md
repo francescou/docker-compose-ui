@@ -57,7 +57,7 @@ you can download my example projects into */home/user/docker-compose-ui/demo-pro
     -p 5000:5000 \
     -v /var/run/docker.sock:/var/run/docker.sock  \
     -e GIT_REPO=https://github.com/francescou/docker-compose-ui.git \
-    francescou/docker-compose-ui:0.15
+    francescou/docker-compose-ui:gitrepo
 
 ### Note about scaling services
 
