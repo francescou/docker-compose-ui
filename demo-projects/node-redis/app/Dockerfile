@@ -1,5 +1,7 @@
 FROM node
 
+WORKDIR /opt
+
 RUN npm install redis
 
 EXPOSE 8080

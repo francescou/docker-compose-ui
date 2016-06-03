@@ -5,9 +5,18 @@
   <button class="btn btn-sm btn-info" ng-show="ymlData" ng-click="ymlData = null">close docker-compose.yml</button>
 </p>
 
+<p ng-show="readmeExists">
+  <button class="btn btn-sm btn-success" ng-hide="readmeShow" ng-click="readmeShow = true">view readme</button>
+  <button class="btn btn-sm btn-success" ng-show="readmeShow" ng-click="readmeShow = false">close readme</button>
+</p>
+
 <pre class="text-left" ng-show="ymlData">
   {{ymlData}}
 </pre>
+
+<div ng-if="readmeShow">
+  <markdown content="{{readmeData}}"></markdown>
+</div>
 
 <h1 ng-show="working">
   <span class="spinner glyphicon glyphicon-refresh"></span>
@@ -36,6 +45,7 @@
             </span>
             <button class="btn btn-xs btn-inverse" ng-click="displayLogs(container.name)">logs</button>
             <a class="btn btn-xs btn-inverse" ng-href="#/project/{{projectId}}/{{container.name}}">details</a>
+            <button class="btn btn-xs btn-inverse" ng-click="rebuild(id)">rebuild</button>
           </div>
           <div class="panel-body">
 

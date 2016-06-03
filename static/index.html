@@ -17,14 +17,14 @@
 
     <div class="container" ng-controller="MainCtrl">
         <div class="row text-center">
-          <img src="images/logo.png" alt="Docker Compose UI">
+          <img class="img-responsive" src="images/logo.png" alt="Docker Compose UI">
         </div>
 
         <div class="row text-center">
           <div class="col-md-4">
             <h3>Projects</h3>
             <div class="btn-group-vertical projects">
-              <a ng-repeat="(id, path) in projects.projects | filterByName:query" class="btn btn-default btn-block" ng-class="{active: activeProject === id}" ng-click="$parent.activeProject = id" ng-href="#/project/{{id}}">{{id}}</a>
+              <a ng-repeat="(id, path) in projects.projects | filterByName:query" class="btn btn-default btn-block" ng-class="{active: activeProject === id}" ng-click="$parent.activeProject = id" ng-href="#/project/{{id}}">{{id}} <span class="label label-success" ng-show="isActive(id, projects.active)">ON</span></a>
             </div>
             <div class="vertical-margin" ng-hide="isEmpty(projects.projects)">
               <form class="form-inline">
@@ -51,7 +51,7 @@
         <footer class="text-center">
             <small class="text-muted"><a
                 href="https://github.com/francescou/docker-compose-ui">Docker
-                Compose UI v.0.15</a>  Licensed under the MIT license.</small>
+                Compose UI v.0.17</a>  Licensed under the MIT license.</small>
         </footer>
     </div>
 
@@ -63,6 +63,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/markdown.js/0.5.0/markdown.min.js"></script>
     <script src="scripts/app.js"></script>
     <script src="scripts/filters/filters.js"></script>
     <script src="scripts/controllers/main.js"></script>

@@ -12,6 +12,10 @@ angular.module('composeUiApp')
 
     var Projects = $resource('api/v1/projects');
 
+    $scope.isActive = function (id, l) {
+      return l.indexOf(id.replace('-', '')) >= 0
+    };
+
     function reload(init) {
       Projects.get(function (data) {
         $scope.projects = data;

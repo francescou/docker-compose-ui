@@ -14,6 +14,7 @@ angular.module('composeUiApp')
         var Project = $resource('api/v1/projects/:id');
         var Host = $resource('api/v1/host');
         var Yml = $resource('api/v1/projects/yml/:id');
+        var Readme = $resource('api/v1/projects/readme/:id');
 
         $scope.$watch('projectId', function (val) {
           if (val) {
@@ -28,6 +29,15 @@ angular.module('composeUiApp')
               var host = data.host;
               $scope.hostName = host ? host.split(':')[0] : null;
             });
+
+            Readme.get({
+              id: $scope.projectId
+            }, function (data) {
+              $scope.readmeData = data.readme;
+              $scope.readmeExists = data.readme && data.readme.length > 0;
+              $scope.readmeShow = false;
+            });
+
           }
 
         });
@@ -41,6 +51,19 @@ angular.module('composeUiApp')
             $scope.logs = data.logs;
           });
         };
+
+        $scope.rebuild = function(serviceName) {
+          $scope.working = true;
+          Project.save({id: $scope.projectId, service_names: [serviceName], do_build: true},
+            function(){
+              $scope.working = false;
+              alertify.success(serviceName + " rebuild successful.")
+            },
+            function(err){
+              $scope.working = false;
+              alertify.alert(err.data);
+            })
+        }
 
         var Service = $resource('api/v1/services', null, {
           scale: {
@@ -83,6 +106,20 @@ angular.module('composeUiApp')
 
         };
 
+
       }
     };
+  })
+  .directive('markdown', function() {
+      return {
+          restrict: 'AE',
+          scope: {
+              status: '='
+          },
+          link: function (scope, element, attrs, controller) {
+            var md_content = attrs.content;
+            var html_content = markdown.toHTML(md_content);
+            $(html_content).appendTo(element);
+          }
+      };
   });

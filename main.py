@@ -6,22 +6,21 @@ from json import loads
 import logging
 import os
 import traceback
-from compose.service import ImageType
+from compose.service import ImageType, BuildAction
 import docker
 import requests
 from flask import Flask, jsonify, request
 from scripts.git_repo import git_pull, git_repo, GIT_YML_PATH
-from scripts.bridge import ps_, get_project, get_container_from_id, get_yml_path
-from scripts.find_yml import find_yml_files
+from scripts.bridge import ps_, get_project, get_container_from_id, get_yml_path, containers
+from scripts.find_files import find_yml_files, get_readme_file
 from scripts.requires_auth import requires_auth, authentication_enabled, \
   disable_authentication, set_authentication
 
 # Flask Application
 API_V1 = '/api/v1/'
+YML_PATH = os.getenv('DOCKER_COMPOSE_UI_YML_PATH') or '/opt/docker-compose-projects'
 logging.basicConfig(level=logging.DEBUG)
 app = Flask(__name__, static_url_path='')
-
-YML_PATH = '/opt/docker-compose-projects'
 
 def load_projects():
     """
@@ -47,14 +46,26 @@ def get_project_with_name(name):
     return get_project(path)
 
 # REST endpoints
-
 @app.route(API_V1 + "projects", methods=['GET'])
 def list_projects():
     """
     List docker compose projects
     """
     load_projects()
-    return jsonify(projects=projects)
+    active = [container['Labels']['com.docker.compose.project'] \
+        if 'com.docker.compose.project' in container['Labels'] \
+        else [] for container in containers()]
+    return jsonify(projects=projects, active=active)
+
+@app.route(API_V1 + "remove/<name>", methods=['DELETE'])
+@requires_auth
+def rm_(name):
+    """
+    remove previous cached containers. docker-compose rm -f
+    """
+    project = get_project_with_name(name)
+    project.remove_stopped()
+    return jsonify(command='rm')
 
 @app.route(API_V1 + "projects/<name>", methods=['GET'])
 def project_containers(name):
@@ -62,8 +73,7 @@ def project_containers(name):
     get project details
     """
     project = get_project_with_name(name)
-    containers = ps_(project)
-    return jsonify(containers=containers)
+    return jsonify(containers=ps_(project))
 
 @app.route(API_V1 + "projects/<project>/<service_id>", methods=['POST'])
 @requires_auth
@@ -94,6 +104,14 @@ def project_yml(name):
     path = get_yml_path(projects[name])
     with open(path) as data_file:
         return jsonify(yml=data_file.read())
+
+@app.route(API_V1 + "projects/readme/<name>", methods=['GET'])
+def get_project_readme(name):
+    """
+    get README.md or readme.md if available
+    """
+    path = projects[name]
+    return jsonify(readme=get_readme_file(path))
 
 @app.route(API_V1 + "projects/<name>/<container_id>", methods=['GET'])
 def project_container(name, container_id):
@@ -157,8 +175,15 @@ def up_():
     """
     docker-compose up
     """
-    name = loads(request.data)["id"]
-    containers = get_project_with_name(name).up()
+    req = loads(request.data)
+    name = req["id"]
+    service_names = req.get('service_names', None)
+    do_build = BuildAction.force if req.get('do_build', False) else BuildAction.none
+
+    containers = get_project_with_name(name).up(
+        service_names=service_names,
+        do_build=do_build)
+
     logging.debug(containers)
     return jsonify(
         {
