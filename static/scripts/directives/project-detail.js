@@ -11,7 +11,15 @@ angular.module('composeUiApp')
       templateUrl: 'views/project-detail.html',
       controller: function($scope) {
 
-        var Project = $resource('api/v1/projects/:id');
+        var Project = $resource('api/v1/projects/:id', null, {
+          remove: {
+            method: 'DELETE',
+            url: 'api/v1/remove-project/:id'
+          }
+        });
+
+
+
         var Host = $resource('api/v1/host');
         var Yml = $resource('api/v1/projects/yml/:id');
         var Readme = $resource('api/v1/projects/readme/:id');
@@ -104,6 +112,13 @@ angular.module('composeUiApp')
             $scope.ymlData = data.yml;
           });
 
+        };
+
+
+        $scope.deleteProject = function (id) {
+          Project.remove({
+            id: id
+          });
         };
 
 

@@ -9,6 +9,7 @@ import traceback
 from compose.service import ImageType, BuildAction
 import docker
 import requests
+import shutil
 from flask import Flask, jsonify, request
 from scripts.bridge import ps_, get_project, get_container_from_id, get_yml_path, containers
 from scripts.find_files import find_yml_files, get_readme_file
@@ -219,6 +220,20 @@ def create():
     load_projects()
 
     return jsonify(path=file_path)
+
+
+@app.route(API_V1 + "remove-project/<name>", methods=['DELETE'])
+@requires_auth
+def remove_project(name):
+    """
+    remove project
+    """
+
+    directory = YML_PATH + '/' + name
+    # shutil.rmtree(directory)
+    logging.info('remove dir ' + directory)
+    load_projects()
+    return jsonify(path=directory)
 
 
 @app.route(API_V1 + "search", methods=['POST'])
