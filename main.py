@@ -6,6 +6,7 @@ from json import loads
 import logging
 import os
 import traceback
+from shutil import rmtree
 from compose.service import ImageType, BuildAction
 import docker
 import requests
@@ -17,7 +18,8 @@ from scripts.requires_auth import requires_auth, authentication_enabled, \
 
 # Flask Application
 API_V1 = '/api/v1/'
-YML_PATH = os.getenv('DOCKER_COMPOSE_UI_YML_PATH') or '/opt/docker-compose-projects'
+YML_PATH = os.getenv('DOCKER_COMPOSE_UI_YML_PATH') \
+  or '/opt/docker-compose-projects'
 logging.basicConfig(level=logging.DEBUG)
 app = Flask(__name__, static_url_path='')
 
@@ -173,15 +175,14 @@ def up_():
     service_names = req.get('service_names', None)
     do_build = BuildAction.force if req.get('do_build', False) else BuildAction.none
 
-    containers = get_project_with_name(name).up(
+    container_list = get_project_with_name(name).up(
         service_names=service_names,
         do_build=do_build)
 
-    logging.debug(containers)
     return jsonify(
         {
             'command': 'up',
-            'containers': [container.name for container in containers]
+            'containers': [container.name for container in container_list]
         })
 
 @app.route(API_V1 + "build", methods=['POST'])
@@ -219,6 +220,19 @@ def create():
     load_projects()
 
     return jsonify(path=file_path)
+
+
+@app.route(API_V1 + "remove-project/<name>", methods=['DELETE'])
+@requires_auth
+def remove_project(name):
+    """
+    remove project
+    """
+
+    directory = YML_PATH + '/' + name
+    rmtree(directory)
+    load_projects()
+    return jsonify(path=directory)
 
 
 @app.route(API_V1 + "search", methods=['POST'])

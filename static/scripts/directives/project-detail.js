@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('composeUiApp')
-  .directive('projectDetail', function($resource, $log, projectService, $window){
+  .directive('projectDetail', function($resource, $log, projectService, $window, $location){
     return {
       restrict: 'E',
       scope: {
@@ -11,7 +11,15 @@ angular.module('composeUiApp')
       templateUrl: 'views/project-detail.html',
       controller: function($scope) {
 
-        var Project = $resource('api/v1/projects/:id');
+        var Project = $resource('api/v1/projects/:id', null, {
+          remove: {
+            method: 'DELETE',
+            url: 'api/v1/remove-project/:id'
+          }
+        });
+
+
+
         var Host = $resource('api/v1/host');
         var Yml = $resource('api/v1/projects/yml/:id');
         var Readme = $resource('api/v1/projects/readme/:id');
@@ -55,15 +63,15 @@ angular.module('composeUiApp')
         $scope.rebuild = function(serviceName) {
           $scope.working = true;
           Project.save({id: $scope.projectId, service_names: [serviceName], do_build: true},
-            function(){
+            function () {
               $scope.working = false;
-              alertify.success(serviceName + " rebuild successful.")
+              alertify.success(serviceName + " rebuild successful.");
             },
-            function(err){
+            function (err) {
               $scope.working = false;
               alertify.alert(err.data);
-            })
-        }
+          });
+        };
 
         var Service = $resource('api/v1/services', null, {
           scale: {
@@ -104,6 +112,23 @@ angular.module('composeUiApp')
             $scope.ymlData = data.yml;
           });
 
+        };
+
+
+        $scope.deleteProject = function (id) {
+          alertify.confirm('Do you really want to remove project ' + id + '?', function (rm) {
+            if (rm) {
+              Project.remove({
+                id: id
+              }, function () {
+                alertify.log('deleted ' + id);
+                $scope.$parent.reload();
+                $location.path('/');
+              }, function (r) {
+                alertify.error('cannot delete ' + id + ': ' + r.data);
+              });
+            }
+          });
         };
 
 
