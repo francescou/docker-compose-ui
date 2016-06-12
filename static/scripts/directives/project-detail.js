@@ -63,15 +63,15 @@ angular.module('composeUiApp')
         $scope.rebuild = function(serviceName) {
           $scope.working = true;
           Project.save({id: $scope.projectId, service_names: [serviceName], do_build: true},
-            function(){
+            function () {
               $scope.working = false;
-              alertify.success(serviceName + " rebuild successful.")
+              alertify.success(serviceName + " rebuild successful.");
             },
-            function(err){
+            function (err) {
               $scope.working = false;
               alertify.alert(err.data);
-            })
-        }
+          });
+        };
 
         var Service = $resource('api/v1/services', null, {
           scale: {
