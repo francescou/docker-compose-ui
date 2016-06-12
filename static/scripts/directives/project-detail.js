@@ -124,6 +124,8 @@ angular.module('composeUiApp')
                 alertify.log('deleted ' + id);
                 $scope.$parent.reload();
                 $location.path('/');
+              }, function (r) {
+                alertify.error('cannot delete ' + id + ': ' + r.data);
               });
             }
           });
