@@ -10,7 +10,6 @@ from compose.config.environment import Environment
 
 from compose.cli.docker_client import docker_client
 from compose.const import API_VERSIONS
-from compose.config.config import V1
 from compose.config.config import V2_0
 
 def ps_(project):
@@ -63,6 +62,9 @@ def get_project(path):
     return project
 
 def containers():
+    """
+    active containers
+    """
     version = API_VERSIONS[V2_0]
     client = docker_client(Environment(), version)
     return client.containers()
