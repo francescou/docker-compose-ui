@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('composeUiApp')
-  .directive('projectDetail', function($resource, $log, projectService, $window){
+  .directive('projectDetail', function($resource, $log, projectService, $window, $location){
     return {
       restrict: 'E',
       scope: {
@@ -116,8 +116,16 @@ angular.module('composeUiApp')
 
 
         $scope.deleteProject = function (id) {
-          Project.remove({
-            id: id
+          alertify.confirm('Do you really want to remove project ' + id + '?', function (rm) {
+            if (rm) {
+              Project.remove({
+                id: id
+              }, function () {
+                alertify.log('deleted ' + id);
+                $scope.$parent.reload();
+                $location.path('/');
+              });
+            }
           });
         };
 

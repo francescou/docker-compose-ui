@@ -230,8 +230,7 @@ def remove_project(name):
     """
 
     directory = YML_PATH + '/' + name
-    # shutil.rmtree(directory)
-    logging.info('remove dir ' + directory)
+    shutil.rmtree(directory)
     load_projects()
     return jsonify(path=directory)
 
