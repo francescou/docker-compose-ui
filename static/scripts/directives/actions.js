@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('composeUiApp')
-  .directive('actions', function ($resource, projectService, logService) {
+  .directive('actions', function ($resource, projectService, logService, $interval) {
 
     return {
       restrict: 'E',
@@ -97,15 +97,34 @@ angular.module('composeUiApp')
 
 
         $scope.lineLimit = 80;
-        $scope.combinedLogs = function () {
 
-          Logs.get({id: $scope.projectId, limit: $scope.lineLimit}, function (data) {
+
+        function combinedLogs() {
+          return Logs.get({id: $scope.projectId, limit: $scope.lineLimit}, function (data) {
             $scope.logs = logService.formatLogs(data.logs);
             $scope.showCombinedLogsDialog = true;
           });
         };
 
-        $scope.scrollToBottom = function () {
+        $scope.combinedLogs = function () {
+
+          combinedLogs();
+          var promiseFromInterval = $interval(combinedLogs, 4000);
+
+          $scope.$watch('logs', function(){
+            scrollToBottom();
+          });
+
+          $scope.$on('$destroy',function(){
+            $interval.cancel(promiseFromInterval);
+          });
+
+          $('.modal').on('hidden.bs.modal', function () {
+            $interval.cancel(promiseFromInterval);
+          })
+        }
+
+        function scrollToBottom() {
           var objDiv = $(".combined-logs")[0];
           objDiv.scrollTop = objDiv.scrollHeight;
         };
