@@ -1,18 +1,22 @@
 <h3>{{projectId}}</h3>
 
+
+<div class="btn-group" role="group">
+  <button class="btn btn-sm btn-default" ng-hide="ymlData" ng-click="yml()">view docker-compose.yml</button>
+  <button class="btn btn-sm btn-default" ng-show="ymlData" ng-click="ymlData = null">close docker-compose.yml</button>
+
+  <button class="btn btn-sm btn-default" ng-hide="readmeShow" ng-click="readmeShow = true">view readme</button>
+  <button class="btn btn-sm btn-default" ng-show="readmeShow" ng-click="readmeShow = false">close readme</button>
+
+  <button class="btn btn-sm btn-default" ng-click="deleteProject(projectId)"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> delete project</button>
+</div>
+
+
 <p>
-  <button class="btn btn-sm btn-info" ng-hide="ymlData" ng-click="yml()">view docker-compose.yml</button>
-  <button class="btn btn-sm btn-info" ng-show="ymlData" ng-click="ymlData = null">close docker-compose.yml</button>
+  <pre class="text-left" ng-show="ymlData">
+    {{ymlData}}
+  </pre>
 </p>
-
-<p ng-show="readmeExists">
-  <button class="btn btn-sm btn-success" ng-hide="readmeShow" ng-click="readmeShow = true">view readme</button>
-  <button class="btn btn-sm btn-success" ng-show="readmeShow" ng-click="readmeShow = false">close readme</button>
-</p>
-
-<pre class="text-left" ng-show="ymlData">
-  {{ymlData}}
-</pre>
 
 <div ng-if="readmeShow">
   <markdown content="{{readmeData}}"></markdown>
