@@ -1,9 +1,11 @@
-web:
-  build: app
-  links:
-  - redis:redis
-  ports:
-  - 8080:8080
-redis:
-  image: redis
+version: '2'
+services:
+  web:
+    build: app
+    links:
+    - redis:redis
+    ports:
+    - "8080:8080"
+  redis:
+    image: redis:3.2-alpine
 

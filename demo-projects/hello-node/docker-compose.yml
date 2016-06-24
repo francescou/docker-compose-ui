@@ -1,4 +1,6 @@
-hello:
-  build: app
-  ports:
-  - 1337:1337
+version: '2'
+services:
+  hello:
+    build: app
+    ports:
+    - "1337:1337"

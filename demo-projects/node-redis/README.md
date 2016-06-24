@@ -2,6 +2,9 @@ IP Logger
 ---
 Simple **NodeJS** application that logs visitor IP address on a **Redis db**.
 
+open <http://localhost:8080/> and check the logs
+
+
 ```
 http.createServer(function (req, res) {
   res.writeHead(200, {'Content-Type': 'text/plain'});

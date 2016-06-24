@@ -1,11 +1,13 @@
-writer:
-  image: node
-  volumes:
-  - /tmp/:/data/
-  command: node -e "var fs = require('fs'); fs.writeFile('/data/node-test.txt', 'Hey there!', function () {console.log('writing /data/node-test.txt')})"
+version: '2'
+services:
+  writer:
+    image: node:5-slim
+    volumes:
+    - /tmp/:/data/
+    command: node -e "var fs = require('fs'); fs.writeFile('/data/node-test.txt', 'Hey there!', function () {console.log('writing /data/node-test.txt')})"
 
-reader:
-  image: node
-  volumes_from:
-  - writer
-  command: node -e "var fs = require('fs'); fs.readFile('/data/node-test.txt', 'utf8', function (err, data) {console.log(data);});"
+  reader:
+    image: node:5-slim
+    volumes_from:
+    - writer
+    command: node -e "var fs = require('fs'); fs.readFile('/data/node-test.txt', 'utf8', function (err, data) {console.log(data);});"
