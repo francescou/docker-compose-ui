@@ -50,7 +50,7 @@ If you want to use your own docker-compose projects, put them into a directory *
 
 you can download my example projects into */home/user/docker-compose-ui/demo-projects/* from https://github.com/francescou/docker-compose-ui/tree/master/demo-projects
 
-### Load projects from a git repository
+### Load projects from a git repository (experimental)
 
     docker run \
     --name docker-compose-ui \

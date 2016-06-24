@@ -29,9 +29,9 @@ def load_projects():
     load project definitions (docker-compose.yml files)
     """
     global projects
-    git_pull()
 
     if git_repo:
+	git_pull()
         projects = find_yml_files(GIT_YML_PATH)
     else:
         projects = find_yml_files(YML_PATH)
