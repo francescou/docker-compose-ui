@@ -31,7 +31,7 @@ def load_projects():
     global projects
 
     if git_repo:
-	git_pull()
+        git_pull()
         projects = find_yml_files(GIT_YML_PATH)
     else:
         projects = find_yml_files(YML_PATH)
