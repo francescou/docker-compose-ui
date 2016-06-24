@@ -6,10 +6,10 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://rawgithub.com/fabien-d/alertify.js/0.3.11/themes/alertify.core.css">
-    <link rel="stylesheet" href="https://rawgithub.com/fabien-d/alertify.js/0.3.11/themes/alertify.default.css">
-    <link rel="stylesheet" href="https://rawgithub.com/designmodo/Flat-UI/2.2.2/dist/css/flat-ui.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="//rawgithub.com/fabien-d/alertify.js/0.3.11/themes/alertify.core.css">
+    <link rel="stylesheet" href="//rawgithub.com/fabien-d/alertify.js/0.3.11/themes/alertify.default.css">
+    <link rel="stylesheet" href="//rawgithub.com/designmodo/Flat-UI/2.2.2/dist/css/flat-ui.min.css">
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/colors.css">
   </head>
@@ -24,7 +24,7 @@
           <div class="col-md-4">
             <h3>Projects</h3>
             <div class="btn-group-vertical projects">
-              <a ng-repeat="(id, path) in projects.projects | filterByName:query" class="btn btn-default btn-block" ng-class="{active: activeProject === id}" ng-click="$parent.activeProject = id" ng-href="#/project/{{id}}">{{id}} <span class="label label-success" ng-show="isActive(id, projects.active)">ON</span></a>
+              <a ng-repeat="(id, path) in projects.projects | filterByName:query" class="btn btn-default btn-block" ng-class="{active: activeProject === id}" ng-click="$parent.activeProject = id" ng-href="#/project/{{id}}">{{id || path}} <span class="label label-success" ng-show="isActive(id, projects.active)">ON</span></a>
             </div>
             <div class="vertical-margin" ng-hide="isEmpty(projects.projects)">
               <form class="form-inline">
@@ -56,14 +56,14 @@
     </div>
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.16/angular.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.16/angular-resource.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.16/angular-route.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/alertify.js/0.3.0/alertify.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/markdown.js/0.5.0/markdown.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.16/angular.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.16/angular-resource.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.16/angular-route.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/alertify.js/0.3.0/alertify.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/markdown.js/0.5.0/markdown.min.js"></script>
     <script src="scripts/app.js"></script>
     <script src="scripts/filters/filters.js"></script>
     <script src="scripts/controllers/main.js"></script>

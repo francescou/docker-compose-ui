@@ -50,6 +50,15 @@ If you want to use your own docker-compose projects, put them into a directory *
 
 you can download my example projects into */home/user/docker-compose-ui/demo-projects/* from https://github.com/francescou/docker-compose-ui/tree/master/demo-projects
 
+### Load projects from a git repository (experimental)
+
+    docker run \
+    --name docker-compose-ui \
+    -p 5000:5000 \
+    -v /var/run/docker.sock:/var/run/docker.sock  \
+    -e GIT_REPO=https://github.com/francescou/docker-compose-ui.git \
+    francescou/docker-compose-ui:gitrepo
+
 ### Note about scaling services
 
 Note that some of the services provided by the demo projects are not "scalable" with `docker-compose scale SERVICE=NUM` because of published ports conflicts.

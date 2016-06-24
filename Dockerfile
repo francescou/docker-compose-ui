@@ -1,15 +1,14 @@
 # https://github.com/francescou/docker-compose-ui
-# DOCKER-VERSION 1.9.1
-FROM python:2.7-slim
+# DOCKER-VERSION 1.11.2
+FROM python:2.7-alpine
 MAINTAINER Francesco Uliana <francesco@uliana.it>
 
 RUN pip install virtualenv
 
-WORKDIR /app
-RUN virtualenv /env
-ADD requirements.txt /app/requirements.txt
-RUN /env/bin/pip install -r requirements.txt
-ADD . /app
+RUN apk add --update git && rm -rf /var/cache/apk/*
+
+COPY . /app
+RUN virtualenv /env && /env/bin/pip install -r /app/requirements.txt
 
 VOLUME ["/opt/docker-compose-projects"]
 
