@@ -24,7 +24,7 @@
           <div class="col-md-4">
             <h3>Projects</h3>
             <div class="btn-group-vertical projects">
-              <a ng-repeat="(id, path) in projects.projects | filterByName:query" class="btn btn-default btn-block" ng-class="{active: activeProject === id}" ng-click="$parent.activeProject = id" ng-href="#/project/{{id}}">{{id}} <span class="label label-success" ng-show="isActive(id, projects.active)">ON</span></a>
+              <a ng-repeat="(id, path) in projects.projects | filterByName:query" class="btn btn-default btn-block" ng-class="{active: activeProject === id}" ng-click="$parent.activeProject = id" ng-href="#/project/{{id}}">{{id || path}} <span class="label label-success" ng-show="isActive(id, projects.active)">ON</span></a>
             </div>
             <div class="vertical-margin" ng-hide="isEmpty(projects.projects)">
               <form class="form-inline">
