@@ -2,23 +2,22 @@
 
 
 <div class="btn-group" role="group">
-  <button class="btn btn-sm btn-default" ng-hide="ymlData" ng-click="yml()">view docker-compose.yml</button>
+  <button class="btn btn-sm btn-default" ng-click="deleteProject(projectId)"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> delete</button>
+
+  <button class="btn btn-sm btn-default" ng-hide="ymlData" ng-click="yml()">docker-compose.yml</button>
   <button class="btn btn-sm btn-default" ng-show="ymlData" ng-click="ymlData = null">close docker-compose.yml</button>
 
-  <button class="btn btn-sm btn-default" ng-hide="readmeShow" ng-click="readmeShow = true">view readme</button>
-  <button class="btn btn-sm btn-default" ng-show="readmeShow" ng-click="readmeShow = false">close readme</button>
+  <button class="btn btn-sm btn-default" ng-show="readmeShow" ng-click="readmeShow = false">close README</button>
+  <button class="btn btn-sm btn-default" ng-hide="readmeShow" ng-click="readmeShow = true">README</button>
 
-  <button class="btn btn-sm btn-default" ng-click="deleteProject(projectId)"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> delete project</button>
 </div>
 
 
 <p>
-  <pre class="text-left" ng-show="ymlData">
-    {{ymlData}}
-  </pre>
+  <pre class="text-left" ng-show="ymlData">{{ymlData}}</pre>
 </p>
 
-<div ng-if="readmeShow">
+<div ng-if="readmeShow" class="well">
   <markdown content="{{readmeData}}"></markdown>
 </div>
 
@@ -47,9 +46,9 @@
             <span ng-class="{'text-muted': !container.is_running}">
               {{container.name_without_project}}
             </span>
-            <button class="btn btn-xs btn-inverse" ng-click="displayLogs(container.name)">logs</button>
-            <a class="btn btn-xs btn-inverse" ng-href="#/project/{{projectId}}/{{container.name}}">details</a>
-            <button class="btn btn-xs btn-inverse" ng-click="rebuild(id)">rebuild</button>
+            <button class="btn btn-xs btn-default" ng-click="displayLogs(container.name)">logs</button>
+            <a class="btn btn-xs btn-default" ng-href="#/project/{{projectId}}/{{container.name}}">details</a>
+            <button class="btn btn-xs btn-default" ng-click="rebuild(id)">rebuild</button>
           </div>
           <div class="panel-body">
 
