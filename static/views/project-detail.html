@@ -7,8 +7,8 @@
   <button class="btn btn-sm btn-default" ng-hide="ymlData" ng-click="yml()">docker-compose.yml</button>
   <button class="btn btn-sm btn-default" ng-show="ymlData" ng-click="ymlData = null">close docker-compose.yml</button>
 
-  <button class="btn btn-sm btn-default" ng-show="readmeShow" ng-click="readmeShow = false">close README</button>
-  <button class="btn btn-sm btn-default" ng-hide="readmeShow" ng-click="readmeShow = true">README</button>
+  <button class="btn btn-sm btn-default" ng-show="readmeExists && readmeShow" ng-click="readmeShow = false">close README</button>
+  <button class="btn btn-sm btn-default" ng-hide="!readmeExists || readmeShow" ng-click="readmeShow = true">README</button>
 
 </div>
 

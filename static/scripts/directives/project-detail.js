@@ -43,7 +43,7 @@ angular.module('composeUiApp')
             }, function (data) {
               $scope.readmeData = data.readme;
               $scope.readmeExists = data.readme && data.readme.length > 0;
-              $scope.readmeShow = false;
+              $scope.readmeShow = $scope.readmeExists;
             });
 
           }
@@ -102,7 +102,6 @@ angular.module('composeUiApp')
           });
 
         };
-
 
         $scope.isEmpty = function (obj) {
           return angular.equals({}, obj);
