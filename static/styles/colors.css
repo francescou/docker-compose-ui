@@ -31,98 +31,98 @@
   border-color: #ffc107;
 }
 .service-4 .active.panel {
-  border-color: #ffeb3b;
-  color: #ffeb3b;
+  border-color: #adaf39;
+  color: #adaf39;
 }
 .service-4 .active.panel > .panel-heading {
-  background-color: #ffffff;
-  border-color: #ffeb3b;
+  background-color: #ecedc7;
+  border-color: #adaf39;
 }
 .service-5 .active.panel {
-  border-color: #cddc39;
-  color: #cddc39;
-}
-.service-5 .active.panel > .panel-heading {
-  background-color: #f9fbe6;
-  border-color: #cddc39;
-}
-.service-6 .active.panel {
   border-color: #8bc34a;
   color: #8bc34a;
 }
-.service-6 .active.panel > .panel-heading {
+.service-5 .active.panel > .panel-heading {
   background-color: #edf6e3;
   border-color: #8bc34a;
 }
-.service-7 .active.panel {
+.service-6 .active.panel {
   border-color: #4caf50;
   color: #4caf50;
 }
-.service-7 .active.panel > .panel-heading {
+.service-6 .active.panel > .panel-heading {
   background-color: #d9eeda;
   border-color: #4caf50;
 }
-.service-8 .active.panel {
+.service-7 .active.panel {
   border-color: #009688;
   color: #009688;
 }
-.service-8 .active.panel > .panel-heading {
+.service-7 .active.panel > .panel-heading {
   background-color: #63fff0;
   border-color: #009688;
 }
-.service-9 .active.panel {
+.service-8 .active.panel {
   border-color: #00bcd4;
   color: #00bcd4;
 }
-.service-9 .active.panel > .panel-heading {
+.service-8 .active.panel > .panel-heading {
   background-color: #a1f4ff;
   border-color: #00bcd4;
 }
-.service-10 .active.panel {
+.service-9 .active.panel {
   border-color: #03a9f4;
   color: #03a9f4;
 }
-.service-10 .active.panel > .panel-heading {
+.service-9 .active.panel > .panel-heading {
   background-color: #c5ecfe;
   border-color: #03a9f4;
 }
-.service-11 .active.panel {
-  border-color: #2196f3;
-  color: #2196f3;
+.service-10 .active.panel {
+  border-color: #2196F3;
+  color: #2196F3;
 }
-.service-11 .active.panel > .panel-heading {
+.service-10 .active.panel > .panel-heading {
   background-color: #e3f2fd;
-  border-color: #2196f3;
+  border-color: #2196F3;
 }
-.service-12 .active.panel {
+.service-11 .active.panel {
   border-color: #3f51b5;
   color: #3f51b5;
 }
-.service-12 .active.panel > .panel-heading {
+.service-11 .active.panel > .panel-heading {
   background-color: #d1d6ef;
   border-color: #3f51b5;
 }
-.service-13 .active.panel {
+.service-12 .active.panel {
   border-color: #673ab7;
   color: #673ab7;
 }
-.service-13 .active.panel > .panel-heading {
+.service-12 .active.panel > .panel-heading {
   background-color: #daceef;
   border-color: #673ab7;
 }
-.service-14 .active.panel {
+.service-13 .active.panel {
   border-color: #9c27b0;
   color: #9c27b0;
 }
-.service-14 .active.panel > .panel-heading {
+.service-13 .active.panel > .panel-heading {
   background-color: #e6b5ee;
   border-color: #9c27b0;
 }
+.service-14 .active.panel {
+  border-color: #E91E63;
+  color: #E91E63;
+}
+.service-14 .active.panel > .panel-heading {
+  background-color: #fbd8e4;
+  border-color: #E91E63;
+}
 .service-15 .active.panel {
-  border-color: #e91e63;
-  color: #e91e63;
+  border-color: #F91E33;
+  color: #F91E33;
 }
 .service-15 .active.panel > .panel-heading {
-  background-color: #fbd8e4;
-  border-color: #e91e63;
+  background-color: #fee5e7;
+  border-color: #F91E33;
 }
