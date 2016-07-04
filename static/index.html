@@ -36,6 +36,7 @@
                 <img height=32 width=32 ng-src="/api/v1/projects/logo/{{id}}" onerror="imgError(this);" />
                 {{id || path}} 
                 <span class="label label-success" ng-show="isActive(id, projects.active)">ON</span>
+              </a>
             </div>
             <div ng-show="isEmpty(projects.projects)" class="vertical-margin">
               no projects configured, please run the container with the option
