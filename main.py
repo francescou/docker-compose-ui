@@ -134,7 +134,8 @@ def project_container(name, container_id):
         labels=container.labels,
         log_config=container.log_config,
         image=container.image,
-        environment=container.environment
+        environment=container.environment,
+        repo_tags=container.image_config['RepoTags']
         )
 
 @app.route(API_V1 + "projects/<name>", methods=['DELETE'])
