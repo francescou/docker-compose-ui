@@ -82,22 +82,24 @@ angular.module('composeUiApp')
         $scope.scale = function (service) {
           alertify.prompt('how many instances of service ' + service + '?', function (evt, num) {
 
-            $scope.working = true;
+            if (!isNaN(num)) {
+              $scope.working = true;
 
-            Service.scale({service: service, project: $scope.projectId, num: num}, function () {
+              Service.scale({service: service, project: $scope.projectId, num: num}, function () {
 
-              Project.get({id: $scope.projectId}, function (data) {
-                $scope.services = projectService.groupByService(data);
-                $scope.working = false;
+                Project.get({id: $scope.projectId}, function (data) {
+                  $scope.services = projectService.groupByService(data);
+                  $scope.working = false;
+                }, function (err) {
+                  $scope.working = false;
+                  alertify.alert(err.data);
+                });
+
               }, function (err) {
                 $scope.working = false;
                 alertify.alert(err.data);
               });
-
-            }, function (err) {
-              $scope.working = false;
-              alertify.alert(err.data);
-            });
+            }
 
           });
 
