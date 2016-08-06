@@ -43,3 +43,7 @@ angular
     };
 
   });
+
+function imgError(image){
+  image.style.display = 'none';
+}

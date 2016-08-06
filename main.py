@@ -11,8 +11,9 @@ from compose.service import ImageType, BuildAction
 import docker
 import requests
 from flask import Flask, jsonify, request
+from scripts.git_repo import git_pull, git_repo, GIT_YML_PATH
 from scripts.bridge import ps_, get_project, get_container_from_id, get_yml_path, containers
-from scripts.find_files import find_yml_files, get_readme_file
+from scripts.find_files import find_yml_files, get_readme_file, get_logo_file
 from scripts.requires_auth import requires_auth, authentication_enabled, \
   disable_authentication, set_authentication
 
@@ -28,7 +29,13 @@ def load_projects():
     load project definitions (docker-compose.yml files)
     """
     global projects
-    projects = find_yml_files(YML_PATH)
+
+    if git_repo:
+        git_pull()
+        projects = find_yml_files(GIT_YML_PATH)
+    else:
+        projects = find_yml_files(YML_PATH)
+
     logging.debug(projects)
 
 load_projects()
@@ -108,6 +115,14 @@ def get_project_readme(name):
     path = projects[name]
     return jsonify(readme=get_readme_file(path))
 
+@app.route(API_V1 + "projects/logo/<name>", methods=['GET'])
+def get_project_logo(name):
+    """
+    get logo.png if available
+    """
+    path = projects[name]
+    return get_logo_file(path)
+
 @app.route(API_V1 + "projects/<name>/<container_id>", methods=['GET'])
 def project_container(name, container_id):
     """
@@ -127,7 +142,8 @@ def project_container(name, container_id):
         labels=container.labels,
         log_config=container.log_config,
         image=container.image,
-        environment=container.environment
+        environment=container.environment,
+        repo_tags=container.image_config['RepoTags']
         )
 
 @app.route(API_V1 + "projects/<name>", methods=['DELETE'])
@@ -400,4 +416,4 @@ def handle_generic_error(err):
 
 # run app
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', debug=True, threaded=True)
+    app.run(host='0.0.0.0', debug=False, threaded=True)

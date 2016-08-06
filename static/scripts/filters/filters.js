@@ -16,7 +16,7 @@ angular.module('composeUiApp')
             };
           })
           .filter(function (item) {
-            return item.name.indexOf(query) >= 0;
+            return item.name.toLowerCase().indexOf(query.toLowerCase()) >= 0;
           })
           .map(function (item) {
             return [item.name, item.path];

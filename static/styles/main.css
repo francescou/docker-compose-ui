@@ -93,16 +93,19 @@ footer {
   margin-top: 10px;
 }
 
-.btn-default {
-  background-color: #869198;
-}
-.btn-default:active, .btn-default.active {
-    background: #6d7377;
-}
-.btn-default:hover, .btn-default.hover {
-    background: #939da3;
-}
-
 .lines-input {
   max-width: 80px
 }
+
+.btn-group {
+  margin-bottom: 10px;
+}
+
+
+code {
+  display: block;
+  white-space: pre-wrap;
+  text-align: left;
+  padding: 20px
+}
+

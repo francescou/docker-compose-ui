@@ -25,7 +25,7 @@ Run the following command in terminal:
     --name docker-compose-ui \
     -p 5000:5000 \
     -v /var/run/docker.sock:/var/run/docker.sock \
-    francescou/docker-compose-ui:0.17
+    francescou/docker-compose-ui:0.19.0
 
 or, if you already have docker-compose installed, just `docker-compose up`.
 
@@ -46,9 +46,18 @@ If you want to use your own docker-compose projects, put them into a directory *
         -p 5000:5000 \
         -v /home/user/docker-compose-ui/demo-projects:/opt/docker-compose-projects:ro \
         -v /var/run/docker.sock:/var/run/docker.sock \
-        francescou/docker-compose-ui:0.17
+        francescou/docker-compose-ui:0.19.0
 
 you can download my example projects into */home/user/docker-compose-ui/demo-projects/* from https://github.com/francescou/docker-compose-ui/tree/master/demo-projects
+
+### Load projects from a git repository (experimental)
+
+    docker run \
+    --name docker-compose-ui \
+    -p 5000:5000 \
+    -v /var/run/docker.sock:/var/run/docker.sock  \
+    -e GIT_REPO=https://github.com/francescou/docker-compose-ui.git \
+    francescou/docker-compose-ui:0.19.0
 
 ### Note about scaling services
 
@@ -70,7 +79,7 @@ You can also run containers on a remote docker host, e.g.
         -p 5000:5000 \
         -v /home/user/docker-compose-ui/demo-projects:/opt/docker-compose-projects:ro \
         -e DOCKER_HOST=remote-docker-host:2375 \
-        francescou/docker-compose-ui:0.17
+        francescou/docker-compose-ui:0.19.0
 
 
 ### Docker Swarm or HTTPS Remote docker host
@@ -89,7 +98,7 @@ For example:
         --name docker-compose-ui \
         -p 5000:5000 \
         -v /home/user/.docker/config.json:/root/.docker/config.json:ro \
-        francescou/docker-compose-ui:0.17
+        francescou/docker-compose-ui:0.19.0
 
 ## Technologies
 
