@@ -1,63 +1,65 @@
 <h3>{{project}} / {{container.name_without_project}}</h3>
 
-<table class="table text-left">
-  <thead>
-    <tr>
-      <th>Key</th>
-      <th>Value</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>name</td>
-      <td>{{container.name}}</td>
-    </tr>
-    <tr>
-      <td>image</td>
-      <td>{{container.repo_tags.join(',')}}</td>
-    </tr>
-    <tr>
-      <td>ip</td>
-      <td>{{container.ip}}</td>
-    </tr>
-    <tr>
-      <td>number</td>
-      <td>{{container.number}}</td>
-    </tr>
-    <tr>
-      <td>short id</td>
-      <td>{{container.short_id}}</td>
-    </tr>
-    <tr>
-      <td>log config</td>
-      <td>{{container.log_config.Type}}</td>
-    </tr>
-    <tr>
-      <td>command</td>
-      <td>{{container.human_readable_command}}</td>
-    </tr>
-    <tr>
-      <td>environment</td>
-      <td>
-        <ul>
-          <li ng-repeat="(k, v) in container.environment">
-            {{k}} = {{v}}
-          </li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td>labels</td>
-      <td>
-        <ul>
-          <li ng-repeat="(k, v) in container.labels">
-            {{k}} = {{v}}
-          </li>
-        </ul>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<div class="table-responsive">
+  <table class="table text-left">
+    <thead>
+      <tr>
+        <th>Key</th>
+        <th>Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>name</td>
+        <td>{{container.name}}</td>
+      </tr>
+      <tr>
+        <td>image</td>
+        <td>{{container.repo_tags.join(',')}}</td>
+      </tr>
+      <tr>
+        <td>ip</td>
+        <td>{{container.ip}}</td>
+      </tr>
+      <tr>
+        <td>number</td>
+        <td>{{container.number}}</td>
+      </tr>
+      <tr>
+        <td>short id</td>
+        <td>{{container.short_id}}</td>
+      </tr>
+      <tr>
+        <td>log config</td>
+        <td>{{container.log_config.Type}}</td>
+      </tr>
+      <tr>
+        <td>command</td>
+        <td>{{container.human_readable_command}}</td>
+      </tr>
+      <tr>
+        <td>environment</td>
+        <td>
+          <ul>
+            <li ng-repeat="(k, v) in container.environment">
+              {{k}} = {{v}}
+            </li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td>labels</td>
+        <td>
+          <ul>
+            <li ng-repeat="(k, v) in container.labels">
+              {{k}} = {{v}}
+            </li>
+          </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 <a ng-href="#/project/{{project}}" class="btn btn-block btn-primary">back to project {{project}}</a>
 

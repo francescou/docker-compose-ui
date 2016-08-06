@@ -13,7 +13,7 @@ import requests
 from flask import Flask, jsonify, request
 from scripts.git_repo import git_pull, git_repo, GIT_YML_PATH
 from scripts.bridge import ps_, get_project, get_container_from_id, get_yml_path, containers
-from scripts.find_files import find_yml_files, get_readme_file
+from scripts.find_files import find_yml_files, get_readme_file, get_logo_file
 from scripts.requires_auth import requires_auth, authentication_enabled, \
   disable_authentication, set_authentication
 
@@ -114,6 +114,14 @@ def get_project_readme(name):
     """
     path = projects[name]
     return jsonify(readme=get_readme_file(path))
+
+@app.route(API_V1 + "projects/logo/<name>", methods=['GET'])
+def get_project_logo(name):
+    """
+    get logo.png if available
+    """
+    path = projects[name]
+    return get_logo_file(path)
 
 @app.route(API_V1 + "projects/<name>/<container_id>", methods=['GET'])
 def project_container(name, container_id):
