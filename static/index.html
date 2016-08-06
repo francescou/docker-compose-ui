@@ -6,8 +6,8 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
 
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap-theme.min.css" />
     <link rel="stylesheet" href="//rawgithub.com/fabien-d/alertify.js/0.3.11/themes/alertify.core.css">
     <link rel="stylesheet" href="//rawgithub.com/fabien-d/alertify.js/0.3.11/themes/alertify.default.css">
     <link rel="stylesheet" href="styles/main.css">
@@ -34,7 +34,7 @@
             <div class="btn-group-vertical projects">
               <a ng-repeat="(id, path) in projects.projects | filterByName:query" class="btn btn-default btn-block" ng-class="{active: activeProject === id}" ng-click="$parent.activeProject = id" ng-href="#/project/{{id}}">
                 <img height=32 width=32 ng-src="/api/v1/projects/logo/{{id}}" onerror="imgError(this);" />
-                {{id || path}} 
+                {{id || path}}
                 <span class="label label-success" ng-show="isActive(id, projects.active)">ON</span>
               </a>
             </div>
@@ -42,6 +42,8 @@
               no projects configured, please run the container with the option
               <pre>-v /home/user/docker-compose-ui/demo-projects:/opt/docker-compose-projects:ro</pre>
             </div>
+            <br>
+            <br>
             <button class="btn btn-default btn-block" ng-click="reload()"><i class="glyphicon glyphicon-refresh"></i> Reload projects</button>
             <a class="btn btn-default btn-block" ng-href="#/create"><i class="glyphicon glyphicon-plus"></i> Create new project</a>
             <a class="btn btn-primary btn-block" ng-href="#/"><i class="glyphicon glyphicon-wrench"></i> Settings</a>
@@ -66,7 +68,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/alertify.js/0.3.0/alertify.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/markdown.js/0.5.0/markdown.min.js"></script>
     <script src="scripts/app.js"></script>
     <script src="scripts/filters/filters.js"></script>
