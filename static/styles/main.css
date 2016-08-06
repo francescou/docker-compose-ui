@@ -100,3 +100,12 @@ footer {
 .btn-group {
   margin-bottom: 10px;
 }
+
+
+code {
+  display: block;
+  white-space: pre-wrap;
+  text-align: left;
+  padding: 20px
+}
+
