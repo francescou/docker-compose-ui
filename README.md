@@ -15,8 +15,6 @@ Docker Compose UI is a web interface for Docker Compose.
 
 [Docker Engine 1.10.0 or later for version 2 of the Compose File format, and Docker Engine 1.9.1 or later for version 1](https://github.com/docker/compose/releases/tag/1.7.1)
 
-(only if you need Docker clustering) [Docker Swarm 1.0](https://docs.docker.com/swarm/)
-
 ## Getting started
 
 Run the following command in terminal:
@@ -84,7 +82,7 @@ You can also run containers on a remote docker host, e.g.
 
 ### Docker Swarm or HTTPS Remote docker host
 
-The project has been tested on a Docker Swarm 1.0 cluster.
+The project has been tested against a Docker Engines 1.12 cluster ([swarm mode](https://docs.docker.com/engine/swarm/swarm-tutorial/)).
 
 You need to add two environment properties to use an HTTPS remote docker host: `DOCKER_CERT_PATH` and `DOCKER_TLS_VERIFY`, see [example by @ymote](https://github.com/francescou/docker-compose-ui/issues/5#issuecomment-135697832)
 
