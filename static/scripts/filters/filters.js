@@ -21,7 +21,7 @@ angular.module('composeUiApp')
           .map(function (item) {
             return [item.name, item.path];
           })
-          .object()
+          .fromPairs()
           .value();
 
       } else {
