@@ -52,7 +52,7 @@ angular.module('composeUiApp')
       });
     }
 
-    var formatLogs = _.compose(omitTimestamp,
+    var formatLogs = _.flowRight(omitTimestamp,
       sortByDate,
       excludeBlankLines,
       _.flatten,
