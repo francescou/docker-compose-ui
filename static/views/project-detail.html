@@ -1,24 +1,35 @@
-<h3>{{projectId}}</h3>
+<h3>{{projectId}} <button class="btn btn-sm btn-default" ng-hide="ymlData" ng-click="yml()">yml</button></h3>
 
-
-<div class="btn-group" role="group">
-  <button class="btn btn-sm btn-default" ng-click="deleteProject(projectId)"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> delete</button>
-
-  <button class="btn btn-sm btn-default" ng-hide="ymlData" ng-click="yml()">docker-compose.yml</button>
-  <button class="btn btn-sm btn-default" ng-show="ymlData" ng-click="ymlData = null">close docker-compose.yml</button>
-
-  <button class="btn btn-sm btn-default" ng-show="readmeExists && readmeShow" ng-click="readmeShow = false">close README</button>
-  <button class="btn btn-sm btn-default" ng-hide="!readmeExists || readmeShow" ng-click="readmeShow = true">README</button>
-
+<div class="row" ng-show="ymlData">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+          <h3 class="panel-title">
+            docker-compose.yml
+            <button class="btn btn-xs btn-default" ng-show="ymlData" ng-click="ymlData = null">hide</button>
+          </h3>
+      </div>
+      <div class="panel-body">
+        <pre class="text-left yml">{{ymlData}}</pre>
+      </div>
+    </div>
+  </div>
 </div>
 
-
-<p>
-  <pre class="text-left" ng-show="ymlData">{{ymlData}}</pre>
-</p>
-
-<div ng-if="readmeShow" class="well">
-  <markdown content="{{readmeData}}"></markdown>
+<div class="row" ng-show="readmeShow">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+          <h3 class="panel-title">
+            README.md
+            <button class="btn btn-xs btn-default" ng-show="readmeExists && readmeShow" ng-click="readmeShow = false">hide</button>
+          </h3>
+      </div>
+      <div class="panel-body" ng-if="readmeShow">
+        <markdown content="{{readmeData}}"></markdown>
+      </div>
+    </div>
+  </div>
 </div>
 
 <h1 ng-show="working">
@@ -92,3 +103,5 @@
   </div>
   <span ng-show="isEmpty(services)">no containers found</span>
 </div>
+
+<button class="btn btn-lg btn-danger btn-block" ng-click="deleteProject(projectId)"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> delete project</button>
