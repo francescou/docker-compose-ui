@@ -1,0 +1,31 @@
+{
+  "name": "docker-compose-ui",
+  "version": "0.19.0",
+  "homepage": "https://github.com/francescou/docker-compose-ui",
+  "authors": [
+    "Francesco Uliana <francesco@uliana.it>"
+  ],
+  "description": "web interface for Docker Compose",
+  "keywords": [
+    "docker"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.7",
+    "angular": "~1.5.8",
+    "angular-resource": "~1.5.8",
+    "angular-route": "~1.5.8",
+    "jquery": "~3.1.0",
+    "lodash": "~4.14.2",
+    "markdown": "~0.5.0",
+    "alertify": "~0.3.10"
+  }
+}
