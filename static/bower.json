@@ -1,6 +1,6 @@
 {
   "name": "docker-compose-ui",
-  "version": "0.20.0",
+  "version": "0.20.1",
   "homepage": "https://github.com/francescou/docker-compose-ui",
   "authors": [
     "Francesco Uliana <francesco@uliana.it>"
