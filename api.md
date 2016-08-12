@@ -61,6 +61,10 @@ layout: main
 
     curl -X DELETE http://localhost:5000/api/v1/projects/hello-node
 
+### docker-compose rm of project "hello-node"
+
+    curl -X DELETE http://localhost:5000/api/v1/remove/hello-node
+
 ### docker-compose logs of project "hello-node", 100 lines limit
 
     curl http://localhost:5000/api/v1/logs/hello-node/100
@@ -86,3 +90,14 @@ layout: main
 
     curl -X POST http://localhost:5000/api/v1/host -H 'Content-type: application/json' --data '{"id": "192.168.0.1:2376"}'
 
+### get project "hello-node" README.md
+
+    curl http://localhost:5000/api/v1/projects/readme/hello-node
+
+### get project "hello-node" icon
+
+    curl http://localhost:5000/api/v1/projects/logo/hello-node
+
+### delete project
+
+    curl -X DELETE http://localhost:5000/api/v1/remove-project/hello-node
