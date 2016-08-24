@@ -27,7 +27,7 @@ Run the following command in terminal:
 
 or, if you already have docker-compose installed, just `docker-compose up`.
 
-You have to wait while Docker pulls the container from the Docker Hub: https://registry.hub.docker.com/u/francescou/docker-compose-ui
+You have to wait while Docker pulls the container from the Docker Hub: <https://hub.docker.com/r/francescou/docker-compose-ui/>
 
 Then open your browser to `http://localhost:5000`
 
@@ -107,7 +107,7 @@ The application uses [Docker Compose](https://docs.docker.com/compose) to monito
 
 ## API
 
-API docs at [francescou.github.io/docker-compose-ui](http://francescou.github.io/docker-compose-ui/)
+API docs at <http://francescou.github.io/docker-compose-ui/api.html>
 
 ## Issues
 
