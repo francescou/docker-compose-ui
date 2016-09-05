@@ -34,6 +34,10 @@
         <td>{{container.log_config.Type}}</td>
       </tr>
       <tr>
+        <td>started at</td>
+        <td>{{container.started_at | date:'medium'}}</td>
+      </tr>
+      <tr>
         <td>command</td>
         <td>{{container.human_readable_command}}</td>
       </tr>

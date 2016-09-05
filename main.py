@@ -143,6 +143,7 @@ def project_container(name, container_id):
         log_config=container.log_config,
         image=container.image,
         environment=container.environment,
+        started_at=container.get('State.StartedAt'),
         repo_tags=container.image_config['RepoTags']
         )
 
