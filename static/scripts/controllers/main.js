@@ -20,7 +20,7 @@ angular.module('composeUiApp')
       Projects.get(function (data) {
         $scope.projects = data;
         if (!init) {
-          alertify.success(Object.keys(data.projects).length + ' projects reloadeded');
+          alertify.success(Object.keys(data.projects).length + ' projects reloaded');
         }
       });
     }
