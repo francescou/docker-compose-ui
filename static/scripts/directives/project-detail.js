@@ -80,7 +80,7 @@ angular.module('composeUiApp')
         });
 
         $scope.scale = function (service) {
-          alertify.prompt('how many instances of service ' + service + '?', function (evt, num) {
+          alertify.prompt('how many instances of service ' + service + '?', 1, function (evt, num) {
 
             if (!isNaN(num)) {
               $scope.working = true;
@@ -125,7 +125,7 @@ angular.module('composeUiApp')
               Project.remove({
                 id: id
               }, function () {
-                alertify.log('deleted ' + id);
+                alertify.message('deleted ' + id);
                 $scope.$parent.reload();
                 $location.path('/');
               }, function (r) {
