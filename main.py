@@ -309,6 +309,16 @@ def down():
     get_project_with_name(name).down(ImageType.none, None)
     return jsonify(command='down')
 
+@app.route(API_V1 + "restart", methods=['POST'])
+@requires_auth
+def restart():
+    """
+    docker-compose restart
+    """
+    name = loads(request.data)["id"]
+    get_project_with_name(name).restart()
+    return jsonify(command='restart')
+
 @app.route(API_V1 + "logs/<name>", defaults={'limit': "all"}, methods=['GET'])
 @app.route(API_V1 + "logs/<name>/<int:limit>", methods=['GET'])
 def logs(name, limit):

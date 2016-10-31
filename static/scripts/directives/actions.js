@@ -30,6 +30,10 @@ angular.module('composeUiApp')
           'down': {
             url: 'api/v1/down',
             method: 'POST'
+          },
+          'restart': {
+            url: 'api/v1/restart',
+            method: 'POST'
           }
         });
 
@@ -38,6 +42,10 @@ angular.module('composeUiApp')
         $scope.kill = function () {
           var id = $scope.projectId;
           updateProjectStatus(Project.delete, id + ' killed');
+        };
+        $scope.restart = function () {
+          var id = $scope.projectId;
+          updateProjectStatus(Project.restart, id + ' restarted');
         };
         $scope.pull = function () {
           $scope.working = true;
