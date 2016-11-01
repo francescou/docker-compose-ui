@@ -59,10 +59,10 @@ angular.module('composeUiApp')
           });
         };
         $scope.up = function () {
-          updateProjectStatus(Project.save, 'project is up');
+          updateProjectStatus(Project.save, 'project up');
         };
         $scope.down = function () {
-          updateProjectStatus(Project.down, 'project is down');
+          updateProjectStatus(Project.down, 'project down');
         };
 
         $scope.start = function () {
