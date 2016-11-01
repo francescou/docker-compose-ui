@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('composeUiApp')
-  .directive('actions', function ($resource, projectService, logService) {
+  .directive('actions', function ($resource, projectService, logService, $interval) {
 
     return {
       restrict: 'E',
@@ -73,9 +73,33 @@ angular.module('composeUiApp')
           updateProjectStatus(Project.stop, 'project stopped');
         };
 
+        var Logz = $resource('api/v1/logs-since/:id/:since');
+
         function updateProjectStatus(fn, msg) {
           $scope.working = true;
           var id = $scope.projectId;
+
+          var now = Math.floor(new Date().getTime() / 1000);
+
+          var refreshLogs = $interval(function () {
+
+            Logz.get({id: $scope.projectId, since: now}, function (data) {
+              var logs = logService.formatLogs(data.logs);
+
+              var lines = _.map(logs, function (item) {
+                return item.container + '<br>' + item.text;
+              });
+
+              _.each(lines, function (msg) {
+                alertify.message(msg);
+              });
+
+            });
+
+            now = Math.floor(new Date().getTime() / 1000);
+
+          }, 1500);
+
           fn({id: id}, function () {
             alertify.success(msg);
             $scope.working = false;
@@ -83,9 +107,11 @@ angular.module('composeUiApp')
               $scope.services = projectService.groupByService(data);
             });
             $scope.$parent.$parent.reload(false);
+            $interval.cancel(refreshLogs);
           }, function (err) {
             $scope.working = false;
             alertify.alert(err.data);
+            $interval.cancel(refreshLogs);
           });
 
         }
@@ -106,7 +132,6 @@ angular.module('composeUiApp')
 
         $scope.lineLimit = 80;
         $scope.combinedLogs = function () {
-
           Logs.get({id: $scope.projectId, limit: $scope.lineLimit}, function (data) {
             $scope.logs = logService.formatLogs(data.logs);
             $scope.showCombinedLogsDialog = true;
