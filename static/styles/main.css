@@ -119,3 +119,7 @@ code {
   background-color: white;
   border: 0
 }
+
+.btn-delete-project {
+  margin-top: 40px
+}

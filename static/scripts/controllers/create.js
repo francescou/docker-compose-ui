@@ -28,7 +28,7 @@ angular.module('composeUiApp')
         yml: yml
       }, function (data) {
         alertify.success('created project: ' + name + ', path: ' + data.path);
-        $scope.$parent.reload();
+        $scope.$parent.reload(false);
         $location.path('project/' + name);
 
       }, function (err) {

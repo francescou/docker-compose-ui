@@ -16,10 +16,10 @@ angular.module('composeUiApp')
       return l.indexOf(id.replace(/\-/g, '')) >= 0;
     };
 
-    function reload(init) {
+    function reload(displayMessage) {
       Projects.get(function (data) {
         $scope.projects = data;
-        if (!init) {
+        if (displayMessage) {
           alertify.success(Object.keys(data.projects).length + ' projects reloaded');
         }
       });
@@ -31,6 +31,6 @@ angular.module('composeUiApp')
       return angular.equals({}, obj);
     };
 
-    reload(true);
+    reload(false);
 
   });

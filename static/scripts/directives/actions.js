@@ -59,10 +59,10 @@ angular.module('composeUiApp')
           });
         };
         $scope.up = function () {
-          updateProjectStatus(Project.save, 'project is up');
+          updateProjectStatus(Project.save, 'project up');
         };
         $scope.down = function () {
-          updateProjectStatus(Project.down, 'project is down');
+          updateProjectStatus(Project.down, 'project down');
         };
 
         $scope.start = function () {
@@ -82,7 +82,7 @@ angular.module('composeUiApp')
             Project.get({id: id}, function (data) {
               $scope.services = projectService.groupByService(data);
             });
-            $scope.$parent.$parent.reload();
+            $scope.$parent.$parent.reload(false);
           }, function (err) {
             $scope.working = false;
             alertify.alert(err.data);

@@ -8,8 +8,10 @@
 
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css" />
-    <link rel="stylesheet" href="bower_components/alertify/themes/alertify.core.css">
-    <link rel="stylesheet" href="bower_components/alertify/themes/alertify.default.css">
+
+    <script src="bower_components/alertify-js/build/alertify.js"></script>
+    <link rel="stylesheet" href="bower_components/alertify-js/build/css/alertify.css"/>
+    <link rel="stylesheet" href="bower_components/alertify-js/build/css/themes/bootstrap.css"/>
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/colors.css">
   </head>
@@ -44,7 +46,7 @@
             </div>
             <br>
             <br>
-            <button class="btn btn-default btn-block" ng-click="reload()"><i class="glyphicon glyphicon-refresh"></i> Reload projects</button>
+            <button class="btn btn-default btn-block" ng-click="reload(true)"><i class="glyphicon glyphicon-refresh"></i> Reload projects</button>
             <a class="btn btn-default btn-block" ng-href="#/create"><i class="glyphicon glyphicon-plus"></i> Create new project</a>
             <a class="btn btn-primary btn-block" ng-href="#/"><i class="glyphicon glyphicon-wrench"></i> Settings</a>
           </div>
@@ -76,6 +78,7 @@
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/markdown/lib/markdown.js"></script>
+    <script src="scripts/alertify-js.config.js"></script>
     <script src="scripts/app.js"></script>
     <script src="scripts/filters/filters.js"></script>
     <script src="scripts/controllers/main.js"></script>
