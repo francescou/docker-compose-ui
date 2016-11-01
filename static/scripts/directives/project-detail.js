@@ -126,7 +126,7 @@ angular.module('composeUiApp')
                 id: id
               }, function () {
                 alertify.message('deleted ' + id);
-                $scope.$parent.reload();
+                $scope.$parent.reload(false);
                 $location.path('/');
               }, function (r) {
                 alertify.error('cannot delete ' + id + ': ' + r.data);
