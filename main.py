@@ -331,6 +331,18 @@ def logs(name, limit):
 
     return jsonify(logs=lines)
 
+@app.route(API_V1 + "logs-since/<name>/<int:since>", methods=['GET'])
+def logs_since(name, since):
+    """
+    docker-compose logs
+    """
+
+    lines = {}
+    for k in get_project_with_name(name).containers(stopped=True):
+        lines[k.name] = k.logs(timestamps=False, since=since).split('\n')
+
+    return jsonify(logs=lines)
+
 @app.route(API_V1 + "logs/<name>/<container_id>", defaults={'limit': "all"}, methods=['GET'])
 @app.route(API_V1 + "logs/<name>/<container_id>/<int:limit>", methods=['GET'])
 def container_logs(name, container_id, limit):
