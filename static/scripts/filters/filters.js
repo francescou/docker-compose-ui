@@ -1,6 +1,23 @@
 'use strict';
 
 angular.module('composeUiApp')
+  .constant('pageSize', 8)
+  .filter('filterByPage', function (pageSize) {
+    return function (projects, page) {
+      var filteredProjects = {};
+
+      var start = page * pageSize;
+
+      var projectIds = Object.keys(projects || {}).splice(start, pageSize);
+
+      _.each(projectIds, function (projectId) {
+        filteredProjects[projectId] = projects[projectId];
+      });
+
+      return filteredProjects;
+
+    };
+  })
   .filter('filterByName', function () {
     return function (projects, query) {
 
