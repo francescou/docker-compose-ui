@@ -42,7 +42,8 @@ def get_volumes(container):
     """
     retrieve container volumes details
     """
-    return container.get('Config.Volumes')
+    mounts = container.get('Mounts')
+    return [dict(source=mount['Source'], destination=mount['Destination']) for mount in mounts]
 
 
 def get_yml_path(path):
