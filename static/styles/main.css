@@ -46,8 +46,22 @@ footer {
   display: block;
   white-space: pre;
   font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
-  font-size: 12px;
+  font-size: 10px;
   word-wrap: normal;
+}
+
+@media (min-width: 992px) {
+  .modal-xl {
+    width: 90%;
+    margin: 30px auto;
+  }
+}
+
+@media (min-height: 850px) {
+
+  .combined-logs {
+    min-height: 700px
+  }
 }
 
 .logs-0 {
