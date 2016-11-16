@@ -41,8 +41,9 @@ If you want to use your own docker-compose projects, put them into a directory *
 
     docker run \
         --name docker-compose-ui \
+        -v $(pwd):$(pwd) \
+        -w $(pwd) \
         -p 5000:5000 \
-        -v /home/user/docker-compose-ui/demo-projects:/opt/docker-compose-projects:ro \
         -v /var/run/docker.sock:/var/run/docker.sock \
         francescou/docker-compose-ui:0.21.0
 
