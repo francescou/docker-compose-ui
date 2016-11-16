@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('composeUiApp')
-  .constant('pageSize', 8)
+  .constant('pageSize', 10)
   .filter('filterByPage', function (pageSize) {
     return function (projects, page) {
       var filteredProjects = {};
