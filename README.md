@@ -13,7 +13,7 @@ Docker Compose UI is a web interface for Docker Compose.
 
 ## Requirements
 
-[Docker Engine 1.10.0 or later for version 2 of the Compose File format, and Docker Engine 1.9.1 or later for version 1](https://github.com/docker/compose/releases/tag/1.7.1)
+[Docker Engine 1.10.0 or later for version 2 of the Compose File format, and Docker Engine 1.9.1 or later for version 1](https://github.com/docker/compose/releases/tag/1.9.0)
 
 ## Getting started
 

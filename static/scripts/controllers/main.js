@@ -8,7 +8,7 @@
  * Controller of the composeUiApp
  */
 angular.module('composeUiApp')
-  .controller('MainCtrl', function ($scope, $resource) {
+  .controller('MainCtrl', function ($scope, $resource, pageSize) {
 
     var Projects = $resource('api/v1/projects');
 
@@ -31,6 +31,14 @@ angular.module('composeUiApp')
     $scope.isEmpty = function (obj) {
       return angular.equals({}, obj);
     };
+
+    $scope.page = 0;
+    $scope.pageSize = pageSize;
+
+    $scope.size = function (projects) {
+      return projects ? Object.keys(projects).length : 0;
+    };
+
 
     reload(false);
 
