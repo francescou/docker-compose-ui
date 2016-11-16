@@ -35,8 +35,8 @@ angular.module('composeUiApp')
     $scope.page = 0;
     $scope.pageSize = pageSize;
 
-    $scope.size = function (x) {
-      return x ? Object.keys(x).length : 0;
+    $scope.size = function (projects) {
+      return projects ? Object.keys(projects).length : 0;
     };
 
 
