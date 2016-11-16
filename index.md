@@ -18,7 +18,7 @@ Docker Compose UI is a web interface for Docker Compose.
 
 ## Requirements
 
-[Docker Engine 1.10.0 or later for version 2 of the Compose File format, and Docker Engine 1.9.1 or later for version 1](https://github.com/docker/compose/releases/tag/1.7.1)
+[Docker Engine 1.10.0 or later for version 2 of the Compose File format, and Docker Engine 1.9.1 or later for version 1](https://github.com/docker/compose/releases/tag/1.9.0)
 
 ## Getting started
 
@@ -28,11 +28,11 @@ Run the following command in terminal:
     --name docker-compose-ui \
     -p 5000:5000 \
     -v /var/run/docker.sock:/var/run/docker.sock \
-    francescou/docker-compose-ui:0.21.0
+    francescou/docker-compose-ui:0.22.0
 
 or, if you already have docker-compose installed, just `docker-compose up`.
 
-You have to wait while Docker pulls the container from the Docker Hub: https://registry.hub.docker.com/u/francescou/docker-compose-ui
+You have to wait while Docker pulls the container from the Docker Hub: <https://hub.docker.com/r/francescou/docker-compose-ui/>
 
 Then open your browser to `http://localhost:5000`
 
@@ -49,7 +49,7 @@ If you want to use your own docker-compose projects, put them into a directory *
         -p 5000:5000 \
         -v /home/user/docker-compose-ui/demo-projects:/opt/docker-compose-projects:ro \
         -v /var/run/docker.sock:/var/run/docker.sock \
-        francescou/docker-compose-ui:0.21.0
+        francescou/docker-compose-ui:0.22.0
 
 you can download my example projects into */home/user/docker-compose-ui/demo-projects/* from https://github.com/francescou/docker-compose-ui/tree/master/demo-projects
 
@@ -60,13 +60,13 @@ you can download my example projects into */home/user/docker-compose-ui/demo-pro
     -p 5000:5000 \
     -v /var/run/docker.sock:/var/run/docker.sock  \
     -e GIT_REPO=https://github.com/francescou/docker-compose-ui.git \
-    francescou/docker-compose-ui:0.21.0
+    francescou/docker-compose-ui:0.22.0
 
 ### Note about scaling services
 
 Note that some of the services provided by the demo projects are not "scalable" with `docker-compose scale SERVICE=NUM` because of published ports conflicts.
 
-Check out this project if you are interested in scaling up and down a docker-compose service without having any down time: https://github.com/francescou/consul-template-docker-compose
+Check out this project if you are interested in scaling up and down a docker-compose service without having any down time: <https://github.com/francescou/docker-continuous-deployment>
 
 
 ### Note about volumes
@@ -82,7 +82,7 @@ You can also run containers on a remote docker host, e.g.
         -p 5000:5000 \
         -v /home/user/docker-compose-ui/demo-projects:/opt/docker-compose-projects:ro \
         -e DOCKER_HOST=remote-docker-host:2375 \
-        francescou/docker-compose-ui:0.21.0
+        francescou/docker-compose-ui:0.22.0
 
 
 ### Docker Swarm or HTTPS Remote docker host
@@ -101,7 +101,7 @@ For example:
         --name docker-compose-ui \
         -p 5000:5000 \
         -v /home/user/.docker/config.json:/root/.docker/config.json:ro \
-        francescou/docker-compose-ui:0.21.0
+        francescou/docker-compose-ui:0.22.0
 
 ## Technologies
 
