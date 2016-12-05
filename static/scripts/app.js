@@ -34,14 +34,6 @@ angular
       .otherwise({
         redirectTo: '/'
       });
-  })
-  .filter('trim', function () {
-    return function (s, n) {
-      var sTrim = s.trim();
-      var sLimit = sTrim.substring(0, n);
-      return sLimit.length < sTrim.length ? sLimit + '...' : sLimit;
-    };
-
   });
 
 function imgError(image){

@@ -66,9 +66,9 @@
             <h6 ng-hide="container.volumes.length === 0"><span class="glyphicon glyphicon glyphicon-hdd"></span> Volumes</h6>
             <ul class="list-unstyled">
               <li ng-repeat="volume in container.volumes">
-                <span ng-attr-title="{{volume.source}}">{{volume.source | trim : 12}}</span>
-                :
-                <span ng-attr-title="{{volume.destination}}">{{volume.destination | trim : 12}}</span>
+                <div class="truncate" ng-attr-title="{{volume.source}} to {{volume.destination}}">
+                  {{volume.source}} : {{volume.destination}}
+                </div>
               </li>
             </ul>
             <span ng-show="container.is_running">
