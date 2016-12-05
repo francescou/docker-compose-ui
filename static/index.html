@@ -29,7 +29,7 @@
               <form class="form-inline">
                 <div class="form-group">
                   <label for="project-filter">filter by project name:</label>
-                  <input name="project-filter" type="text" ng-model="query" class="form-control">
+                  <input name="project-filter" type="text" ng-model="query" ng-change="page = 0" class="form-control">
                 </div>
               </form>
             </div>
@@ -40,7 +40,7 @@
                 {{id || path}}
                 <span class="label label-success" ng-show="isActive(id, projects.active)">ON</span>
               </a>
-              <button ng-click="page = page + 1" ng-show="(page + 1) * pageSize < size(projects.projects)" class="btn btn-default btn-block"><strong>next <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></strong></button>
+              <button ng-click="page = page + 1" ng-show="(page + 1) * pageSize < size(projects.projects | filterByName:query)" class="btn btn-default btn-block"><strong>next <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></strong></button>
             </div>
             <div ng-show="isEmpty(projects.projects)" class="vertical-margin">
               no projects configured, please run the container with the option
