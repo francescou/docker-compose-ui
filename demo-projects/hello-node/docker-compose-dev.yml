@@ -1,0 +1,6 @@
+version: '2'
+services:
+  hello:
+    build: app
+    ports:
+    - "1338:1338"
