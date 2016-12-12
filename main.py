@@ -45,7 +45,7 @@ def get_project_with_name(name):
     get docker compose project given a project name
     """
     path = projects[name]
-    return get_project(path)
+    return get_project(path, name)
 
 # REST endpoints
 @app.route(API_V1 + "projects", methods=['GET'])

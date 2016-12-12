@@ -52,14 +52,16 @@ def get_yml_path(path):
     """
     return get_default_config_files(path)[0]
 
-def get_project(path):
+def get_project(path, name):
     """
     get docker project given file path
     """
     logging.debug('get project ' + path)
     environment = Environment.from_env_file(path)
-    config_path = get_config_path_from_options(path, dict(), environment)
-    project = compose_get_project(path, config_path)
+    options = dict()
+    # options['--file'] = path
+    config_path = get_config_path_from_options(path, options, environment)
+    project = compose_get_project(path, config_path, project_name=name)
     return project
 
 def containers():

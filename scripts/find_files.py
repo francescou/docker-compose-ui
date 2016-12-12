@@ -1,8 +1,8 @@
 """
 find docker-compose.yml files
 """
-
 import fnmatch
+import re
 import os
 
 def find_yml_files(path):
@@ -11,9 +11,14 @@ def find_yml_files(path):
     """
     matches = {}
     for root, _, filenames in os.walk(path):
-        for _ in fnmatch.filter(filenames, 'docker-compose.yml'):
+        for file_name in fnmatch.filter(filenames, 'docker-compose*.yml'):
             key = root.split('/')[-1]
-            matches[key] = os.path.join(os.getcwd(), root)
+            path = os.path.join(os.getcwd(), root)
+            m = re.search('docker-compose(.+).yml', file_name)
+            if m == None:
+                matches[key] = path
+            else:
+                matches[key + m.group(1)] = path
     return matches
 
 
