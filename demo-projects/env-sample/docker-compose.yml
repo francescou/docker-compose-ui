@@ -1,0 +1,5 @@
+version: '2'
+services:
+  hello:
+    image: node:7-slim
+    command: node -e '${COMMAND}'
