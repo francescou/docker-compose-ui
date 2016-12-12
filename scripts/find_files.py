@@ -48,4 +48,3 @@ def get_logo_file(path):
             break
 
     return logo
-

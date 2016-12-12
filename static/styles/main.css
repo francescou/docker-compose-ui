@@ -137,3 +137,9 @@ code {
 .btn-delete-project {
   margin-top: 40px
 }
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

@@ -2,9 +2,9 @@
 git functionalities
 """
 
-from git import Repo
 import os
 import logging
+from git import Repo
 
 git_repo = os.getenv('GIT_REPO')
 

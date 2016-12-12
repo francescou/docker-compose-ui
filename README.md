@@ -4,6 +4,10 @@
 
 Docker Compose UI is a web interface for Docker Compose.
 
+The aim of this project is to provide a minimal HTTP API on top of Docker Compose while maintaining full interoperability with Docker Compose CLI.
+
+The application can be deployed as a single container, there are no dependencies nor databases to install.
+
 ![screenshot project detail](https://raw.githubusercontent.com/francescou/docker-compose-ui/master/screenshots/project-detail.png)
 
 ![screenshot project wizard](https://raw.githubusercontent.com/francescou/docker-compose-ui/master/screenshots/project-wizard.png)
@@ -23,7 +27,7 @@ Run the following command in terminal:
     --name docker-compose-ui \
     -p 5000:5000 \
     -v /var/run/docker.sock:/var/run/docker.sock \
-    francescou/docker-compose-ui:0.21.0
+    francescou/docker-compose-ui:0.22.0
 
 or, if you already have docker-compose installed, just `docker-compose up`.
 
@@ -45,7 +49,7 @@ If you want to use your own docker-compose projects, put them into a directory *
         -w $(pwd) \
         -p 5000:5000 \
         -v /var/run/docker.sock:/var/run/docker.sock \
-        francescou/docker-compose-ui:0.21.0
+        francescou/docker-compose-ui:0.22.0
 
 you can download my example projects into */home/user/docker-compose-ui/demo-projects/* from https://github.com/francescou/docker-compose-ui/tree/master/demo-projects
 
@@ -56,7 +60,7 @@ you can download my example projects into */home/user/docker-compose-ui/demo-pro
     -p 5000:5000 \
     -v /var/run/docker.sock:/var/run/docker.sock  \
     -e GIT_REPO=https://github.com/francescou/docker-compose-ui.git \
-    francescou/docker-compose-ui:0.21.0
+    francescou/docker-compose-ui:0.22.0
 
 ### Note about scaling services
 
@@ -78,7 +82,7 @@ You can also run containers on a remote docker host, e.g.
         -p 5000:5000 \
         -v /home/user/docker-compose-ui/demo-projects:/opt/docker-compose-projects:ro \
         -e DOCKER_HOST=remote-docker-host:2375 \
-        francescou/docker-compose-ui:0.21.0
+        francescou/docker-compose-ui:0.22.0
 
 
 ### Docker Swarm or HTTPS Remote docker host
@@ -97,7 +101,7 @@ For example:
         --name docker-compose-ui \
         -p 5000:5000 \
         -v /home/user/.docker/config.json:/root/.docker/config.json:ro \
-        francescou/docker-compose-ui:0.21.0
+        francescou/docker-compose-ui:0.22.0
 
 ## Technologies
 

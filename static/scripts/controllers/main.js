@@ -13,8 +13,10 @@ angular.module('composeUiApp')
     var Projects = $resource('api/v1/projects');
 
     $scope.isActive = function (id, l) {
-      var name = id.toLowerCase().replace(/\-/g, '');
-      return l.indexOf(name) >= 0;
+      var normalizedId = id
+        .toLowerCase()
+        .replace(/[^a-z0-9]/g, '');
+      return l.indexOf(normalizedId) >= 0;
     };
 
     function reload(displayMessage) {
