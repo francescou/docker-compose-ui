@@ -81,12 +81,6 @@ def get_yml_path(path):
     return get_default_config_files(path)[0]
 
 def get_project(path):
-    """
-    get docker project given file path
-    add locale env car defined in file path/.env to docker-compose then cleanup
-    """
-    logging.debug('get project ' + path)
-    environment = Environment.from_env_file(path)
 
     """ 
     apply env var for docker-compose.yml substitutions
@@ -97,6 +91,14 @@ def get_project(path):
     for key, value in localenv.iteritems():
         logging.debug('environment: ' + key + ' ' + value)
         os.environ[key] = value
+
+    """
+    get docker project given file path
+    add locale env car defined in file path/.env to docker-compose then cleanup
+    """
+    logging.debug('get project ' + path)
+    environment = Environment.from_env_file(path)
+
 
     config_path = get_config_path_from_options(path, dict(), environment)
     project = compose_get_project(path, config_path)

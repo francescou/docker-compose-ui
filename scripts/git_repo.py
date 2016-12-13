@@ -10,7 +10,7 @@ git_repo = os.getenv('GIT_REPO')
 
 logging.basicConfig(level=logging.DEBUG)
 
-GIT_YML_PATH = '/opt/docker-compose-projects-git/'
+GIT_YML_PATH = '/opt/docker-compose-projects/'
 
 def git_pull():
     """

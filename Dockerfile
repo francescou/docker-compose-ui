@@ -12,7 +12,7 @@ RUN virtualenv /env && /env/bin/pip install --no-cache-dir -r /app/requirements.
 
 VOLUME ["/opt/docker-compose-projects"]
 
-COPY demo-projects /opt/docker-compose-projects
+COPY docker-compose-ui-projects /opt/docker-compose-projects
 
 EXPOSE 5000
 
