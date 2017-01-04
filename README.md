@@ -26,6 +26,7 @@ Run the following command in terminal:
     docker run \
     --name docker-compose-ui \
     -p 5000:5000 \
+    -w /opt/docker-compose-projects/ \
     -v /var/run/docker.sock:/var/run/docker.sock \
     francescou/docker-compose-ui:0.22.0
 
@@ -41,7 +42,7 @@ use `francescou/docker-compose-ui:1.0.RC1` if you want to try the new real time 
 
 ### Add your own docker-compose projects
 
-If you want to use your own docker-compose projects, put them into a directory */home/user/docker-compose-ui/demo-projects* and then run:
+to use use your own docker-compose projects run this command from the directory containing your docker-compose.yml files:
 
     docker run \
         --name docker-compose-ui \
@@ -58,6 +59,7 @@ you can download my example projects into */home/user/docker-compose-ui/demo-pro
     docker run \
     --name docker-compose-ui \
     -p 5000:5000 \
+    -w /opt/docker-compose-projects-git/ \
     -v /var/run/docker.sock:/var/run/docker.sock  \
     -e GIT_REPO=https://github.com/francescou/docker-compose-ui.git \
     francescou/docker-compose-ui:0.22.0
@@ -80,7 +82,8 @@ You can also run containers on a remote docker host, e.g.
     docker run \
         --name docker-compose-ui \
         -p 5000:5000 \
-        -v /home/user/docker-compose-ui/demo-projects:/opt/docker-compose-projects:ro \
+        -v $(pwd):$(pwd) \
+        -w $(pwd) \
         -e DOCKER_HOST=remote-docker-host:2375 \
         francescou/docker-compose-ui:0.22.0
 
@@ -100,6 +103,7 @@ For example:
     docker run \
         --name docker-compose-ui \
         -p 5000:5000 \
+        -w /opt/docker-compose-projects/ \
         -v /home/user/.docker/config.json:/root/.docker/config.json:ro \
         francescou/docker-compose-ui:0.22.0
 
