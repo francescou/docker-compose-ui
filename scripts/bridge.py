@@ -57,6 +57,7 @@ def get_project(path):
     get docker project given file path
     """
     logging.debug('get project ' + path)
+
     environment = Environment.from_env_file(path)
     config_path = get_config_path_from_options(path, dict(), environment)
     project = compose_get_project(path, config_path)

@@ -20,7 +20,7 @@ from scripts.requires_auth import requires_auth, authentication_enabled, \
 # Flask Application
 API_V1 = '/api/v1/'
 YML_PATH = os.getenv('DOCKER_COMPOSE_UI_YML_PATH') \
-  or '/opt/docker-compose-projects'
+  or '.'
 logging.basicConfig(level=logging.DEBUG)
 app = Flask(__name__, static_url_path='')
 
@@ -39,6 +39,7 @@ def load_projects():
     logging.debug(projects)
 
 load_projects()
+
 
 def get_project_with_name(name):
     """

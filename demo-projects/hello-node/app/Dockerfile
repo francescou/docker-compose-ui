@@ -1,4 +1,4 @@
-FROM node:5-slim
+FROM node:7-alpine
 
 EXPOSE 1337
 

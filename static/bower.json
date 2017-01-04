@@ -1,6 +1,6 @@
 {
   "name": "docker-compose-ui",
-  "version": "0.22.0",
+  "version": "1.0.0",
   "homepage": "https://github.com/francescou/docker-compose-ui",
   "authors": [
     "Francesco Uliana <francesco@uliana.it>"
@@ -26,6 +26,6 @@
     "jquery": "~3.1.0",
     "lodash": "~4.14.2",
     "markdown": "~0.5.0",
-    "alertify": "~0.3.10"
+    "alertify-js": "^1.8.0"
   }
 }
