@@ -1,5 +1,5 @@
 version: '2'
 services:
   hello:
-    image: node:7-slim
+    image: node:7-alpine
     command: node -e '${COMMAND}'
