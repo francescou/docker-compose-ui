@@ -5,9 +5,16 @@ layout: main
 
 ![Docker Compose UI](https://raw.githubusercontent.com/francescou/docker-compose-ui/master/static/images/logo.png)
 
+[![Docker Stars](https://img.shields.io/docker/stars/francescou/docker-compose-ui.svg)](https://hub.docker.com/r/francescou/docker-compose-ui/)
+[![Docker Pulls](https://img.shields.io/docker/pulls/francescou/docker-compose-ui.svg)](https://hub.docker.com/r/francescou/docker-compose-ui/)
+
 ## What is it
 
 Docker Compose UI is a web interface for Docker Compose.
+
+The aim of this project is to provide a minimal HTTP API on top of Docker Compose while maintaining full interoperability with Docker Compose CLI.
+
+The application can be deployed as a single container, there are no dependencies nor databases to install.
 
 ![screenshot project detail](https://raw.githubusercontent.com/francescou/docker-compose-ui/master/screenshots/project-detail.png)
 
@@ -27,6 +34,7 @@ Run the following command in terminal:
     docker run \
     --name docker-compose-ui \
     -p 5000:5000 \
+    -w /opt/docker-compose-projects/ \
     -v /var/run/docker.sock:/var/run/docker.sock \
     francescou/docker-compose-ui:1.0.0
 
@@ -36,18 +44,15 @@ You have to wait while Docker pulls the container from the Docker Hub: <https://
 
 Then open your browser to `http://localhost:5000`
 
-### Real time notifications (Experimental)
-
-use `francescou/docker-compose-ui:1.0.RC1` if you want to try the new real time notification system, more info on [issue #14](https://github.com/francescou/docker-compose-ui/issues/14)
-
 ### Add your own docker-compose projects
 
-If you want to use your own docker-compose projects, put them into a directory */home/user/docker-compose-ui/demo-projects* and then run:
+to use use your own docker-compose projects run this command from the directory containing your docker-compose.yml files:
 
     docker run \
         --name docker-compose-ui \
+        -v $(pwd):$(pwd) \
+        -w $(pwd) \
         -p 5000:5000 \
-        -v /home/user/docker-compose-ui/demo-projects:/opt/docker-compose-projects:ro \
         -v /var/run/docker.sock:/var/run/docker.sock \
         francescou/docker-compose-ui:1.0.0
 
@@ -58,6 +63,7 @@ you can download my example projects into */home/user/docker-compose-ui/demo-pro
     docker run \
     --name docker-compose-ui \
     -p 5000:5000 \
+    -w /opt/docker-compose-projects-git/ \
     -v /var/run/docker.sock:/var/run/docker.sock  \
     -e GIT_REPO=https://github.com/francescou/docker-compose-ui.git \
     francescou/docker-compose-ui:1.0.0
@@ -80,7 +86,8 @@ You can also run containers on a remote docker host, e.g.
     docker run \
         --name docker-compose-ui \
         -p 5000:5000 \
-        -v /home/user/docker-compose-ui/demo-projects:/opt/docker-compose-projects:ro \
+        -v $(pwd):$(pwd) \
+        -w $(pwd) \
         -e DOCKER_HOST=remote-docker-host:2375 \
         francescou/docker-compose-ui:1.0.0
 
@@ -100,6 +107,7 @@ For example:
     docker run \
         --name docker-compose-ui \
         -p 5000:5000 \
+        -w /opt/docker-compose-projects/ \
         -v /home/user/.docker/config.json:/root/.docker/config.json:ro \
         francescou/docker-compose-ui:1.0.0
 
@@ -141,3 +149,5 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
+
+
