@@ -49,6 +49,10 @@ layout: main
 
     curl -X POST http://localhost:5000/api/v1/stop --data '{"id":"hello-node"}' -H'Content-type: application/json'
 
+### docker-compose restart of project "hello-node"
+
+    curl -X POST http://localhost:5000/api/v1/restart --data '{"id":"hello-node"}' -H'Content-type: application/json'
+
 ### docker-compose build of project "hello-node" (with params _pull_ and _nocache_)
 
     curl -X POST http://localhost:5000/api/v1/build --data '{"id":"hello-node", "pull": true, "no_cache": true}' -H'Content-type: application/json'
