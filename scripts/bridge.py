@@ -4,7 +4,7 @@ bridge to docker-compose
 
 import logging
 from compose.container import Container
-from compose.cli.command import get_project as compose_get_project, get_config_path_from_options
+from compose.cli.command import get_project as compose_get_project, get_config_path_from_options, get_config_from_options
 from compose.config.config import get_default_config_files
 from compose.config.environment import Environment
 
@@ -70,3 +70,11 @@ def containers():
     version = API_VERSIONS[V2_0]
     client = docker_client(Environment(), version)
     return client.containers()
+
+
+def project_config(path):
+    """
+    docker-compose config
+    """
+    return get_config_from_options(path, dict())
+    

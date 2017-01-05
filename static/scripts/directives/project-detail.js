@@ -41,9 +41,7 @@ angular.module('composeUiApp')
             Readme.get({
               id: $scope.projectId
             }, function (data) {
-              $scope.readmeData = data.readme;
-              $scope.readmeExists = data.readme && data.readme.length > 0;
-              $scope.readmeShow = $scope.readmeExists;
+              $scope.readme = data.readme;
             });
 
           }
@@ -109,11 +107,12 @@ angular.module('composeUiApp')
           return angular.equals({}, obj);
         };
 
-        $scope.yml = function () {
+        $scope.details = function () {
           Yml.get({
             id: $scope.projectId
           }, function (data) {
-            $scope.ymlData = data.yml;
+            $scope.yml = data.yml;
+            $scope.config = data.config;
           });
 
         };

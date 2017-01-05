@@ -1,42 +1,36 @@
-<h3>{{projectId}} <button class="btn btn-sm btn-default" ng-hide="ymlData" ng-click="yml()">yml</button></h3>
+<h3>{{projectId}} <button class="btn btn-sm btn-default" ng-hide="yml" ng-click="details()">details</button></h3>
 
-<div class="row" ng-show="ymlData">
-  <div class="col-md-8 col-md-offset-2">
+<div class="row" ng-show="yml">
+  <div class="col-md-10 col-md-offset-1">
     <div class="panel panel-default">
       <div class="panel-heading">
           <h3 class="panel-title">
-            docker-compose.yml
-            <button class="btn btn-xs btn-default" ng-show="ymlData" ng-click="ymlData = null">hide</button>
+            project details
+            <button class="btn btn-xs btn-default" ng-show="yml" ng-click="yml = null">hide</button>
           </h3>
       </div>
       <div class="panel-body">
-        <pre class="text-left yml">{{ymlData}}</pre>
+        <pre class="text-left yml">{{yml}}</pre>
+        <hr>
+        <pre class="text-left yml">{{config | json}}</pre>
+        <hr>
+        <div ng-if="readme">
+          <markdown content="{{readme}}"></markdown>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
-<div class="row" ng-show="readmeShow">
-  <div class="col-md-8 col-md-offset-2">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-          <h3 class="panel-title">
-            README.md
-            <button class="btn btn-xs btn-default" ng-show="readmeExists && readmeShow" ng-click="readmeShow = false">hide</button>
-          </h3>
-      </div>
-      <div class="panel-body" ng-if="readmeShow">
-        <markdown content="{{readmeData}}"></markdown>
-      </div>
-    </div>
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <h1 ng-show="working">
+      <span class="spinner glyphicon glyphicon-refresh"></span>
+    </h1>
+    <actions project-id="projectId" services="services" working="working" ng-hide="working"></actions>
   </div>
 </div>
 
-<h1 ng-show="working">
-  <span class="spinner glyphicon glyphicon-refresh"></span>
-</h1>
-
-<actions project-id="projectId" services="services" working="working" ng-hide="working"></actions>
 <br><br>
 
 <div ng-hide="working">
@@ -46,7 +40,7 @@
     <div class="row">
       <h5>
         {{id}}
-        <button class="btn btn-sm btn-default" ng-click="scale(id)"><span class="glyphicon glyphicon-resize-full"></span> scale</button>
+        <button class="btn btn-xs btn-default" ng-click="scale(id)"><span class="glyphicon glyphicon-resize-full"></span> scale</button>
       </h5>
     </div>
     <div class="row service service-{{$index % 16}}">
