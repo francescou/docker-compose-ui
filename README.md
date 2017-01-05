@@ -115,7 +115,7 @@ The application uses [Docker Compose](https://docs.docker.com/compose) to monito
 
 ## API
 
-API docs at <http://francescou.github.io/docker-compose-ui/api.html>
+API docs at <https://francescou.github.io/docker-compose-ui/api.html>
 
 ## Issues
 
