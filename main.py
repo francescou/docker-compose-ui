@@ -353,7 +353,7 @@ def host():
     """
     host_value = os.getenv('DOCKER_HOST')
 
-    return jsonify(host=host_value)
+    return jsonify(host=host_value, workdir=os.getcwd() if YML_PATH == '.' else YML_PATH)
 
 
 @app.route(API_V1 + "host", methods=['POST'])
