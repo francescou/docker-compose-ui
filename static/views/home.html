@@ -1,9 +1,14 @@
-<h3>Docker host: {{dockerHost || unixSocket}}</h3>
+<h3>Settings</h3>
 
 <div class="row">
+
+  <h4>current directory: <strong>{{workdir}}</strong></h4>
+
+  <h4>docker daemon socket: {{dockerHost || unixSocket}}</h4>
+
   <form class="form-inline" ng-submit="select($event, newHost)">
     <div class="form-group">
-      <label for="new-host">remote Docker Host:</label>
+      <label for="new-host">set remote Docker Host:</label>
     </div>
     <div class="input-group">
       <input name="new-host" type="text" ng-model="newHost" class="form-control">
@@ -12,7 +17,26 @@
       </span>
     </div>
     <button class="btn btn-primary" ng-click="select($event)" ng-show="dockerHost">use {{unixSocket}}</button>
-
-
   </form>
+</div>
+
+<br><br>
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2 alert alert-warning">
+    <h4>getting started with <strong>docker-compose-ui</strong></h4>
+    <ul class="list-unstyled">
+      <li>read <a href="https://francescou.github.io/docker-compose-ui/">project documentation</a></li>
+      <li>view docker-compose.yml <a href="https://github.com/francescou/docker-compose-ui/tree/v1.0.0/demo-projects">example projects</a></li>
+      <li>open a <a href="https://github.com/francescou/docker-compose-ui/issues/new">new issue on github</a></li>
+      <li><strong>docker pull francescou/docker-compose-ui</strong> from <a href="https://hub.docker.com/r/francescou/docker-compose-ui/">docker hub</a></li>
+      <li>third party application integration using <a href="https://francescou.github.io/docker-compose-ui/api.html">HTTP API</a></li>
+    </ul>
+
+    <br>
+    <p>
+      <a href="https://hub.docker.com/r/francescou/docker-compose-ui/"><img src="https://img.shields.io/docker/stars/francescou/docker-compose-ui.svg" title="Docker Stars" /></a>
+      <a href="https://hub.docker.com/r/francescou/docker-compose-ui/"><img src="https://img.shields.io/docker/pulls/francescou/docker-compose-ui.svg" title="Docker Pulls" /></a>
+    </p>
+  </div>
 </div>

@@ -19,6 +19,7 @@ angular.module('composeUiApp')
     Host.get(function (data) {
       alertify.success('Docker Host: ' + (data.host || label));
       $scope.dockerHost = data.host;
+      $scope.workdir = data.workdir;
     });
 
     $scope.select = function ($event, host) {
