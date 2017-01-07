@@ -34,13 +34,19 @@
               </form>
             </div>
             <div class="btn-group-vertical projects">
-              <button ng-click="page = page - 1" ng-hide="page === 0" class="btn btn-link btn-block"><strong>previous <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span></strong></button>
               <a ng-repeat="(id, path) in projects.projects | filterByName:query | filterByPage: page" class="btn btn-link btn-block truncate" ng-class="{active: activeProject === id}" ng-click="$parent.activeProject = id" ng-href="#/project/{{id}}">
                 <img height="32" width="32" ng-src="/api/v1/projects/logo/{{id}}" onerror="imgError(this);" />
                 {{id || path}}
                 <span class="label label-success" ng-show="isActive(id, projects.active)">ON</span>
               </a>
-              <button ng-click="page = page + 1" ng-show="(page + 1) * pageSize < size(projects.projects | filterByName:query)" class="btn btn-link btn-block"><strong>next <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></strong></button>
+              <div class="btn-group btn-group-justified" role="group">
+                <div class="btn-group" ng-hide="page === 0" role="group">
+                  <button ng-click="page = page - 1" class="btn btn-link"><strong><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> previous</strong></button>
+                </div>
+                <div class="btn-group" role="group" ng-show="(page + 1) * pageSize < size(projects.projects | filterByName:query)">
+                  <button ng-click="page = page + 1" class="btn btn-link"><strong>next <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></strong></button>
+                </div>
+              </div>
             </div>
             <div ng-show="isEmpty(projects.projects)" class="vertical-margin">
               no projects configured, please run the container with the option
