@@ -51,6 +51,8 @@ angular.module('composeUiApp')
 
     };
 
+    $scope.search('yml');
+
     $scope.load = function (name, id) {
 
       Yml.save({
