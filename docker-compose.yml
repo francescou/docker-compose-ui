@@ -8,6 +8,8 @@ services:
         hostname: docker_compose_ui
         ports:
             - 5000:5000
+        working_dir: /opt/docker-compose-projects/
+        #working_dir: /home/user/docker-compose-ui/demo-projects
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock
-            #- /home/user/docker-compose-ui/demo-projects:/opt/docker-compose-projects
+            #- /home/user/docker-compose-ui/demo-projects:/home/user/docker-compose-ui/demo-projects
