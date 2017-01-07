@@ -48,9 +48,8 @@
                 </div>
               </div>
             </div>
-            <div ng-show="isEmpty(projects.projects)" class="vertical-margin">
-              no projects configured, please run the container with the option
-              <pre>-v /home/user/docker-compose-ui/demo-projects:/opt/docker-compose-projects:ro</pre>
+            <div ng-show="isEmpty(projects.projects)" class="vertical-margin alert alert-danger">
+              no docker-compose.yml projects found, please see <a href="https://github.com/francescou/docker-compose-ui#add-your-own-docker-compose-projects">docker-compose-ui documentation</a>
             </div>
             <br>
             <br>
