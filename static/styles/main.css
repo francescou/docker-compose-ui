@@ -143,3 +143,11 @@ code {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+header {
+  background: #3F51B5;
+}
+
+.projects .btn:hover, .projects .btn:focus {
+  text-decoration: none
+}
