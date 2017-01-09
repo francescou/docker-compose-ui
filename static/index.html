@@ -30,12 +30,12 @@
                 <div class="form-group">
                   <label for="project-filter">filter by project name:</label>
                   <input name="project-filter" type="text" ng-model="query" ng-change="page = 0" class="form-control">
-                  <button ng-click="active = !active" class="btn btn-default" ng-class="{active: active}">active only</button>
+                  <button ng-click="active = !active; page = 0" class="btn btn-default" ng-class="{active: active}">active only</button>
                 </div>
               </form>
             </div>
             <div class="btn-group-vertical projects">
-              <a ng-repeat="(id, path) in projects.projects | filterByName:query | filterByActive: active : projects.active | filterByPage: page" class="btn btn-link btn-block truncate" ng-class="{active: activeProject === id}" ng-click="$parent.activeProject = id" ng-href="#/project/{{id}}">
+              <a ng-repeat="(id, path) in projects.projects | filterByName:query | filterByActive:active:projects.active | filterByPage: page" class="btn btn-default btn-block truncate" ng-class="{active: activeProject === id}" ng-click="$parent.activeProject = id" ng-href="#/project/{{id}}">
                 <img height="32" width="32" ng-src="/api/v1/projects/logo/{{id}}" onerror="imgError(this);" />
                 {{id || path}}
                 <span class="label label-success" ng-show="isActive(id, projects.active)">ON</span>
@@ -44,7 +44,7 @@
                 <div class="btn-group" ng-hide="page === 0" role="group">
                   <button ng-click="page = page - 1" class="btn btn-link"><strong><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> previous</strong></button>
                 </div>
-                <div class="btn-group" role="group" ng-show="(page + 1) * pageSize < size(projects.projects | filterByName:query)">
+                <div class="btn-group" role="group" ng-show="(page + 1) * pageSize < size(projects.projects | filterByName:query | filterByActive:active:projects.active )">
                   <button ng-click="page = page + 1" class="btn btn-link"><strong>next <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></strong></button>
                 </div>
               </div>
