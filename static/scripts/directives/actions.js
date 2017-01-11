@@ -114,7 +114,7 @@ angular.module('composeUiApp')
               };
 
               $scope.scrollToBottom = function () {
-                  var objDiv = $(".combined-logs")[0];
+                  var objDiv = $('.combined-logs')[0];
                   objDiv.scrollTop = objDiv.scrollHeight;
               };
 

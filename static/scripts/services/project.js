@@ -5,7 +5,7 @@ angular.module('composeUiApp')
 
       return {
           groupByService: function (data) {
-              return _.groupBy(data.containers, "labels['com.docker.compose.service']");
+              return _.groupBy(data.containers, 'labels[\'com.docker.compose.service\']');
           }
       };
   });

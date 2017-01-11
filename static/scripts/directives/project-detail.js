@@ -63,7 +63,7 @@ angular.module('composeUiApp')
                   Project.save({id: $scope.projectId, service_names: [serviceName], do_build: true},
             function () {
                 $scope.working = false;
-                alertify.success(serviceName + " rebuild successful.");
+                alertify.success(serviceName + ' rebuild successful.');
             },
             function (err) {
                 $scope.working = false;
@@ -144,7 +144,7 @@ angular.module('composeUiApp')
           scope: {
               status: '='
           },
-          link: function (scope, element, attrs, controller) {
+          link: function (scope, element, attrs) {
               var md_content = attrs.content;
               var html_content = markdown.toHTML(md_content);
               $(html_content).appendTo(element);
