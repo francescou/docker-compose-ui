@@ -36,7 +36,7 @@
             </div>
             <div class="btn-group-vertical projects">
               <a ng-repeat="(id, path) in projects.projects | filterByName:query | filterByActive:active:projects.active | filterByPage: page" class="btn btn-default btn-block truncate" ng-class="{active: activeProject === id}" ng-click="$parent.activeProject = id" ng-href="#/project/{{id}}">
-                <img height="32" width="32" ng-src="/api/v1/projects/logo/{{id}}" onerror="imgError(this);" />
+                <img height="32" width="32" ng-src="/api/v1/projects/logo/{{id}}" fallback-icon />
                 {{id || path}}
                 <span class="label label-success" ng-show="isActive(id, projects.active)">ON</span>
               </a>

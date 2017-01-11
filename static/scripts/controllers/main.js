@@ -44,4 +44,12 @@ angular.module('composeUiApp')
 
       reload(false);
 
+  }).directive('fallbackIcon', function () {
+      return {
+          link: function postLink(scope, iElement) {
+              iElement.bind('error', function() {
+                  angular.element(this).attr('style', 'display:none');
+              });
+          }
+      };
   });
