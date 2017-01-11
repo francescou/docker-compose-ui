@@ -150,10 +150,12 @@ header {
 
 .projects .btn-default {
   background-image: linear-gradient(to bottom, #fff 0%, #F4F4F4 100%);
-  min-height: 50px
+  min-height: 50px;
+  line-height: 32px;
 }
 
 .projects .btn-default:hover,.projects .btn-default:active, .projects .btn-default:focus {
   background-position: 0;
   background-image: linear-gradient(to bottom, #fff 0%, #E8E8E8 100%);
 }
+
