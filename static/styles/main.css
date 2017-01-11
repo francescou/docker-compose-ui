@@ -148,6 +148,12 @@ header {
   background: #3F51B5;
 }
 
-.projects .btn:hover, .projects .btn:focus {
-  text-decoration: none
+.projects .btn-default {
+  background-image: linear-gradient(to bottom, #fff 0%, #F4F4F4 100%);
+  min-height: 50px
+}
+
+.projects .btn-default:hover,.projects .btn-default:active, .projects .btn-default:focus {
+  background-position: 0;
+  background-image: linear-gradient(to bottom, #fff 0%, #E8E8E8 100%);
 }

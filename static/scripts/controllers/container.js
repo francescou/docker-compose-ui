@@ -10,13 +10,13 @@
 angular.module('composeUiApp')
   .controller('ContainerCtrl', function ($scope, $routeParams, $resource) {
 
-    var Container = $resource('api/v1/projects/:id/:container');
+      var Container = $resource('api/v1/projects/:id/:container');
 
-    var project = $routeParams.id;
-    $scope.project = project;
+      var project = $routeParams.id;
+      $scope.project = project;
 
-    Container.get({id: project, container: $routeParams.container}, function (data) {
-      $scope.container = data;
-    });
+      Container.get({id: project, container: $routeParams.container}, function (data) {
+          $scope.container = data;
+      });
 
   });
