@@ -1,13 +1,19 @@
-version: '2'
+version: "2.1"
+
 services:
   writer:
     image: node:7-alpine
     volumes:
-    - /tmp/:/data/
+      - volume_with_label:/data
     command: node -e "var fs = require('fs'); fs.writeFile('/data/node-test.txt', 'Hey there!', function () {console.log('writing /data/node-test.txt')})"
 
   reader:
     image: node:7-alpine
-    volumes_from:
-    - writer
+    volumes:
+      - volume_with_label:/data
     command: node -e "var fs = require('fs'); fs.readFile('/data/node-test.txt', 'utf8', function (err, data) {console.log(data);});"
+
+volumes:
+  volume_with_label:
+    labels:
+      - "label_key=label_val"
