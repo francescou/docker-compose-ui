@@ -1,9 +1,23 @@
-version: '2'
+version: '2.1'
+
 services:
   web:
     build: app
     ports:
     - "8080:8080"
+    networks:
+      - network_with_label
+    healthcheck:
+      test: "wget -qO- http://localhost:8080/health"
+      interval: 1s
+      timeout: 30m
+      retries: 1
   redis:
     image: redis:3.2-alpine
+    networks:
+      - network_with_label
 
+networks:
+  network_with_label:
+    labels:
+      - "label_key=label_val"
