@@ -2,7 +2,7 @@ FROM node:7-alpine
 
 WORKDIR /opt
 
-RUN npm install redis
+RUN npm install redis express
 
 EXPOSE 8080
 
