@@ -23,9 +23,15 @@ The application can be deployed as a single container, there are no dependencies
 ![screenshot project logs](https://raw.githubusercontent.com/francescou/docker-compose-ui/master/screenshots/logs.png)
 
 
-## Requirements
+## Compose file format compatibility matrix
 
-[Docker Engine 1.10.0 or later for version 2 of the Compose File format, and Docker Engine 1.9.1 or later for version 1](https://github.com/docker/compose/releases/tag/1.9.0)
+| Compose file format  | Docker Engine |
+| ------------- | ------------- |
+| 3.0	| 1.13.0+ |
+| 2.1	| 1.12.0+ |
+| 2.0	| 1.10.0+ |
+| 1.0	| 1.9.1+ |
+
 
 ## Getting started
 
