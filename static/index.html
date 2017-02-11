@@ -28,7 +28,7 @@
             <div class="vertical-margin" ng-hide="isEmpty(projects.projects)">
               <form class="form-inline">
                 <div class="form-group">
-                  <label for="project-filter">filter by project name:</label>
+                  <label for="project-filter">filter by name:</label>
                   <input name="project-filter" type="text" ng-model="query" ng-change="page = 0" class="form-control">
                   <button ng-click="active = !active; page = 0" class="btn btn-default" ng-class="{active: active}">active only</button>
                 </div>
