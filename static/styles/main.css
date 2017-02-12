@@ -159,3 +159,9 @@ header {
   background-image: linear-gradient(to bottom, #fff 0%, #E8E8E8 100%);
 }
 
+
+@media (min-width: 768px){
+  .form-inline .query {
+    width: 140px
+  }
+}
