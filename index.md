@@ -27,7 +27,7 @@ The application can be deployed as a single container, there are no dependencies
 
 | Compose file format  | Docker Engine |
 | ------------- | ------------- |
-| 3.0	| 1.13.0+ |
+| 3.0 ; 3.1| 1.13.0+ |
 | 2.1	| 1.12.0+ |
 | 2.0	| 1.10.0+ |
 | 1.0	| 1.9.1+ |
@@ -42,7 +42,7 @@ Run the following command in terminal:
     -p 5000:5000 \
     -w /opt/docker-compose-projects/ \
     -v /var/run/docker.sock:/var/run/docker.sock \
-    francescou/docker-compose-ui:1.3.1
+    francescou/docker-compose-ui:1.4.1
 
 or, if you already have docker-compose installed, just `docker-compose up`.
 
@@ -60,7 +60,7 @@ to use use your own docker-compose projects run this command from the directory 
         -w $(pwd) \
         -p 5000:5000 \
         -v /var/run/docker.sock:/var/run/docker.sock \
-        francescou/docker-compose-ui:1.3.1
+        francescou/docker-compose-ui:1.4.1
 
 you can download my example projects into */home/user/docker-compose-ui/demo-projects/* from https://github.com/francescou/docker-compose-ui/tree/master/demo-projects
 
@@ -72,7 +72,7 @@ you can download my example projects into */home/user/docker-compose-ui/demo-pro
     -w /opt/docker-compose-projects-git/ \
     -v /var/run/docker.sock:/var/run/docker.sock  \
     -e GIT_REPO=https://github.com/francescou/docker-compose-ui.git \
-    francescou/docker-compose-ui:1.3.1
+    francescou/docker-compose-ui:1.4.1
 
 ### Note about scaling services
 
@@ -95,7 +95,7 @@ You can also run containers on a remote docker host, e.g.
         -v $(pwd):$(pwd) \
         -w $(pwd) \
         -e DOCKER_HOST=remote-docker-host:2375 \
-        francescou/docker-compose-ui:1.3.1
+        francescou/docker-compose-ui:1.4.1
 
 
 ### Docker Swarm or HTTPS Remote docker host
@@ -115,7 +115,7 @@ For example:
         -p 5000:5000 \
         -w /opt/docker-compose-projects/ \
         -v /home/user/.docker/config.json:/root/.docker/config.json:ro \
-        francescou/docker-compose-ui:1.3.1
+        francescou/docker-compose-ui:1.4.1
 
 ## Technologies
 
