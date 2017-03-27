@@ -11,8 +11,8 @@ angular.module('composeUiApp')
   .controller('CreateCtrl', function ($scope, $routeParams, $resource, $location) {
 
       var Projects = $resource('api/v1/projects', null, {
-          'create': {
-              url: 'api/v1/create',
+          'createProject': {
+              url: 'api/v1/create-project',
               method: 'POST'
           }
       });
@@ -20,10 +20,10 @@ angular.module('composeUiApp')
       var Search = $resource('api/v1/search');
       var Yml = $resource('api/v1/yml');
 
-      $scope.create = function (name, yml) {
+      $scope.createProject = function (name, yml) {
 
       //TODO: check if name is alphanumeric
-          Projects.create({
+          Projects.createProject({
               name: name,
               yml: yml
           }, function (data) {

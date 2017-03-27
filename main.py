@@ -222,9 +222,9 @@ def build():
 
     return jsonify(command='build')
 
-@app.route(API_V1 + "create", methods=['POST'])
+@app.route(API_V1 + "create-project", methods=['POST'])
 @requires_auth
-def create():
+def create_project():
     """
     create new project
     """
