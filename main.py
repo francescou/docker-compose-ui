@@ -283,6 +283,16 @@ def yml():
     return jsonify(response.json())
 
 
+@app.route(API_V1 + "create", methods=['POST'])
+@requires_auth
+def create():
+    """
+    docker-compose create
+    """
+    name = loads(request.data)["id"]
+    get_project_with_name(name).create()
+    return jsonify(command='create')
+
 @app.route(API_V1 + "start", methods=['POST'])
 @requires_auth
 def start():

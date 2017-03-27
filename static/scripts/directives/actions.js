@@ -19,6 +19,10 @@ angular.module('composeUiApp')
                       url: 'api/v1/build',
                       method: 'POST'
                   },
+                  'create': {
+                      url: 'api/v1/create',
+                      method: 'POST'
+                  },
                   'start': {
                       url: 'api/v1/start',
                       method: 'POST'
@@ -63,6 +67,10 @@ angular.module('composeUiApp')
               };
               $scope.down = function () {
                   updateProjectStatus(Project.down, 'project down');
+              };
+
+              $scope.create = function () {
+                  updateProjectStatus(Project.create, 'project created');
               };
 
               $scope.start = function () {
