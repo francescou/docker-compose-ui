@@ -20,7 +20,7 @@ angular.module('composeUiApp')
                       method: 'POST'
                   },
                   'create': {
-                      url: 'api/v1/create',
+                      url: 'api/v2/create',
                       method: 'POST'
                   },
                   'start': {
