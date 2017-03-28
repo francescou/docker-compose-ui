@@ -67,10 +67,13 @@ def containers():
     """
     active containers
     """
-    version = API_VERSIONS[V2_0]
-    client = docker_client(Environment(), version)
-    return client.containers()
+    return client().containers()
 
+def version():
+    return client().info()['ServerVersion']
+
+def client():
+    return docker_client(Environment(), API_VERSIONS[V2_0])
 
 def project_config(path):
     """
