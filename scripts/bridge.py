@@ -69,8 +69,9 @@ def containers():
     """
     return client().containers()
 
-def version():
-    return client().info()['ServerVersion']
+def info():
+    info = client().info()
+    return dict(info=info['ServerVersion'], name=info['Name'])
 
 def client():
     return docker_client(Environment(), API_VERSIONS[V2_0])

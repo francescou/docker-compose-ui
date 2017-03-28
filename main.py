@@ -12,7 +12,7 @@ import docker
 import requests
 from flask import Flask, jsonify, request
 from scripts.git_repo import git_pull, git_repo, GIT_YML_PATH
-from scripts.bridge import ps_, get_project, get_container_from_id, get_yml_path, containers, project_config, version
+from scripts.bridge import ps_, get_project, get_container_from_id, get_yml_path, containers, project_config, info
 from scripts.find_files import find_yml_files, get_readme_file, get_logo_file
 from scripts.requires_auth import requires_auth, authentication_enabled, \
   disable_authentication, set_authentication
@@ -378,7 +378,7 @@ def health():
     """
     docker health
     """
-    return jsonify(version=version())
+    return jsonify(info())
 
 @app.route(API_V1 + "host", methods=['POST'])
 @requires_auth
