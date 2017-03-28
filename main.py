@@ -16,6 +16,7 @@ from scripts.bridge import ps_, get_project, get_container_from_id, get_yml_path
 from scripts.find_files import find_yml_files, get_readme_file, get_logo_file
 from scripts.requires_auth import requires_auth, authentication_enabled, \
   disable_authentication, set_authentication
+from scripts.manage_project import manage
 
 # Flask Application
 API_V1 = '/api/v1/'
@@ -231,16 +232,21 @@ def create_project():
     """
     data = loads(request.data)
 
-    directory = YML_PATH + '/' + data["name"]
-    os.makedirs(directory)
-
-    file_path = directory + "/docker-compose.yml"
-    out_file = open(file_path, "w")
-    out_file.write(data["yml"])
-    out_file.close()
+    file_path = manage(YML_PATH + '/' +  data["name"], data["yml"], False)
 
     load_projects()
 
+    return jsonify(path=file_path)
+
+
+@app.route(API_V1 + "update-project", methods=['PUT'])
+@requires_auth
+def update_project():
+    """
+    update project
+    """
+    data = loads(request.data)
+    file_path = manage(YML_PATH + '/' +  data["name"], data["yml"], True)
     return jsonify(path=file_path)
 
 
