@@ -23,7 +23,7 @@ API_V1 = '/api/v1/'
 API_V2 = '/api/v2/'
 YML_PATH = os.getenv('DOCKER_COMPOSE_UI_YML_PATH') \
   or '.'
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 app = Flask(__name__, static_url_path='')
 
 def load_projects():
@@ -38,7 +38,7 @@ def load_projects():
     else:
         projects = find_yml_files(YML_PATH)
 
-    logging.debug(projects)
+    logging.info(projects)
 
 load_projects()
 

@@ -165,3 +165,7 @@ header {
     width: 140px
   }
 }
+
+.btn {
+  padding: 6px 9px;
+}

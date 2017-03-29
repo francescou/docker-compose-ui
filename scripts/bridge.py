@@ -16,7 +16,7 @@ def ps_(project):
     """
     containers status
     """
-    logging.debug('ps ' + project.name)
+    logging.info('ps ' + project.name)
     containers = project.containers(stopped=True)
 
     items = [{
