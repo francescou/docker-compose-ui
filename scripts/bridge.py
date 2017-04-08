@@ -3,21 +3,22 @@ bridge to docker-compose
 """
 
 import logging
+from os.path import normpath
 from compose.container import Container
 from compose.cli.command import get_project as compose_get_project, get_config_path_from_options, get_config_from_options
 from compose.config.config import get_default_config_files
 from compose.config.environment import Environment
 
 from compose.cli.docker_client import docker_client
-from compose.const import API_VERSIONS
-from compose.config.config import V2_0
+from compose.const import API_VERSIONS, COMPOSEFILE_V3_0
+
 
 def ps_(project):
     """
     containers status
     """
     logging.info('ps ' + project.name)
-    containers = project.containers(stopped=True)
+    running_containers = project.containers(stopped=True)
 
     items = [{
         'name': container.name,
@@ -27,16 +28,16 @@ def ps_(project):
         'labels': container.labels,
         'ports': container.ports,
         'volumes': get_volumes(get_container_from_id(project.client, container.id)),
-        'is_running': container.is_running} for container in containers]
+        'is_running': container.is_running} for container in running_containers]
 
     return items
 
 
-def get_container_from_id(client, container_id):
+def get_container_from_id(my_docker_client, container_id):
     """
     return the docker container from a given id
     """
-    return Container.from_id(client, container_id)
+    return Container.from_id(my_docker_client, container_id)
 
 def get_volumes(container):
     """
@@ -70,15 +71,21 @@ def containers():
     return client().containers()
 
 def info():
-    info = client().info()
-    return dict(info=info['ServerVersion'], name=info['Name'])
+    """
+    docker info
+    """
+    docker_info = client().info()
+    return dict(info=docker_info['ServerVersion'], name=docker_info['Name'])
 
 def client():
-    return docker_client(Environment(), API_VERSIONS[V2_0])
+    """
+    docker client
+    """
+    return docker_client(Environment(), API_VERSIONS[COMPOSEFILE_V3_0])
 
 def project_config(path):
     """
     docker-compose config
     """
-    return get_config_from_options(path, dict())
-    
+    norm_path = normpath(path)
+    return get_config_from_options(norm_path, dict())

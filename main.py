@@ -271,12 +271,10 @@ def search():
     query = loads(request.data)['query']
     response = requests.get('https://www.composeregistry.com/api/v1/search', \
         params={'query': query}, headers={'x-key': 'default'})
-    if response.status_code == 200:
-        return jsonify(response.json())
-    else:
-        result = jsonify(response.json())
+    result = jsonify(response.json())
+    if response.status_code != 200:
         result.status_code = response.status_code
-        return result
+    return result
 
 
 @app.route(API_V1 + "yml", methods=['POST'])
