@@ -1,6 +1,10 @@
-version: '2'
+version: '3.2'
+
 services:
   hello:
-    build: app
+    build:
+      context: app
+      cache_from:
+      - node:7-alpine
     ports:
     - "1337:1337"
