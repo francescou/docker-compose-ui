@@ -11,11 +11,7 @@ The aim of this project is to provide a minimal HTTP API on top of Docker Compos
 
 The application can be deployed as a single container, there are no dependencies nor databases to install.
 
-![screenshot project detail](https://raw.githubusercontent.com/francescou/docker-compose-ui/master/screenshots/project-detail.png)
-
-![screenshot project wizard](https://raw.githubusercontent.com/francescou/docker-compose-ui/master/screenshots/project-wizard.png)
-
-![screenshot project logs](https://raw.githubusercontent.com/francescou/docker-compose-ui/master/screenshots/logs.png)
+![compose ui screenshots](https://raw.githubusercontent.com/francescou/docker-compose-ui/master/screenshots/docker-compose-ui.gif)
 
 
 ## Compose file format compatibility matrix
