@@ -20,7 +20,6 @@ from scripts.manage_project import manage
 
 # Flask Application
 API_V1 = '/api/v1/'
-API_V2 = '/api/v2/'
 YML_PATH = os.getenv('DOCKER_COMPOSE_UI_YML_PATH') \
   or '.'
 logging.basicConfig(level=logging.INFO)
@@ -225,6 +224,7 @@ def build():
     return jsonify(command='build')
 
 @app.route(API_V1 + "create-project", methods=['POST'])
+@app.route(API_V1 + "create", methods=['POST'])
 @requires_auth
 def create_project():
     """
@@ -288,7 +288,7 @@ def yml():
     return jsonify(response.json())
 
 
-@app.route(API_V2 + "create", methods=['POST'])
+@app.route(API_V1 + "_create", methods=['POST'])
 @requires_auth
 def create():
     """
