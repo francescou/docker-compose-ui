@@ -112,6 +112,7 @@ angular.module('composeUiApp')
                       id: $scope.projectId
                   }, function (data) {
                       $scope.yml = data.yml;
+                      $scope.env = data.env;
                       $scope.config = data.config;
                   });
 
