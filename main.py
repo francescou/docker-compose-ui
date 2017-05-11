@@ -235,10 +235,9 @@ def create_project():
     file_path = manage(YML_PATH + '/' +  data["name"], data["yml"], False)
 
     if 'env' in data and data["env"]:
-        file_path = YML_PATH + '/' + data["name"] + "/.env"
-        out_file = open(file_path, "w")
-        out_file.write(data["env"])
-        out_file.close()
+        env_file = open(YML_PATH + '/' + data["name"] + "/.env", "w")
+        env_file.write(data["env"])
+        env_file.close()
 
     load_projects()
 
