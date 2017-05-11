@@ -234,6 +234,12 @@ def create_project():
 
     file_path = manage(YML_PATH + '/' +  data["name"], data["yml"], False)
 
+    if 'env' in data and data["env"]:
+        file_path = directory + "/.env"
+        out_file = open(file_path, "w")
+        out_file.write(data["env"])
+        out_file.close()
+
     load_projects()
 
     return jsonify(path=file_path)
