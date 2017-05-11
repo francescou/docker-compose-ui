@@ -118,6 +118,11 @@ angular.module('composeUiApp')
 
               };
 
+              $scope.clone = function () {
+                  // redirect to create from project
+                  $location.path('/create/' + $scope.projectId);
+              };
+
 
               $scope.deleteProject = function (id) {
                   alertify.confirm('Do you really want to remove project ' + id + '?', function (rm) {
