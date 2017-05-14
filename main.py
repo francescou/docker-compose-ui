@@ -20,8 +20,9 @@ from scripts.manage_project import manage
 
 # Flask Application
 API_V1 = '/api/v1/'
-YML_PATH = os.getenv('DOCKER_COMPOSE_UI_YML_PATH') \
-  or '.'
+YML_PATH = os.getenv('DOCKER_COMPOSE_UI_YML_PATH') or '.'
+COMPOSE_REGISTRY = os.getenv('DOCKER_COMPOSE_REGISTRY') or 'https://www.composeregistry.com'
+
 logging.basicConfig(level=logging.INFO)
 app = Flask(__name__, static_url_path='')
 
@@ -271,10 +272,10 @@ def remove_project(name):
 @app.route(API_V1 + "search", methods=['POST'])
 def search():
     """
-    search for a project on www.composeregistry.com
+    search for a project on a docker-compose registry (e.g. www.composeregistry.com)
     """
     query = loads(request.data)['query']
-    response = requests.get('https://www.composeregistry.com/api/v1/search', \
+    response = requests.get(COMPOSE_REGISTRY + '/api/v1/search', \
         params={'query': query}, headers={'x-key': 'default'})
     result = jsonify(response.json())
     if response.status_code != 200:
@@ -285,10 +286,10 @@ def search():
 @app.route(API_V1 + "yml", methods=['POST'])
 def yml():
     """
-    get yml content from www.composeregistry.com
+    get yml content from a docker-compose registry (e.g. www.composeregistry.com)
     """
     item_id = loads(request.data)['id']
-    response = requests.get('https://www.composeregistry.com/api/v1/yml', \
+    response = requests.get(COMPOSE_REGISTRY + '/api/v1/yml', \
         params={'id': item_id}, headers={'x-key': 'default'})
     return jsonify(response.json())
 
@@ -374,6 +375,13 @@ def host():
     host_value = os.getenv('DOCKER_HOST')
 
     return jsonify(host=host_value, workdir=os.getcwd() if YML_PATH == '.' else YML_PATH)
+
+@app.route(API_V1 + "compose-registry", methods=['GET'])
+def compose_registry():
+    """
+    docker compose registry
+    """
+    return jsonify(url = COMPOSE_REGISTRY)
 
 
 @app.route(API_V1 + "health", methods=['GET'])

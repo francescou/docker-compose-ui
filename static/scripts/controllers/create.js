@@ -20,6 +20,12 @@ angular.module('composeUiApp')
       var Search = $resource('api/v1/search');
       var Yml = $resource('api/v1/yml');
 
+      var ComposeRegistry = $resource('api/v1/compose-registry');
+
+      ComposeRegistry.get(function (data) {
+          $scope.composeRegistry = data.url;
+      });
+
       $scope.createProject = function (name, yml, env) {
 
       //TODO: check if name is alphanumeric

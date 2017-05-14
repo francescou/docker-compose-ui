@@ -17,7 +17,7 @@
           <ul class="list-unstyled search-items">
             <li ng-repeat="item in items">
               <button class="btn btn-link" ng-click="load(item.name, item.id)">{{item.name}} by {{item.owner}}</button>{{item.stars}} <i class="glyphicon glyphicon-star"></i>
-              <a ng-href="https://www.composeregistry.com/details?id={{item.id}}" target="_blank" class="btn btn-xs btn-info">info</a>
+              <a ng-href="{{composeRegistry}}/details?id={{item.id}}" target="_blank" class="btn btn-xs btn-info">info</a>
             </li>
           </ul>
 
@@ -25,7 +25,7 @@
 
         </form>
 
-        search provided by <a href="https://www.composeregistry.com">composeregistry.com</a>
+        search provided by <a ng-href="{{composeRegistry}}">{{composeRegistry}}</a>
       </div>
     </div>
 
