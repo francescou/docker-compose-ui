@@ -20,12 +20,13 @@ angular.module('composeUiApp')
       var Search = $resource('api/v1/search');
       var Yml = $resource('api/v1/yml');
 
-      $scope.createProject = function (name, yml) {
+      $scope.createProject = function (name, yml, env) {
 
       //TODO: check if name is alphanumeric
           Projects.createProject({
               name: name,
-              yml: yml
+              yml: yml,
+              env: env
           }, function (data) {
               alertify.success('created project: ' + name + ', path: ' + data.path);
               $scope.$parent.reload(false);
