@@ -112,9 +112,15 @@ angular.module('composeUiApp')
                       id: $scope.projectId
                   }, function (data) {
                       $scope.yml = data.yml;
+                      $scope.env = data.env;
                       $scope.config = data.config;
                   });
 
+              };
+
+              $scope.clone = function () {
+                  // redirect to create from project
+                  $location.path('/create/' + $scope.projectId);
               };
 
 
