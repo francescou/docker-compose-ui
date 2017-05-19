@@ -1,6 +1,7 @@
 <h3>{{projectId}} 
     <button class="btn btn-sm btn-default" ng-hide="yml" ng-click="details()">details</button>
-    <button class="btn btn-sm btn-default" ng-hide="yml" ng-click="clone()">clone</button>
+    <a class="btn btn-sm btn-default" ng-hide="yml" ng-href="#/create/{{projectId}}">clone</a>
+
 </h3>
 
 <div class="row" ng-show="yml">
