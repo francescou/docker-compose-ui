@@ -111,8 +111,9 @@ def project_yml(name):
 
     with open(path) as data_file:
         env = None
-        with open(folder_path + '/.env') as env_file:
-            env = env_file.read()
+        if os.path.isfile(folder_path + '/.env'):
+            with open(folder_path + '/.env') as env_file:
+                env = env_file.read()
 
         return jsonify(yml=data_file.read(), env=env, config=config)
 
