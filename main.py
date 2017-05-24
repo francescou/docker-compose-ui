@@ -109,6 +109,25 @@ def run_exec(container_id):
         container_id=container.id \
         )
 
+@app.route(API_V1 + "exec/<container_id>/<exec_id>", methods=['GET'])
+@requires_auth
+def inspect_exec(container_id, exec_id):
+    """
+    Inspect a one-off exec command ran with `run_exec`.
+    """
+
+    container = get_container_from_id(client(), container_id)
+    r = client().exec_inspect(exec_id)
+
+    return jsonify(\
+        id=exec_id, \
+        running=r.get('Running'), \
+        code=r.get('ExitCode'), \
+        pid=r.get('Pid'), \
+        container_id=r.get('ContainerID') \
+        )
+
+
 @app.route(API_V1 + "projects/<project>/<service_id>", methods=['POST'])
 @requires_auth
 def run_service(project, service_id):
