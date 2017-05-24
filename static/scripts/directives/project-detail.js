@@ -19,7 +19,6 @@ angular.module('composeUiApp')
               });
 
 
-
               var Host = $resource('api/v1/host');
               var Yml = $resource('api/v1/projects/yml/:id');
               var Readme = $resource('api/v1/projects/readme/:id');
@@ -55,6 +54,25 @@ angular.module('composeUiApp')
                       $scope.containerLogs = id;
                       $scope.showDialog = true;
                       $scope.logs = data.logs;
+                  });
+              };
+
+              var Exec = $resource('api/v1/exec/:container');
+
+              $scope.showRunCommand = function (container) {
+                  $scope.container = container;
+                  $scope.showRunDialog = true;
+              };
+              $scope.runCommand = function (container_id, command) {
+                  Exec.save({
+                      container: container_id
+                  }, {
+                      command: command 
+                  }, function(r) {
+                      alertify.success('`' + r.command + '` running in ' + r.container + '.');
+                      // TODO perhaps set an interval checking for a successful exit code? (see: ExecInspect API endpoint)
+                  }, function() {
+                      alertify.error('Error running `' + command + '`');
                   });
               };
 
