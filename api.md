@@ -32,6 +32,15 @@ layout: main
 
     curl -X POST http://localhost:5000/api/v1/create --data '{"name":"hello-node", "yml": "node:\n    image: node"}' -H'Content-type: application/json'
 
+    or
+
+    curl -X POST http://localhost:5000/api/v1/create-project --data '{"name":"hello-node", "yml": "node:\n    image: node"}' -H'Content-type: application/json'
+
+### update docker-compose project "hello-node"
+
+    curl -X PUT http://localhost:5000/api/v1/update-project --data '{"name":"hello-node", "yml": "node:\n    image: node:8-alpine"}' -H'Content-type: application/json'
+
+
 ### docker-compose scale redis=2, project "node-redis"
 
     curl -X PUT http://localhost:5000/api/v1/services --data '{"service":"redis","project":"node-redis","num":"2"}' -H'Content-type: application/json'
@@ -69,6 +78,10 @@ layout: main
 
     curl -X DELETE http://localhost:5000/api/v1/remove/hello-node
 
+### docker-compose create of project "hello-node"
+
+    curl -X POST http://localhost:5000/api/v1/_create -H 'Content-type: application/json' --data '{"id":"hello-node"}'
+
 ### docker-compose logs of project "hello-node", 100 lines limit
 
     curl http://localhost:5000/api/v1/logs/hello-node/100
@@ -105,3 +118,7 @@ layout: main
 ### delete project
 
     curl -X DELETE http://localhost:5000/api/v1/remove-project/hello-node
+
+### health check endpoint
+
+    curl http://localhost:5000/api/v1/health
