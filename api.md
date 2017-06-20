@@ -32,7 +32,7 @@ layout: main
 
     curl -X POST http://localhost:5000/api/v1/create --data '{"name":"hello-node", "yml": "node:\n    image: node"}' -H'Content-type: application/json'
 
-    or
+or
 
     curl -X POST http://localhost:5000/api/v1/create-project --data '{"name":"hello-node", "yml": "node:\n    image: node"}' -H'Content-type: application/json'
 
