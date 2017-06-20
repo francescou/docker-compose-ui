@@ -16,18 +16,16 @@ The aim of this project is to provide a minimal HTTP API on top of Docker Compos
 
 The application can be deployed as a single container, there are no dependencies nor databases to install.
 
-![screenshot project detail](https://raw.githubusercontent.com/francescou/docker-compose-ui/master/screenshots/project-detail.png)
-
-![screenshot project wizard](https://raw.githubusercontent.com/francescou/docker-compose-ui/master/screenshots/project-wizard.png)
-
-![screenshot project logs](https://raw.githubusercontent.com/francescou/docker-compose-ui/master/screenshots/logs.png)
+![compose ui screenshots](https://raw.githubusercontent.com/francescou/docker-compose-ui/master/screenshots/docker-compose-ui.gif)
 
 
 ## Compose file format compatibility matrix
 
 | Compose file format  | Docker Engine |
 | ------------- | ------------- |
-| 3.0 ; 3.1| 1.13.0+ |
+| 3.3| 17.06.0+ |
+| 3.0 – 3.2| 1.13.0+ |
+| 2.2	| 1.13.0+ |
 | 2.1	| 1.12.0+ |
 | 2.0	| 1.10.0+ |
 | 1.0	| 1.9.1+ |
@@ -42,7 +40,7 @@ Run the following command in terminal:
     -p 5000:5000 \
     -w /opt/docker-compose-projects/ \
     -v /var/run/docker.sock:/var/run/docker.sock \
-    francescou/docker-compose-ui:1.4.1
+    francescou/docker-compose-ui:1.6.0
 
 or, if you already have docker-compose installed, just `docker-compose up`.
 
@@ -60,7 +58,7 @@ to use use your own docker-compose projects run this command from the directory 
         -w $(pwd) \
         -p 5000:5000 \
         -v /var/run/docker.sock:/var/run/docker.sock \
-        francescou/docker-compose-ui:1.4.1
+        francescou/docker-compose-ui:1.6.0
 
 you can download my example projects into */home/user/docker-compose-ui/demo-projects/* from https://github.com/francescou/docker-compose-ui/tree/master/demo-projects
 
@@ -72,7 +70,7 @@ you can download my example projects into */home/user/docker-compose-ui/demo-pro
     -w /opt/docker-compose-projects-git/ \
     -v /var/run/docker.sock:/var/run/docker.sock  \
     -e GIT_REPO=https://github.com/francescou/docker-compose-ui.git \
-    francescou/docker-compose-ui:1.4.1
+    francescou/docker-compose-ui:1.6.0
 
 ### Note about scaling services
 
@@ -95,7 +93,7 @@ You can also run containers on a remote docker host, e.g.
         -v $(pwd):$(pwd) \
         -w $(pwd) \
         -e DOCKER_HOST=remote-docker-host:2375 \
-        francescou/docker-compose-ui:1.4.1
+        francescou/docker-compose-ui:1.6.0
 
 
 ### Docker Swarm or HTTPS Remote docker host
@@ -115,7 +113,7 @@ For example:
         -p 5000:5000 \
         -w /opt/docker-compose-projects/ \
         -v /home/user/.docker/config.json:/root/.docker/config.json:ro \
-        francescou/docker-compose-ui:1.4.1
+        francescou/docker-compose-ui:1.6.0
 
 ## Technologies
 
