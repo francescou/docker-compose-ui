@@ -16,6 +16,8 @@ from scripts.bridge import ps_, get_project, get_container_from_id, get_yml_path
 from scripts.find_files import find_yml_files, get_readme_file, get_logo_file
 from scripts.requires_auth import requires_auth, authentication_enabled, \
   disable_authentication, set_authentication
+from scripts.requires_full_auth import requires_full_auth, full_authentication_enabled, \
+  disable_full_authentication, set_full_authentication
 from scripts.manage_project import manage
 
 # Flask Application
@@ -51,6 +53,7 @@ def get_project_with_name(name):
 
 # REST endpoints
 @app.route(API_V1 + "projects", methods=['GET'])
+@requires_full_auth
 def list_projects():
     """
     List docker compose projects
@@ -62,6 +65,7 @@ def list_projects():
     return jsonify(projects=projects, active=active)
 
 @app.route(API_V1 + "remove/<name>", methods=['DELETE'])
+@requires_full_auth
 @requires_auth
 def rm_(name):
     """
@@ -72,6 +76,7 @@ def rm_(name):
     return jsonify(command='rm')
 
 @app.route(API_V1 + "projects/<name>", methods=['GET'])
+@requires_full_auth
 def project_containers(name):
     """
     get project details
@@ -80,6 +85,7 @@ def project_containers(name):
     return jsonify(containers=ps_(project))
 
 @app.route(API_V1 + "projects/<project>/<service_id>", methods=['POST'])
+@requires_full_auth
 @requires_auth
 def run_service(project, service_id):
     """
@@ -101,6 +107,7 @@ def run_service(project, service_id):
         )
 
 @app.route(API_V1 + "projects/yml/<name>", methods=['GET'])
+@requires_full_auth
 def project_yml(name):
     """
     get yml content
@@ -118,6 +125,7 @@ def project_yml(name):
         return jsonify(yml=data_file.read(), env=env, config=config)
 
 @app.route(API_V1 + "projects/readme/<name>", methods=['GET'])
+@requires_full_auth
 def get_project_readme(name):
     """
     get README.md or readme.md if available
@@ -126,6 +134,7 @@ def get_project_readme(name):
     return jsonify(readme=get_readme_file(path))
 
 @app.route(API_V1 + "projects/logo/<name>", methods=['GET'])
+@requires_full_auth
 def get_project_logo(name):
     """
     get logo.png if available
@@ -134,6 +143,7 @@ def get_project_logo(name):
     return get_logo_file(path)
 
 @app.route(API_V1 + "projects/<name>/<container_id>", methods=['GET'])
+@requires_full_auth
 def project_container(name, container_id):
     """
     get container details
@@ -158,6 +168,7 @@ def project_container(name, container_id):
         )
 
 @app.route(API_V1 + "projects/<name>", methods=['DELETE'])
+@requires_full_auth
 @requires_auth
 def kill(name):
     """
@@ -167,6 +178,7 @@ def kill(name):
     return jsonify(command='kill')
 
 @app.route(API_V1 + "projects", methods=['PUT'])
+@requires_full_auth
 @requires_auth
 def pull():
     """
@@ -177,6 +189,7 @@ def pull():
     return jsonify(command='pull')
 
 @app.route(API_V1 + "services", methods=['PUT'])
+@requires_full_auth
 @requires_auth
 def scale():
     """
@@ -192,6 +205,7 @@ def scale():
     return jsonify(command='scale')
 
 @app.route(API_V1 + "projects", methods=['POST'])
+@requires_full_auth
 @requires_auth
 def up_():
     """
@@ -213,6 +227,7 @@ def up_():
         })
 
 @app.route(API_V1 + "build", methods=['POST'])
+@requires_full_auth
 @requires_auth
 def build():
     """
@@ -230,6 +245,7 @@ def build():
 
 @app.route(API_V1 + "create-project", methods=['POST'])
 @app.route(API_V1 + "create", methods=['POST'])
+@requires_full_auth
 @requires_auth
 def create_project():
     """
@@ -250,6 +266,7 @@ def create_project():
 
 
 @app.route(API_V1 + "update-project", methods=['PUT'])
+@requires_full_auth
 @requires_auth
 def update_project():
     """
@@ -261,6 +278,7 @@ def update_project():
 
 
 @app.route(API_V1 + "remove-project/<name>", methods=['DELETE'])
+@requires_full_auth
 @requires_auth
 def remove_project(name):
     """
@@ -274,6 +292,7 @@ def remove_project(name):
 
 
 @app.route(API_V1 + "search", methods=['POST'])
+@requires_full_auth
 def search():
     """
     search for a project on www.composeregistry.com
@@ -288,6 +307,7 @@ def search():
 
 
 @app.route(API_V1 + "yml", methods=['POST'])
+@requires_full_auth
 def yml():
     """
     get yml content from www.composeregistry.com
@@ -299,6 +319,7 @@ def yml():
 
 
 @app.route(API_V1 + "_create", methods=['POST'])
+@requires_full_auth
 @requires_auth
 def create():
     """
@@ -309,6 +330,7 @@ def create():
     return jsonify(command='create')
 
 @app.route(API_V1 + "start", methods=['POST'])
+@requires_full_auth
 @requires_auth
 def start():
     """
@@ -319,6 +341,7 @@ def start():
     return jsonify(command='start')
 
 @app.route(API_V1 + "stop", methods=['POST'])
+@requires_full_auth
 @requires_auth
 def stop():
     """
@@ -329,6 +352,7 @@ def stop():
     return jsonify(command='stop')
 
 @app.route(API_V1 + "down", methods=['POST'])
+@requires_full_auth
 @requires_auth
 def down():
     """
@@ -339,6 +363,7 @@ def down():
     return jsonify(command='down')
 
 @app.route(API_V1 + "restart", methods=['POST'])
+@requires_full_auth
 @requires_auth
 def restart():
     """
@@ -350,6 +375,7 @@ def restart():
 
 @app.route(API_V1 + "logs/<name>", defaults={'limit': "all"}, methods=['GET'])
 @app.route(API_V1 + "logs/<name>/<int:limit>", methods=['GET'])
+@requires_full_auth
 def logs(name, limit):
     """
     docker-compose logs
@@ -362,6 +388,7 @@ def logs(name, limit):
 
 @app.route(API_V1 + "logs/<name>/<container_id>", defaults={'limit': "all"}, methods=['GET'])
 @app.route(API_V1 + "logs/<name>/<container_id>/<int:limit>", methods=['GET'])
+@requires_full_auth
 def container_logs(name, container_id, limit):
     """
     docker-compose logs of a specific container
@@ -372,6 +399,7 @@ def container_logs(name, container_id, limit):
     return jsonify(logs=lines)
 
 @app.route(API_V1 + "host", methods=['GET'])
+@requires_full_auth
 def host():
     """
     docker host info
@@ -382,6 +410,7 @@ def host():
 
 
 @app.route(API_V1 + "health", methods=['GET'])
+@requires_full_auth
 def health():
     """
     docker health
@@ -389,6 +418,7 @@ def health():
     return jsonify(info())
 
 @app.route(API_V1 + "host", methods=['POST'])
+@requires_full_auth
 @requires_auth
 def set_host():
     """
@@ -404,6 +434,7 @@ def set_host():
         return jsonify(host=new_host)
 
 @app.route(API_V1 + "authentication", methods=['GET'])
+@requires_full_auth
 def authentication():
     """
     check if basic authentication is enabled
@@ -411,6 +442,7 @@ def authentication():
     return jsonify(enabled=authentication_enabled())
 
 @app.route(API_V1 + "authentication", methods=['DELETE'])
+@requires_full_auth
 @requires_auth
 def disable_basic_authentication():
     """
@@ -420,6 +452,7 @@ def disable_basic_authentication():
     return jsonify(enabled=False)
 
 @app.route(API_V1 + "authentication", methods=['POST'])
+@requires_full_auth
 @requires_auth
 def enable_basic_authentication():
     """
@@ -427,6 +460,32 @@ def enable_basic_authentication():
     """
     data = loads(request.data)
     set_authentication(data["username"], data["password"])
+    return jsonify(enabled=True)
+
+@app.route(API_V1 + "full-authentication", methods=['GET'])
+def full_authentication():
+    """
+    check if basic full-authentication is enabled
+    """
+    return jsonify(enabled=full_authentication_enabled())
+
+@app.route(API_V1 + "full-authentication", methods=['DELETE'])
+@requires_full_auth
+def disable_basic_full_authentication():
+    """
+    disable basic full-authentication
+    """
+    disable_full_authentication()
+    return jsonify(enabled=False)
+
+@app.route(API_V1 + "full-authentication", methods=['POST'])
+@requires_full_auth
+def enable_basic_full_authentication():
+    """
+    set up basic authentication
+    """
+    data = loads(request.data)
+    set_full_authentication(data["username"], data["password"])
     return jsonify(enabled=True)
 
 # static resources
