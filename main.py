@@ -115,7 +115,9 @@ def project_yml(name):
             with open(folder_path + '/.env') as env_file:
                 env = env_file.read()
 
-        return jsonify(yml=data_file.read(), env=env, config=config)
+        return jsonify(yml=data_file.read(), env=env, config=config._replace(version=config.version.__str__()))
+
+
 
 @app.route(API_V1 + "projects/readme/<name>", methods=['GET'])
 def get_project_readme(name):
