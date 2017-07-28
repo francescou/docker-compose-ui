@@ -12,7 +12,7 @@ import docker
 import requests
 from flask import Flask, jsonify, request
 from scripts.git_repo import git_pull, git_repo, GIT_YML_PATH
-from scripts.bridge import ps_, get_project, get_container_from_id, get_yml_path, containers, project_config, info
+from scripts.bridge import ps_, get_project, get_container_from_id, get_yml_path, containers, project_config, info, client
 from scripts.find_files import find_yml_files, get_readme_file, get_logo_file
 from scripts.requires_auth import requires_auth, authentication_enabled, \
   disable_authentication, set_authentication
@@ -78,6 +78,55 @@ def project_containers(name):
     """
     project = get_project_with_name(name)
     return jsonify(containers=ps_(project))
+
+@app.route(API_V1 + "exec/<container_id>", methods=['POST'])
+@requires_auth
+def run_exec(container_id):
+    """
+    Run a one-off exec command in a specific container specified by the
+    "container_id" param.
+    """
+
+    json = loads(request.data)
+
+    if 'command' not in json:
+        raise Exception('run_exec expects command to be set in JSON body')
+
+    command = json['command']
+    container = get_container_from_id(client(), container_id)
+
+    r = container.create_exec(command)
+
+    if 'Id' not in r:
+        raise Exception('Unable to create exec for command "%s"' % command)
+
+    container.start_exec(r['Id'], detach=True)
+
+    return jsonify(\
+        id=r['Id'], \
+        command=command, \
+        container=container.name, \
+        container_id=container.id \
+        )
+
+@app.route(API_V1 + "exec/<container_id>/<exec_id>", methods=['GET'])
+@requires_auth
+def inspect_exec(container_id, exec_id):
+    """
+    Inspect a one-off exec command ran with `run_exec`.
+    """
+
+    container = get_container_from_id(client(), container_id)
+    r = client().exec_inspect(exec_id)
+
+    return jsonify(\
+        id=exec_id, \
+        running=r.get('Running'), \
+        code=r.get('ExitCode'), \
+        pid=r.get('Pid'), \
+        container_id=r.get('ContainerID') \
+        )
+
 
 @app.route(API_V1 + "projects/<project>/<service_id>", methods=['POST'])
 @requires_auth

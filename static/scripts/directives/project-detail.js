@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('composeUiApp')
-  .directive('projectDetail', function($resource, $log, projectService, $window, $location){
+  .directive('projectDetail', function($resource, $log, projectService, $window, $location, $timeout){
       return {
           restrict: 'E',
           scope: {
@@ -17,7 +17,6 @@ angular.module('composeUiApp')
                       url: 'api/v1/remove-project/:id'
                   }
               });
-
 
 
               var Host = $resource('api/v1/host');
@@ -55,6 +54,45 @@ angular.module('composeUiApp')
                       $scope.containerLogs = id;
                       $scope.showDialog = true;
                       $scope.logs = data.logs;
+                  });
+              };
+
+              var Exec = $resource('api/v1/exec/:container/:id');
+
+              $scope.showRunCommand = function (container) {
+                  $scope.container = container;
+                  $scope.showRunDialog = true;
+              };
+              $scope.runCommand = function (container_id, command) {
+                  Exec.save({
+                      container: container_id
+                  }, {
+                      command: command 
+                  }, function(r) {
+                      alertify.success('`' + r.command + '` running in ' + r.container + '.');
+
+                      // repeatedly check exec command exit code
+                      var checkExec = function() {
+                          // check for successful exit code
+                          Exec.get({
+                              container: container_id,
+                              id: r.id
+                          }, function (exec) {
+                              if (exec.running) {
+                                  // keep checking until the command is finished
+                                  return $timeout(checkExec, 5000);
+                              }
+
+                              if (exec.code === 0) {
+                                  alertify.success('`' + r.command + '` successfully completed in ' + r.container + '.');
+                              } else {
+                                  alertify.error('`' + r.command + '` exited with non-zero exit code');
+                              }
+                          });
+                      };
+                      checkExec();
+                  }, function() {
+                      alertify.error('Error running `' + command + '`');
                   });
               };
 
