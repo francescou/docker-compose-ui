@@ -30,15 +30,17 @@ layout: main
 
 ### create new docker-compose project "hello-node"
 
-    curl -X POST http://localhost:5000/api/v1/create --data '{"name":"hello-node", "yml": "node:\n    image: node"}' -H'Content-type: application/json'
+    curl -X POST http://localhost:5000/api/v1/create --data '{"name":"hello-node", "yml": "node:\n    image: node", "env": "VAR1=VAL1\nVAR2=VAL2"}' -H'Content-type: application/json'
 
 or
 
-    curl -X POST http://localhost:5000/api/v1/create-project --data '{"name":"hello-node", "yml": "node:\n    image: node"}' -H'Content-type: application/json'
+    curl -X POST http://localhost:5000/api/v1/create-project --data '{"name":"hello-node", "yml": "node:\n    image: node", "env": "VAR1=VAL1\nVAR2=VAL2"}' -H'Content-type: application/json'
+    
+The `env` parameter is optional. If it's specified, its content will be put in an `.env` file in the project directory (see [docker-compose docs](https://docs.docker.com/compose/env-file/) for usage).
 
 ### update docker-compose project "hello-node"
 
-    curl -X PUT http://localhost:5000/api/v1/update-project --data '{"name":"hello-node", "yml": "node:\n    image: node:8-alpine"}' -H'Content-type: application/json'
+    curl -X PUT http://localhost:5000/api/v1/update-project --data '{"name":"hello-node", "yml": "node:\n    image: node:8-alpine", "env": "VAR1=VAL1\nVAR2=VAL2"}' -H'Content-type: application/json'
 
 
 ### docker-compose scale redis=2, project "node-redis"
