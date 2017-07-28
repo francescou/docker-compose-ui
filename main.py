@@ -259,6 +259,12 @@ def update_project():
     """
     data = loads(request.data)
     file_path = manage(YML_PATH + '/' +  data["name"], data["yml"], True)
+
+    if 'env' in data and data["env"]:
+        env_file = open(YML_PATH + '/' + data["name"] + "/.env", "w")
+        env_file.write(data["env"])
+        env_file.close()
+
     return jsonify(path=file_path)
 
 
