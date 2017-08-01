@@ -60,6 +60,7 @@
             <button class="btn btn-xs btn-default" ng-click="displayLogs(container.name)">logs</button>
             <a class="btn btn-xs btn-default" ng-href="#/project/{{projectId}}/{{container.name}}">details</a>
             <button class="btn btn-xs btn-default" ng-click="rebuild(id)">rebuild</button>
+            <button class="btn btn-xs btn-default" ng-show="{{containerConsolePattern != null}}" ng-click="openConsole(container.name)">console</button>
           </div>
           <div class="panel-body">
 
@@ -103,6 +104,23 @@
       </div>
     </div>
   </div>
+  
+  <div console-modal-show="showConsoleDialog" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">{{containerName}} console</h4>
+        </div>
+        <div class="modal-body">
+          <iframe src="{{containerConsoleUrl}}" style="width: 100%; height: 400px;"></iframe>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+  
   <span ng-show="isEmpty(services)">no containers found</span>
 </div>
 
