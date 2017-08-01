@@ -388,6 +388,12 @@ def host():
 
     return jsonify(host=host_value, workdir=os.getcwd() if YML_PATH == '.' else YML_PATH)
 
+@app.route(API_V1 + "web_console_pattern", methods=['GET'])
+def get_web_console_pattern():
+    """
+    forward WEB_CONSOLE_PATTERN env var from server to spa
+    """
+    return jsonify(web_console_pattern=os.getenv('WEB_CONSOLE_PATTERN'))
 
 @app.route(API_V1 + "health", methods=['GET'])
 def health():
