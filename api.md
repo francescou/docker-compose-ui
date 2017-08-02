@@ -105,6 +105,10 @@ The `env` parameter is optional. If it's specified, its content will be put in a
 
     curl http://localhost:5000/api/v1/host
 
+### get value of `WEB_CONSOLE_PATTERN` env var
+
+    curl http://localhost:5000/api/v1/get_web_console_pattern
+
 ### set docker daemon socket(s) to connect to
 
     curl -X POST http://localhost:5000/api/v1/host -H 'Content-type: application/json' --data '{"id": "192.168.0.1:2376"}'
