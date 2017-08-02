@@ -54,12 +54,28 @@
 
         <div class="panel" ng-class="{'active': container.is_running, 'off': !container.is_running}">
           <div class="panel-heading">
+            
             <span ng-class="{'text-muted': !container.is_running}">
               {{container.name_without_project}}
             </span>
-            <button class="btn btn-xs btn-default" ng-click="displayLogs(container.name)">logs</button>
-            <a class="btn btn-xs btn-default" ng-href="#/project/{{projectId}}/{{container.name}}">details</a>
-            <button class="btn btn-xs btn-default" ng-click="rebuild(id)">rebuild</button>
+            <br/>
+            
+            <div class="btn-group" role="group" >
+				<button class="btn btn-xs btn-default" ng-click="displayLogs(container.name)">logs</button>
+				<a class="btn btn-xs btn-default" ng-href="#/project/{{projectId}}/{{container.name}}">details</a>
+				<button class="btn btn-xs btn-default" ng-click="rebuild(id)">rebuild</button>
+			
+				<div class="btn-group" role="group" ng-show="containerConsolePattern">
+					<button class="btn btn-xs btn-default dropdown-toggle" type="button" id="shellSelector" data-toggle="dropdown">
+						console <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu shell-selector-list">
+						<li><a ng-click="openConsole(container.name, '/bin/bash')">/bin/bash</a></li>
+						<li><a ng-click="openConsole(container.name, '/bin/sh')">/bin/sh</a></li>
+					</ul>
+				</div>
+			</div>
+            
           </div>
           <div class="panel-body">
 
@@ -103,6 +119,23 @@
       </div>
     </div>
   </div>
+  
+  <div console-modal-show="showConsoleDialog" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">{{containerName}} console</h4>
+        </div>
+        <div class="modal-body">
+          <iframe ng-if="containerConsoleUrl" src="{{containerConsoleUrl}}" style="width: 800px; height: 450px; border: none;"></iframe>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+  
   <span ng-show="isEmpty(services)">no containers found</span>
 </div>
 

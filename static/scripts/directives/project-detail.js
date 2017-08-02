@@ -1,6 +1,22 @@
 'use strict';
 
 angular.module('composeUiApp')
+  .config(function($sceDelegateProvider) {
+      $.get('/api/v1/web_console_pattern', (response) => {
+          if (response.web_console_pattern) {
+			  var parser = document.createElement('a'),
+			      whitelistUrlPattern;
+
+			  parser.href = response.web_console_pattern;
+              whitelistUrlPattern = parser.protocol + '//' + parser.host + '/**';
+
+			  $sceDelegateProvider.resourceUrlWhitelist([
+				  'self',
+				  whitelistUrlPattern
+			  ]);
+		   }
+      });
+  })
   .directive('projectDetail', function($resource, $log, projectService, $window, $location){
       return {
           restrict: 'E',
@@ -18,11 +34,10 @@ angular.module('composeUiApp')
                   }
               });
 
-
-
               var Host = $resource('api/v1/host');
               var Yml = $resource('api/v1/projects/yml/:id');
               var Readme = $resource('api/v1/projects/readme/:id');
+              var WebConsolePattern = $resource('api/v1/web_console_pattern');
 
               $scope.$watch('projectId', function (val) {
                   if (val) {
@@ -57,7 +72,24 @@ angular.module('composeUiApp')
                       $scope.logs = data.logs;
                   });
               };
+              
+              $scope.containerConsolePattern = null;
+              WebConsolePattern.get(function(data) {
+				  if (data.web_console_pattern) {
+				      $scope.containerConsolePattern = data.web_console_pattern;
+				  }
+              });
 
+              $scope.openConsole = function(containerName, shell) {
+                  if ($scope.containerConsolePattern) {
+                      console.log('Opening console for ' + containerName + ' with shell ' + shell);
+                  
+                      $scope.containerConsoleUrl = $scope.containerConsolePattern.replace('{containerName}', containerName).replace('{command}', shell);
+                      $scope.containerName = containerName;
+				      $scope.showConsoleDialog = true;
+				  }
+              };
+              
               $scope.rebuild = function(serviceName) {
                   $scope.working = true;
                   Project.save({id: $scope.projectId, service_names: [serviceName], do_build: true},

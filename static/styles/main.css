@@ -169,3 +169,7 @@ header {
 .btn {
   padding: 6px 9px;
 }
+
+.shell-selector-list a {
+  cursor: pointer;
+}
