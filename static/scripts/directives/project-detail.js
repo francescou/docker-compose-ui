@@ -80,11 +80,11 @@ angular.module('composeUiApp')
 				  }
               });
 
-              $scope.openConsole = function(containerName) {
+              $scope.openConsole = function(containerName, shell) {
                   if ($scope.containerConsolePattern) {
-                      console.log('Opening console for ' + containerName);
+                      console.log('Opening console for ' + containerName + ' with shell ' + shell);
                   
-                      $scope.containerConsoleUrl = $scope.containerConsolePattern.replace('{containerName}', containerName).replace('{command}', 'sh');
+                      $scope.containerConsoleUrl = $scope.containerConsolePattern.replace('{containerName}', containerName).replace('{command}', shell);
                       $scope.containerName = containerName;
 				      $scope.showConsoleDialog = true;
 				  }
