@@ -77,6 +77,30 @@ Check out this project if you are interested in scaling up and down a docker-com
 
 since you're running docker-compose inside a container you must pay attention to volumes mounted with relative paths, see [Issue #6](https://github.com/francescou/docker-compose-ui/issues/6)
 
+### Integration with external web console
+
+Docker Compose UI support to lauch a console with a shell (one of `/bin/bash` or `/bin/sh`) in a given container if a suitable companion container is available, the only requirement for a web console is to support passing the container id (or name) and the command to exec as querystring parameters.
+
+For e.g. with [bitbull/docker-exec-web-console](https://github.com/bitbull-team/docker-exec-web-console) you can call `http://localhost:8888/?cid={containerName}&cmd={command}`, so you can pass the `WEB_CONSOLE_PATTERN` environment var to docker-compose-ui, that hold the pattern that will be used to build the url to load the console. Such pattern should include the `{containerName}` and `{command}` placeholders.
+
+Example usage:
+
+    docker run \
+        --name docker_exec_web_console \
+        -p 8888:8888 \
+        -v /var/run/docker.sock:/var/run/docker.sock  \
+        bitbull/docker-exec-web-console
+
+    docker run \
+        --name docker-compose-ui \
+        -p 5000:5000 \
+        -v $(pwd):$(pwd) \
+        -w $(pwd) \
+        -v /var/run/docker.sock:/var/run/docker.sock  \
+        -e WEB_CONSOLE_PATTERN=http://localhost:8888/?cid={containerName}&cmd={command} \
+        francescou/docker-compose-ui:1.7.0
+
+
 ## Remote docker host
 
 You can also run containers on a remote docker host, e.g.
