@@ -98,7 +98,7 @@ Example usage:
         -w $(pwd) \
         -v /var/run/docker.sock:/var/run/docker.sock  \
         -e WEB_CONSOLE_PATTERN=http://localhost:8888/?cid={containerName}&cmd={command} \
-        francescou/docker-compose-ui:1.7.0
+        francescou/docker-compose-ui:1.8.0
 
 
 ## Remote docker host
