@@ -89,6 +89,7 @@ Example usage:
         --name docker_exec_web_console \
         -p 8888:8888 \
         -v /var/run/docker.sock:/var/run/docker.sock  \
+        -e 'CONTEXT_PATH=/web-console/' \
         bitbull/docker-exec-web-console
 
     docker run \
@@ -97,7 +98,7 @@ Example usage:
         -v $(pwd):$(pwd) \
         -w $(pwd) \
         -v /var/run/docker.sock:/var/run/docker.sock  \
-        -e WEB_CONSOLE_PATTERN=http://localhost:8888/?cid={containerName}&cmd={command} \
+        -e 'WEB_CONSOLE_PATTERN=http://localhost:8888/web-console/?cid={containerName}&cmd={command}' \
         francescou/docker-compose-ui:1.8.0
 
 
