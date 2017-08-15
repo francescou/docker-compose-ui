@@ -3,13 +3,32 @@ version: "2"
 services:
     docker_compose_ui:
         restart: always
-        image: francescou/docker-compose-ui:1.5.2
+        image: francescou/docker-compose-ui:1.8.0
         container_name: docker_compose_ui
         hostname: docker_compose_ui
-        ports:
-            - 5000:5000
         working_dir: /opt/docker-compose-projects/
+        environment:
+        - 'WEB_CONSOLE_PATTERN=/web-console/?cid={containerName}&cmd={command}'
         #working_dir: /home/user/docker-compose-ui/demo-projects
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock
             #- /home/user/docker-compose-ui/demo-projects:/home/user/docker-compose-ui/demo-projects
+    web_console:
+        image: bitbull/docker-exec-web-console
+        environment:
+        - 'CONTEXT_PATH=/web-console/'
+        read_only: true
+        restart: always
+        volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+    nginx:
+        image: nginx:alpine
+        read_only: true
+        restart: always
+        ports:
+        - 8080:80
+        volumes:
+        - ./default.conf:/etc/nginx/conf.d/default.conf:ro
+        - /var/cache/nginx/
+        - /var/run/
+        - /logs/

@@ -111,7 +111,14 @@ def project_yml(name):
     config = project_config(folder_path)
 
     with open(path) as data_file:
-        return jsonify(yml=data_file.read(), config=config)
+        env = None
+        if os.path.isfile(folder_path + '/.env'):
+            with open(folder_path + '/.env') as env_file:
+                env = env_file.read()
+
+        return jsonify(yml=data_file.read(), env=env, config=config._replace(version=config.version.__str__()))
+
+
 
 @app.route(API_V1 + "projects/readme/<name>", methods=['GET'])
 def get_project_readme(name):
@@ -253,6 +260,12 @@ def update_project():
     """
     data = loads(request.data)
     file_path = manage(YML_PATH + '/' +  data["name"], data["yml"], True)
+
+    if 'env' in data and data["env"]:
+        env_file = open(YML_PATH + '/' + data["name"] + "/.env", "w")
+        env_file.write(data["env"])
+        env_file.close()
+
     return jsonify(path=file_path)
 
 
@@ -383,6 +396,12 @@ def compose_registry():
     """
     return jsonify(url = COMPOSE_REGISTRY)
 
+@app.route(API_V1 + "web_console_pattern", methods=['GET'])
+def get_web_console_pattern():
+    """
+    forward WEB_CONSOLE_PATTERN env var from server to spa
+    """
+    return jsonify(web_console_pattern=os.getenv('WEB_CONSOLE_PATTERN'))
 
 @app.route(API_V1 + "health", methods=['GET'])
 def health():

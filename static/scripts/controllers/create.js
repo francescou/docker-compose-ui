@@ -14,6 +14,10 @@ angular.module('composeUiApp')
           'createProject': {
               url: 'api/v1/create-project',
               method: 'POST'
+          },
+          'loadProject': {
+              url: 'api/v1/projects/yml/:id',
+              method: 'GET'
           }
       });
 
@@ -44,6 +48,26 @@ angular.module('composeUiApp')
 
 
       };
+
+      // pre-fill a project's details
+      $scope.loadProject = function (projectId) {
+
+          Projects.loadProject({ id: projectId }, function (data) {
+              if ('yml' in data) {
+                  $scope.yml = data.yml;
+              }
+              if ('env' in data) {
+                  $scope.env = data.env;
+              }
+          }, function (err) {
+              alertify.alert(err.data);
+          });
+
+      };
+
+      if ('from' in $routeParams) {
+          $scope.loadProject($routeParams.from);
+      }
 
 
       $scope.search = function (query) {

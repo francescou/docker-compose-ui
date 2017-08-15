@@ -18,6 +18,7 @@ The application can be deployed as a single container, there are no dependencies
 
 | Compose file format  | Docker Engine |
 | ------------- | ------------- |
+| 3.3| 17.06.0+ |
 | 3.0 – 3.2| 1.13.0+ |
 | 2.2	| 1.13.0+ |
 | 2.1	| 1.12.0+ |
@@ -33,13 +34,13 @@ Run the following command in terminal:
     -p 5000:5000 \
     -w /opt/docker-compose-projects/ \
     -v /var/run/docker.sock:/var/run/docker.sock \
-    francescou/docker-compose-ui:1.5.2
+    francescou/docker-compose-ui:1.8.0
 
 or, if you already have docker-compose installed, just `docker-compose up`.
 
 You have to wait while Docker pulls the container from the Docker Hub: <https://hub.docker.com/r/francescou/docker-compose-ui/>
 
-Then open your browser to `http://localhost:5000`
+Then open your browser to `http://localhost:8080`
 
 ### Add your own docker-compose projects
 
@@ -51,7 +52,7 @@ to use use your own docker-compose projects run this command from the directory 
         -w $(pwd) \
         -p 5000:5000 \
         -v /var/run/docker.sock:/var/run/docker.sock \
-        francescou/docker-compose-ui:1.5.2
+        francescou/docker-compose-ui:1.8.0
 
 you can download my example projects into */home/user/docker-compose-ui/demo-projects/* from https://github.com/francescou/docker-compose-ui/tree/master/demo-projects
 
@@ -63,7 +64,7 @@ you can download my example projects into */home/user/docker-compose-ui/demo-pro
     -w /opt/docker-compose-projects-git/ \
     -v /var/run/docker.sock:/var/run/docker.sock  \
     -e GIT_REPO=https://github.com/francescou/docker-compose-ui.git \
-    francescou/docker-compose-ui:1.5.2
+    francescou/docker-compose-ui:1.8.0
 
 ### Note about scaling services
 
@@ -76,6 +77,31 @@ Check out this project if you are interested in scaling up and down a docker-com
 
 since you're running docker-compose inside a container you must pay attention to volumes mounted with relative paths, see [Issue #6](https://github.com/francescou/docker-compose-ui/issues/6)
 
+### Integration with external web console
+
+Docker Compose UI support to lauch a console with a shell (one of `/bin/bash` or `/bin/sh`) in a given container if a suitable companion container is available, the only requirement for a web console is to support passing the container id (or name) and the command to exec as querystring parameters.
+
+For e.g. with [bitbull/docker-exec-web-console](https://github.com/bitbull-team/docker-exec-web-console) you can call `http://localhost:8888/?cid={containerName}&cmd={command}`, so you can pass the `WEB_CONSOLE_PATTERN` environment var to docker-compose-ui, that hold the pattern that will be used to build the url to load the console. Such pattern should include the `{containerName}` and `{command}` placeholders.
+
+Example usage:
+
+    docker run \
+        --name docker_exec_web_console \
+        -p 8888:8888 \
+        -v /var/run/docker.sock:/var/run/docker.sock  \
+        -e 'CONTEXT_PATH=/web-console/' \
+        bitbull/docker-exec-web-console
+
+    docker run \
+        --name docker-compose-ui \
+        -p 5000:5000 \
+        -v $(pwd):$(pwd) \
+        -w $(pwd) \
+        -v /var/run/docker.sock:/var/run/docker.sock  \
+        -e 'WEB_CONSOLE_PATTERN=http://localhost:8888/web-console/?cid={containerName}&cmd={command}' \
+        francescou/docker-compose-ui:1.8.0
+
+
 ## Remote docker host
 
 You can also run containers on a remote docker host, e.g.
@@ -86,7 +112,7 @@ You can also run containers on a remote docker host, e.g.
         -v $(pwd):$(pwd) \
         -w $(pwd) \
         -e DOCKER_HOST=remote-docker-host:2375 \
-        francescou/docker-compose-ui:1.5.2
+        francescou/docker-compose-ui:1.8.0
 
 
 ### Docker Swarm or HTTPS Remote docker host
@@ -106,7 +132,7 @@ For example:
         -p 5000:5000 \
         -w /opt/docker-compose-projects/ \
         -v /home/user/.docker/config.json:/root/.docker/config.json:ro \
-        francescou/docker-compose-ui:1.5.2
+        francescou/docker-compose-ui:1.8.0
 
 ## Technologies
 
