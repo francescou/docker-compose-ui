@@ -50,7 +50,7 @@ to use your own docker-compose projects run this command from the directory cont
     docker run \
         --name docker-compose-ui \
         -v $(pwd):$(pwd) \
-        -w $(pwd) \
+        -w $(dirname $(pwd)) \
         -p 5000:5000 \
         -v /var/run/docker.sock:/var/run/docker.sock \
         francescou/docker-compose-ui:1.8.0
@@ -96,8 +96,6 @@ Example usage:
     docker run \
         --name docker-compose-ui \
         -p 5000:5000 \
-        -v $(pwd):$(pwd) \
-        -w $(pwd) \
         -v /var/run/docker.sock:/var/run/docker.sock  \
         -e 'WEB_CONSOLE_PATTERN=http://localhost:8888/web-console/?cid={containerName}&cmd={command}' \
         francescou/docker-compose-ui:1.8.0
@@ -110,8 +108,6 @@ You can also run containers on a remote docker host, e.g.
     docker run \
         --name docker-compose-ui \
         -p 5000:5000 \
-        -v $(pwd):$(pwd) \
-        -w $(pwd) \
         -e DOCKER_HOST=remote-docker-host:2375 \
         francescou/docker-compose-ui:1.8.0
 
