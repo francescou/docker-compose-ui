@@ -36,15 +36,16 @@ Run the following command in terminal:
     -v /var/run/docker.sock:/var/run/docker.sock \
     francescou/docker-compose-ui:1.8.0
 
-or, if you already have docker-compose installed, just `docker-compose up`.
-
 You have to wait while Docker pulls the container from the Docker Hub: <https://hub.docker.com/r/francescou/docker-compose-ui/>
 
-Then open your browser to `http://localhost:8080`
+Then open your browser to `http://localhost:5000`
+
+If you already have docker-compose installed, you can run `docker-compose up` and then open your browser to `http://localhost:8080`.
+
 
 ### Add your own docker-compose projects
 
-to use use your own docker-compose projects run this command from the directory containing your docker-compose.yml files:
+to use your own docker-compose projects run this command from the directory containing your docker-compose.yml files:
 
     docker run \
         --name docker-compose-ui \
