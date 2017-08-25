@@ -16,8 +16,8 @@
 
           <ul class="list-unstyled search-items">
             <li ng-repeat="item in items">
-              <button class="btn btn-link" ng-click="load(item.name, item.id)">{{item.name}} by {{item.owner}}</button>{{item.stars}} <i class="glyphicon glyphicon-star"></i>
-              <a ng-href="{{composeRegistry}}/details?id={{item.id}}" target="_blank" class="btn btn-xs btn-info">info</a>
+              <button class="btn btn-link" ng-click="load(item.name, item.id)">{{item.name}} <span ng-hide="composeRegistry"> by {{item.owner}}</span></button>{{item.stars}} <i ng-hide="composeRegistry" class="glyphicon glyphicon-star"></i>
+              <a ng-hide="composeRegistry" ng-href="{{composeRegistry}}/details?id={{item.id}}" target="_blank" class="btn btn-xs btn-info">info</a>
             </li>
           </ul>
 
