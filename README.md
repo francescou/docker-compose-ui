@@ -34,7 +34,7 @@ Run the following command in terminal:
     -p 5000:5000 \
     -w /opt/docker-compose-projects/ \
     -v /var/run/docker.sock:/var/run/docker.sock \
-    francescou/docker-compose-ui:1.8.0
+    francescou/docker-compose-ui:1.8.1
 
 You have to wait while Docker pulls the container from the Docker Hub: <https://hub.docker.com/r/francescou/docker-compose-ui/>
 
@@ -53,7 +53,7 @@ to use your own docker-compose projects run this command from the directory cont
         -w $(dirname $(pwd)) \
         -p 5000:5000 \
         -v /var/run/docker.sock:/var/run/docker.sock \
-        francescou/docker-compose-ui:1.8.0
+        francescou/docker-compose-ui:1.8.1
 
 you can download my example projects into */home/user/docker-compose-ui/demo-projects/* from https://github.com/francescou/docker-compose-ui/tree/master/demo-projects
 
@@ -65,7 +65,7 @@ you can download my example projects into */home/user/docker-compose-ui/demo-pro
     -w /opt/docker-compose-projects-git/ \
     -v /var/run/docker.sock:/var/run/docker.sock  \
     -e GIT_REPO=https://github.com/francescou/docker-compose-ui.git \
-    francescou/docker-compose-ui:1.8.0
+    francescou/docker-compose-ui:1.8.1
 
 ### Note about scaling services
 
@@ -98,7 +98,7 @@ Example usage:
         -p 5000:5000 \
         -v /var/run/docker.sock:/var/run/docker.sock  \
         -e 'WEB_CONSOLE_PATTERN=http://localhost:8888/web-console/?cid={containerName}&cmd={command}' \
-        francescou/docker-compose-ui:1.8.0
+        francescou/docker-compose-ui:1.8.1
 
 
 ## Remote docker host
@@ -109,7 +109,7 @@ You can also run containers on a remote docker host, e.g.
         --name docker-compose-ui \
         -p 5000:5000 \
         -e DOCKER_HOST=remote-docker-host:2375 \
-        francescou/docker-compose-ui:1.8.0
+        francescou/docker-compose-ui:1.8.1
 
 
 ### Docker Swarm or HTTPS Remote docker host
@@ -129,7 +129,7 @@ For example:
         -p 5000:5000 \
         -w /opt/docker-compose-projects/ \
         -v /home/user/.docker/config.json:/root/.docker/config.json:ro \
-        francescou/docker-compose-ui:1.8.0
+        francescou/docker-compose-ui:1.8.1
 
 ## Technologies
 
