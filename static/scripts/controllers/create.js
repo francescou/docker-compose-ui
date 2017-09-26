@@ -27,7 +27,11 @@ angular.module('composeUiApp')
       var ComposeRegistry = $resource('api/v1/compose-registry');
 
       ComposeRegistry.get(function (data) {
-          $scope.composeRegistry = data.url;
+          var url = data.url;
+          $scope.composeRegistry = url;
+          if (url) {
+            $scope.search('yml');
+          }
       });
 
       $scope.createProject = function (name, yml, env) {
@@ -82,7 +86,7 @@ angular.module('composeUiApp')
 
       };
 
-      $scope.search('yml');
+
 
       $scope.load = function (name, id) {
 

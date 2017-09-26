@@ -21,7 +21,7 @@ from scripts.manage_project import manage
 # Flask Application
 API_V1 = '/api/v1/'
 YML_PATH = os.getenv('DOCKER_COMPOSE_UI_YML_PATH') or '.'
-COMPOSE_REGISTRY = os.getenv('DOCKER_COMPOSE_REGISTRY') or 'https://www.composeregistry.com'
+COMPOSE_REGISTRY = os.getenv('DOCKER_COMPOSE_REGISTRY')
 
 logging.basicConfig(level=logging.INFO)
 app = Flask(__name__, static_url_path='')
@@ -285,7 +285,7 @@ def remove_project(name):
 @app.route(API_V1 + "search", methods=['POST'])
 def search():
     """
-    search for a project on a docker-compose registry (e.g. www.composeregistry.com)
+    search for a project on a docker-compose registry 
     """
     query = loads(request.data)['query']
     response = requests.get(COMPOSE_REGISTRY + '/api/v1/search', \
@@ -299,7 +299,7 @@ def search():
 @app.route(API_V1 + "yml", methods=['POST'])
 def yml():
     """
-    get yml content from a docker-compose registry (e.g. www.composeregistry.com)
+    get yml content from a docker-compose registry 
     """
     item_id = loads(request.data)['id']
     response = requests.get(COMPOSE_REGISTRY + '/api/v1/yml', \
