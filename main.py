@@ -10,7 +10,7 @@ from shutil import rmtree
 from compose.service import ImageType, BuildAction
 import docker
 import requests
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, abort
 from scripts.git_repo import git_pull, git_repo, GIT_YML_PATH
 from scripts.bridge import ps_, get_project, get_container_from_id, get_yml_path, containers, project_config, info
 from scripts.find_files import find_yml_files, get_readme_file, get_logo_file
@@ -134,7 +134,11 @@ def get_project_logo(name):
     get logo.png if available
     """
     path = projects[name]
-    return get_logo_file(path)
+    logo = get_logo_file(path)
+    if logo is None:
+        abort(404)
+    return logo
+
 
 @app.route(API_V1 + "projects/<name>/<container_id>", methods=['GET'])
 def project_container(name, container_id):
@@ -485,4 +489,4 @@ def handle_generic_error(err):
 
 # run app
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', debug=False, threaded=True)
+    app.run(host='0.0.0.0', debug=True, threaded=False)
