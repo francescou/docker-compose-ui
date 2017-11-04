@@ -5,6 +5,7 @@ bridge to docker-compose
 import logging
 from os.path import normpath
 from compose.container import Container
+from compose.cli.utils import get_version_info
 from compose.cli.command import get_project as compose_get_project, get_config_path_from_options, get_config_from_options
 from compose.config.config import get_default_config_files
 from compose.config.environment import Environment
@@ -12,6 +13,8 @@ from compose.config.environment import Environment
 from compose.cli.docker_client import docker_client
 from compose.const import API_VERSIONS, COMPOSEFILE_V3_0
 
+
+logging.info(get_version_info('full'))
 
 def ps_(project):
     """
