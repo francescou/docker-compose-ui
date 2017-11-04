@@ -4,6 +4,7 @@ bridge to docker-compose
 
 import logging
 from os.path import normpath
+from compose import __version__ as compose_version
 from compose.container import Container
 from compose.cli.utils import get_version_info
 from compose.cli.command import get_project as compose_get_project, get_config_path_from_options, get_config_from_options
@@ -78,7 +79,7 @@ def info():
     docker info
     """
     docker_info = client().info()
-    return dict(info=docker_info['ServerVersion'], name=docker_info['Name'])
+    return dict(compose=compose_version,info=docker_info['ServerVersion'], name=docker_info['Name'])
 
 def client():
     """
