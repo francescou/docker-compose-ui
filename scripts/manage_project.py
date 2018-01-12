@@ -2,7 +2,7 @@
 docker compose project management
 """
 
-from os import rename, makedirs
+from os import rename, makedirs, path
 from time import time
 
 def manage(directory, yml, is_update):
@@ -10,7 +10,7 @@ def manage(directory, yml, is_update):
     create or update docker compose project
     """
 
-    file_path = directory + "/docker-compose.yml"
+    file_path = directory + "/docker-compose.yml" if path.exists(directory + "/docker-compose.yml") else "/docker-compose.yaml"
 
     if is_update:
         rename(file_path, file_path + "." + str(int(round(time()))))
