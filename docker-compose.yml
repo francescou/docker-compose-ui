@@ -3,7 +3,7 @@ version: "2"
 services:
     docker_compose_ui:
         restart: always
-        image: francescou/docker-compose-ui:1.10.0
+        image: francescou/docker-compose-ui:1.10.1
         container_name: docker_compose_ui
         hostname: docker_compose_ui
         working_dir: /opt/docker-compose-projects/
