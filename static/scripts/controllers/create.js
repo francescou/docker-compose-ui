@@ -10,11 +10,23 @@
 angular.module('composeUiApp')
   .controller('CreateCtrl', function ($scope, $routeParams, $resource, $location) {
 
+    var isEdit = $location.path().indexOf('/edit/') === 0;
+
+    if (isEdit) {
+        $scope.name = $routeParams.from;
+        $scope.isEdit = true;
+    }
+
       var Projects = $resource('api/v1/projects', null, {
-          'createProject': {
-              url: 'api/v1/create-project',
-              method: 'POST'
+
+          'createProject' : {
+            url: 'api/v1/create-project',
+            method:  'POST'
           },
+          'updateProject': {
+            url: 'api/v1/update-project',
+            method: 'PUT'
+            },
           'loadProject': {
               url: 'api/v1/projects/yml/:id',
               method: 'GET'
@@ -37,7 +49,7 @@ angular.module('composeUiApp')
       $scope.createProject = function (name, yml, env) {
 
       //TODO: check if name is alphanumeric
-          Projects.createProject({
+          Projects[isEdit ? 'updateProject' : 'createProject']({
               name: name,
               yml: yml,
               env: env
