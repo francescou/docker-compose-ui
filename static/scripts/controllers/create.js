@@ -54,7 +54,7 @@ angular.module('composeUiApp')
               yml: yml,
               env: env
           }, function (data) {
-              alertify.success('created project: ' + name + ', path: ' + data.path);
+              alertify.success((isEdit ? 'updated project' : 'created project: ') + name + ', path: ' + data.path);
               $scope.$parent.reload(false);
               $location.path('project/' + name);
 
