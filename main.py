@@ -369,8 +369,8 @@ def logs(name, limit):
     """
     lines = {}
     for k in get_project_with_name(name).containers(stopped=True):
-        lines[k.name] = k.logs(timestamps=True, tail=limit).split('\n')
-
+        lines[k.name] = k.logs(timestamps=True, tail=limit).decode().split('\n')
+ 
     return jsonify(logs=lines)
 
 @app.route(API_V1 + "logs/<name>/<container_id>", defaults={'limit': "all"}, methods=['GET'])
@@ -381,7 +381,7 @@ def container_logs(name, container_id, limit):
     """
     project = get_project_with_name(name)
     container = get_container_from_id(project.client, container_id)
-    lines = container.logs(timestamps=True, tail=limit).split('\n')
+    lines = container.logs(timestamps=True, tail=limit).decode().split('\n')
     return jsonify(logs=lines)
 
 @app.route(API_V1 + "host", methods=['GET'])

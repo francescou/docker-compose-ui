@@ -1,11 +1,17 @@
 # https://github.com/francescou/docker-compose-ui
 # DOCKER-VERSION 1.12.3
-FROM python:2.7-alpine
+FROM python:3.8-alpine
 MAINTAINER Francesco Uliana <francesco@uliana.it>
 
 RUN pip install virtualenv
 
-RUN apk add -U --no-cache git
+RUN apk add -U --no-cache git \
+   gcc \
+   libffi-dev \
+   make \
+   musl-dev \
+   openssl \
+   openssl-dev
 
 COPY ./requirements.txt /app/requirements.txt
 RUN virtualenv /env && /env/bin/pip install --no-cache-dir -r /app/requirements.txt
