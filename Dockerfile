@@ -1,6 +1,6 @@
 # https://github.com/francescou/docker-compose-ui
 # DOCKER-VERSION 1.12.3
-FROM python:3.8-alpine
+FROM python:3.8-alpine AS builder
 MAINTAINER Francesco Uliana <francesco@uliana.it>
 
 RUN pip install virtualenv
@@ -17,10 +17,17 @@ COPY ./requirements.txt /app/requirements.txt
 RUN virtualenv /env && /env/bin/pip install --no-cache-dir -r /app/requirements.txt
 
 COPY . /app
+COPY demo-projects /opt/docker-compose-projects
+
+FROM python:3.8-alpine
+
+RUN apk add -U --no-cache git 
 
 VOLUME ["/opt/docker-compose-projects"]
 
-COPY demo-projects /opt/docker-compose-projects
+COPY --from=builder /env /env
+COPY --from=builder /app /app
+COPY --from=builder /opt/docker-compose-projects /opt/docker-compose-projects
 
 EXPOSE 5000
 
