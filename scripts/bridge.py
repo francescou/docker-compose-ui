@@ -12,7 +12,7 @@ from compose.config.config import get_default_config_files
 from compose.config.environment import Environment
 
 from compose.cli.docker_client import docker_client
-from compose.const import API_VERSIONS, COMPOSEFILE_V3_0
+from compose.const import API_VERSIONS, COMPOSE_SPEC
 
 
 logging.info(get_version_info('full'))
@@ -85,7 +85,7 @@ def client():
     """
     docker client
     """
-    return docker_client(Environment(), API_VERSIONS[COMPOSEFILE_V3_0])
+    return docker_client(Environment(), API_VERSIONS[COMPOSE_SPEC])
 
 def project_config(path):
     """
