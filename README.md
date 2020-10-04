@@ -18,6 +18,8 @@ The application can be deployed as a single container, there are no dependencies
 
 | Compose file format  | Docker Engine |
 | ------------- | ------------- |
+| 3.8 | 19.03.0+ |
+| 3.7 | 18.06.0+ |
 | 3.6 | 18.02.0+ |
 | 3.3 - 3.5 | 17.06.0+ |
 | 3.0 – 3.2| 1.13.0+ |
