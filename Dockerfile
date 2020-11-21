@@ -1,5 +1,5 @@
-# https://github.com/francescou/docker-compose-ui
-# DOCKER-VERSION 1.12.3
+# https://github.com/nsano-rururu/docker-compose-ui
+# DOCKER-VERSION 1.13.1
 FROM python:3.9.0-alpine AS builder
 MAINTAINER Francesco Uliana <francesco@uliana.it>
 
