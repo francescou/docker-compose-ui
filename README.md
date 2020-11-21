@@ -1,5 +1,7 @@
 ![Docker Compose UI](https://raw.githubusercontent.com/nsano-rururu/docker-compose-ui/master/static/images/logo-dark.png)
 
+![GitHub release](https://img.shields.io/github/release/nsano-rururu/docker-compose-ui.svg)
+![GitHub stars](https://img.shields.io/github/stars/nsano-rururu/docker-compose-ui.svg?style=social&label=Stars)
 [![Docker Stars](https://img.shields.io/docker/stars/rururukenken/docker-compose-ui.svg)](https://hub.docker.com/r/rururukenken/docker-compose-ui/)
 [![Docker Pulls](https://img.shields.io/docker/pulls/rururukenken/docker-compose-ui.svg)](https://hub.docker.com/r/rururukenken/docker-compose-ui/)
 
