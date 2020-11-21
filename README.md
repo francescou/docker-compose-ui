@@ -75,7 +75,7 @@ you can download my example projects into */home/user/docker-compose-ui/demo-pro
 
 Note that some of the services provided by the demo projects are not "scalable" with `docker-compose scale SERVICE=NUM` because of published ports conflicts.
 
-Check out this project if you are interested in scaling up and down a docker-compose service without having any down time: <https://github.com/rururukenken/docker-continuous-deployment>
+Check out this project if you are interested in scaling up and down a docker-compose service without having any down time: <https://github.com/francescou/docker-continuous-deployment>
 
 
 ### Note about volumes
