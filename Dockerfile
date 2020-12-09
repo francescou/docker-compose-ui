@@ -1,6 +1,6 @@
 # https://github.com/nsano-rururu/docker-compose-ui
 # DOCKER-VERSION 1.13.1
-FROM python:3.9.0-alpine AS builder
+FROM python:3.9.1-alpine AS builder
 MAINTAINER Francesco Uliana <francesco@uliana.it>
 
 RUN pip install virtualenv
@@ -21,7 +21,7 @@ RUN virtualenv /env && \
 COPY . /app
 COPY demo-projects /opt/docker-compose-projects
 
-FROM python:3.9.0-alpine
+FROM python:3.9.1-alpine
 
 RUN apk add -U --no-cache git 
 
