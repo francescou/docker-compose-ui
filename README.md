@@ -73,6 +73,18 @@ you can download my example projects into */home/user/docker-compose-ui/demo-pro
     -e GIT_REPO=https://github.com/nsano-rururu/docker-compose-ui.git \
     rururukenken/docker-compose-ui:1.13.2
 
+### Run from URL prefix
+
+Useful for running multiple applications under the same hostname, ie, Traefik console at `http://hostname.com/traefik/`, DCUI under `http://hostname.com/manage/`, etc.
+
+    docker run \
+    --name docker-compose-ui \
+    -p 5000:5000 \
+    -w /opt/docker-compose-projects/ \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    -e DOCKER_COMPOSE_UI_PREFIX=manage/docker \
+    rururukenken/docker-compose-ui:1.13.2
+
 ### Note about scaling services
 
 Note that some of the services provided by the demo projects are not "scalable" with `docker-compose scale SERVICE=NUM` because of published ports conflicts.
