@@ -22,9 +22,24 @@ from scripts.manage_project import manage
 API_V1 = '/api/v1/'
 YML_PATH = os.getenv('DOCKER_COMPOSE_UI_YML_PATH') or '.'
 COMPOSE_REGISTRY = os.getenv('DOCKER_COMPOSE_REGISTRY')
+STATIC_URL_PATH = '/' + (os.getenv('DOCKER_COMPOSE_UI_PREFIX') or '')
 
 logging.basicConfig(level=logging.INFO)
-app = Flask(__name__, static_url_path='')
+app = Flask(__name__, static_url_path=STATIC_URL_PATH)
+
+
+def prefix_route(route_function, prefix='', mask='{0}{1}'):
+  '''
+    Defines a new route function with a prefix.
+    The mask argument is a `format string` formatted with, in that order:
+      prefix, route
+  '''
+  def newroute(route, *args, **kwargs):
+    '''New function to prefix the route'''
+    return route_function(mask.format(prefix, route), *args, **kwargs)
+  return newroute
+
+app.route = prefix_route(app.route,prefix=STATIC_URL_PATH)
 
 def load_projects():
     """
@@ -489,4 +504,4 @@ def handle_generic_error(err):
 
 # run app
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', debug=False, threaded=True)
+    app.run(host='0.0.0.0', threaded=True)
