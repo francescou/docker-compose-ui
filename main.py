@@ -33,6 +33,7 @@ def prefix_route(route_function, prefix='', mask='{0}{1}'):
     Defines a new route function with a prefix.
     The mask argument is a `format string` formatted with, in that order:
       prefix, route
+    Pulled from https://stackoverflow.com/a/37878456 from user 7heo.tk
   '''
   def newroute(route, *args, **kwargs):
     '''New function to prefix the route'''
