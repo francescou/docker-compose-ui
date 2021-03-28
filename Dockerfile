@@ -1,7 +1,7 @@
 # https://github.com/nsano-rururu/docker-compose-ui
-# DOCKER-VERSION 1.13.2
+# DOCKER-VERSION 19.03
 FROM python:3.9.2-alpine AS builder
-MAINTAINER Francesco Uliana <francesco@uliana.it>
+MAINTAINER Naoyuki Sano <nsano@ae.em-net.ne.jp>
 
 RUN pip install virtualenv
 
