@@ -1,3 +1,11 @@
+# Fork of francescou/docker-compose-ui
+
+The original [francescou/docker-compose-ui repository](https://github.com/francescou/docker-compose-ui) is archived. 
+
+Consequently, it is difficult to merge fixes, dependency upgrades, and new features into docker-compose-ui. Because of this, a fork of docker-compose-ui has been created.
+
+---
+
 ![Docker Compose UI](https://raw.githubusercontent.com/nsano-rururu/docker-compose-ui/master/static/images/logo-dark.png)
 
 ![GitHub release](https://img.shields.io/github/release/nsano-rururu/docker-compose-ui.svg)
@@ -155,9 +163,9 @@ Docker Compose UI has been developed using Flask (python microframework) to prov
 
 The application uses [Docker Compose](https://docs.docker.com/compose) to monitor and edit the state of a set of docker compose projects (*docker-compose.yml* files).
 
-## Issues
+## Discussions
 
-If you have any problems with or questions about this image, please open a GitHub issue on https://github.com/nsano-rururu/docker-compose-ui
+If you have any problems with or questions about this image, please open a GitHub discussions on https://github.com/nsano-rururu/docker-compose-ui/discussions
 
 ## License - MIT
 
