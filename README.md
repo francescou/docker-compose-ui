@@ -2,7 +2,9 @@
 
 The original [francescou/docker-compose-ui repository](https://github.com/francescou/docker-compose-ui) is archived. 
 
-Consequently, it is difficult to merge fixes, dependency upgrades, and new features into docker-compose-ui. Because of this, a fork of docker-compose-ui has been created.
+Consequently, it is difficult to merge fixes, dependency upgrades, and new features into docker-compose-ui.
+
+Because of this, a fork of docker-compose-ui has been created.
 
 ---
 
