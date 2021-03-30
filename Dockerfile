@@ -23,7 +23,7 @@ RUN virtualenv /env && \
 COPY . /app
 COPY demo-projects /opt/docker-compose-projects
 
-FROM python:3.9.1-alpine
+FROM python:3.9.2-alpine
 
 RUN apk add -U --no-cache git 
 
