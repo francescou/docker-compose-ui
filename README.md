@@ -50,7 +50,7 @@ Run the following command in terminal:
     -p 5000:5000 \
     -w /opt/docker-compose-projects/ \
     -v /var/run/docker.sock:/var/run/docker.sock \
-    rururukenken/docker-compose-ui:1.13.3
+    rururukenken/docker-compose-ui:1.13.4
 
 You have to wait while Docker pulls the container from the Docker Hub: <https://hub.docker.com/r/rururukenken/docker-compose-ui/>
 
@@ -69,7 +69,7 @@ to use your own docker-compose projects run this command from the directory cont
         -w $(dirname $(pwd)) \
         -p 5000:5000 \
         -v /var/run/docker.sock:/var/run/docker.sock \
-        rururukenken/docker-compose-ui:1.13.3
+        rururukenken/docker-compose-ui:1.13.4
 
 you can download my example projects into */home/user/docker-compose-ui/demo-projects/* from https://github.com/nsano-rururu/docker-compose-ui/tree/master/demo-projects
 
@@ -81,7 +81,7 @@ you can download my example projects into */home/user/docker-compose-ui/demo-pro
     -w /opt/docker-compose-projects-git/ \
     -v /var/run/docker.sock:/var/run/docker.sock  \
     -e GIT_REPO=https://github.com/nsano-rururu/docker-compose-ui.git \
-    rururukenken/docker-compose-ui:1.13.3
+    rururukenken/docker-compose-ui:1.13.4
 
 ### Run from URL prefix
 
@@ -93,7 +93,7 @@ Useful for running multiple applications under the same hostname, ie, Traefik co
     -w /opt/docker-compose-projects/ \
     -v /var/run/docker.sock:/var/run/docker.sock \
     -e DOCKER_COMPOSE_UI_PREFIX=manage/docker \
-    rururukenken/docker-compose-ui:1.13.3
+    rururukenken/docker-compose-ui:1.13.4
 
 ### Note about scaling services
 
@@ -126,7 +126,7 @@ Example usage:
         -p 5000:5000 \
         -v /var/run/docker.sock:/var/run/docker.sock  \
         -e 'WEB_CONSOLE_PATTERN=http://localhost:8888/web-console/?cid={containerName}&cmd={command}' \
-        rururukenken/docker-compose-ui:1.13.3
+        rururukenken/docker-compose-ui:1.13.4
 
 
 ## Remote docker host
@@ -137,7 +137,7 @@ You can also run containers on a remote docker host, e.g.
         --name docker-compose-ui \
         -p 5000:5000 \
         -e DOCKER_HOST=remote-docker-host:2375 \
-        rururukenken/docker-compose-ui:1.13.3
+        rururukenken/docker-compose-ui:1.13.4
 
 
 ### Docker Swarm or HTTPS Remote docker host
@@ -157,7 +157,7 @@ For example:
         -p 5000:5000 \
         -w /opt/docker-compose-projects/ \
         -v /home/user/.docker/config.json:/root/.docker/config.json:ro \
-        rururukenken/docker-compose-ui:1.13.3
+        rururukenken/docker-compose-ui:1.13.4
 
 ## Technologies
 
