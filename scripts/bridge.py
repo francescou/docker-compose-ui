@@ -12,7 +12,7 @@ from compose.config.config import get_default_config_files
 from compose.config.environment import Environment
 
 from compose.cli.docker_client import docker_client
-from compose.const import API_VERSIONS, COMPOSEFILE_V3_0
+from compose.const import API_VERSIONS, COMPOSE_SPEC
 
 
 logging.info(get_version_info('full'))
@@ -64,7 +64,7 @@ def get_project(path):
     logging.debug('get project ' + path)
 
     environment = Environment.from_env_file(path)
-    config_path = get_config_path_from_options(path, dict(), environment)
+    config_path = get_config_path_from_options(dict(), environment)
     project = compose_get_project(path, config_path)
     return project
 
@@ -85,7 +85,7 @@ def client():
     """
     docker client
     """
-    return docker_client(Environment(), API_VERSIONS[COMPOSEFILE_V3_0])
+    return docker_client(Environment(), API_VERSIONS[COMPOSE_SPEC])
 
 def project_config(path):
     """
