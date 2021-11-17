@@ -3,7 +3,7 @@ version: "2"
 services:
     docker_compose_ui:
         restart: always
-        image: rururukenken/docker-compose-ui:1.13.5
+        image: rururukenken/docker-compose-ui:1.13.6
         container_name: docker_compose_ui
         hostname: docker_compose_ui
         working_dir: /opt/docker-compose-projects/
