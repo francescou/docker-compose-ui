@@ -1,0 +1,31 @@
+version: 2
+updates:
+- package-ecosystem: pip
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "20:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: gitpython
+    versions:
+    - 3.1.12
+    - 3.1.13
+    - 3.1.14
+  - dependency-name: docker-compose
+    versions:
+    - 1.28.2
+    - 1.28.3
+    - 1.28.4
+    - 1.28.5
+- package-ecosystem: docker
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "20:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: python
+    versions:
+    - 3.10.0a6.pre.alpine
+    - 3.9.2.pre.alpine

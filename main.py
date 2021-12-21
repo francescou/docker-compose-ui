@@ -22,9 +22,25 @@ from scripts.manage_project import manage
 API_V1 = '/api/v1/'
 YML_PATH = os.getenv('DOCKER_COMPOSE_UI_YML_PATH') or '.'
 COMPOSE_REGISTRY = os.getenv('DOCKER_COMPOSE_REGISTRY')
+STATIC_URL_PATH = '/' + (os.getenv('DOCKER_COMPOSE_UI_PREFIX') or '')
 
 logging.basicConfig(level=logging.INFO)
-app = Flask(__name__, static_url_path='')
+app = Flask(__name__, static_url_path=STATIC_URL_PATH)
+
+
+def prefix_route(route_function, prefix='', mask='{0}{1}'):
+  '''
+    Defines a new route function with a prefix.
+    The mask argument is a `format string` formatted with, in that order:
+      prefix, route
+    Pulled from https://stackoverflow.com/a/37878456 from user 7heo.tk
+  '''
+  def newroute(route, *args, **kwargs):
+    '''New function to prefix the route'''
+    return route_function(mask.format(prefix, route), *args, **kwargs)
+  return newroute
+
+app.route = prefix_route(app.route,prefix=STATIC_URL_PATH)
 
 def load_projects():
     """
@@ -116,7 +132,7 @@ def project_yml(name):
             with open(folder_path + '/.env') as env_file:
                 env = env_file.read()
 
-        return jsonify(yml=data_file.read(), env=env, config=config._replace(version=config.version.__str__()))
+        return jsonify(yml=data_file.read(), env=env, config=config._replace(config_version=config.config_version.__str__(), version=config.version.__str__()))
 
 
 
@@ -369,8 +385,8 @@ def logs(name, limit):
     """
     lines = {}
     for k in get_project_with_name(name).containers(stopped=True):
-        lines[k.name] = k.logs(timestamps=True, tail=limit).split('\n')
-
+        lines[k.name] = k.logs(timestamps=True, tail=limit).decode().split('\n')
+ 
     return jsonify(logs=lines)
 
 @app.route(API_V1 + "logs/<name>/<container_id>", defaults={'limit': "all"}, methods=['GET'])
@@ -381,7 +397,7 @@ def container_logs(name, container_id, limit):
     """
     project = get_project_with_name(name)
     container = get_container_from_id(project.client, container_id)
-    lines = container.logs(timestamps=True, tail=limit).split('\n')
+    lines = container.logs(timestamps=True, tail=limit).decode().split('\n')
     return jsonify(logs=lines)
 
 @app.route(API_V1 + "host", methods=['GET'])
@@ -489,4 +505,4 @@ def handle_generic_error(err):
 
 # run app
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', debug=False, threaded=True)
+    app.run(host='0.0.0.0', threaded=True)

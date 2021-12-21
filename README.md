@@ -1,7 +1,19 @@
-![Docker Compose UI](https://raw.githubusercontent.com/francescou/docker-compose-ui/master/static/images/logo-dark.png)
+# Fork of francescou/docker-compose-ui
 
-[![Docker Stars](https://img.shields.io/docker/stars/francescou/docker-compose-ui.svg)](https://hub.docker.com/r/francescou/docker-compose-ui/)
-[![Docker Pulls](https://img.shields.io/docker/pulls/francescou/docker-compose-ui.svg)](https://hub.docker.com/r/francescou/docker-compose-ui/)
+The original [francescou/docker-compose-ui repository](https://github.com/francescou/docker-compose-ui) is archived. 
+
+Consequently, it is difficult to merge fixes, dependency upgrades, and new features into docker-compose-ui.
+
+Because of this, a fork of docker-compose-ui has been created.
+
+---
+
+![Docker Compose UI](https://raw.githubusercontent.com/nsano-rururu/docker-compose-ui/master/static/images/logo-dark.png)
+
+![GitHub release](https://img.shields.io/github/release/nsano-rururu/docker-compose-ui.svg)
+![GitHub stars](https://img.shields.io/github/stars/nsano-rururu/docker-compose-ui.svg?style=social&label=Stars)
+[![Docker Stars](https://img.shields.io/docker/stars/rururukenken/docker-compose-ui.svg)](https://hub.docker.com/r/rururukenken/docker-compose-ui/)
+[![Docker Pulls](https://img.shields.io/docker/pulls/rururukenken/docker-compose-ui.svg)](https://hub.docker.com/r/rururukenken/docker-compose-ui/)
 
 ## What is it
 
@@ -11,18 +23,20 @@ The aim of this project is to provide a minimal HTTP API on top of Docker Compos
 
 The application can be deployed as a single container, there are no dependencies nor databases to install.
 
-![compose ui screenshots](https://raw.githubusercontent.com/francescou/docker-compose-ui/master/screenshots/docker-compose-ui.gif)
+![compose ui screenshots](https://raw.githubusercontent.com/nsano-rururu/docker-compose-ui/master/screenshots/docker-compose-ui.gif)
 
 
 ## Compose file format compatibility matrix
 
 | Compose file format  | Docker Engine |
 | ------------- | ------------- |
+| 3.8 | 19.03.0+ |
+| 3.7 | 18.06.0+ |
 | 3.6 | 18.02.0+ |
 | 3.3 - 3.5 | 17.06.0+ |
-| 3.0 – 3.2| 1.13.0+ |
+| 3.0 – 3.2| 1.13.1+ |
 | 2.3	| 17.06.0+ |
-| 2.2	| 1.13.0+ |
+| 2.2	| 1.13.1+ |
 | 2.1	| 1.12.0+ |
 | 2.0	| 1.10.0+ |
 | 1.0	| 1.9.1+ |
@@ -36,9 +50,9 @@ Run the following command in terminal:
     -p 5000:5000 \
     -w /opt/docker-compose-projects/ \
     -v /var/run/docker.sock:/var/run/docker.sock \
-    francescou/docker-compose-ui:1.13.0
+    rururukenken/docker-compose-ui:1.13.6
 
-You have to wait while Docker pulls the container from the Docker Hub: <https://hub.docker.com/r/francescou/docker-compose-ui/>
+You have to wait while Docker pulls the container from the Docker Hub: <https://hub.docker.com/r/rururukenken/docker-compose-ui/>
 
 Then open your browser to `http://localhost:5000`
 
@@ -55,9 +69,9 @@ to use your own docker-compose projects run this command from the directory cont
         -w $(dirname $(pwd)) \
         -p 5000:5000 \
         -v /var/run/docker.sock:/var/run/docker.sock \
-        francescou/docker-compose-ui:1.13.0
+        rururukenken/docker-compose-ui:1.13.6
 
-you can download my example projects into */home/user/docker-compose-ui/demo-projects/* from https://github.com/francescou/docker-compose-ui/tree/master/demo-projects
+you can download my example projects into */home/user/docker-compose-ui/demo-projects/* from https://github.com/nsano-rururu/docker-compose-ui/tree/master/demo-projects
 
 ### Load projects from a git repository (experimental)
 
@@ -66,8 +80,20 @@ you can download my example projects into */home/user/docker-compose-ui/demo-pro
     -p 5000:5000 \
     -w /opt/docker-compose-projects-git/ \
     -v /var/run/docker.sock:/var/run/docker.sock  \
-    -e GIT_REPO=https://github.com/francescou/docker-compose-ui.git \
-    francescou/docker-compose-ui:1.13.0
+    -e GIT_REPO=https://github.com/nsano-rururu/docker-compose-ui.git \
+    rururukenken/docker-compose-ui:1.13.6
+
+### Run from URL prefix
+
+Useful for running multiple applications under the same hostname, ie, Traefik console at `http://hostname.com/traefik/`, DCUI under `http://hostname.com/manage/`, etc.
+
+    docker run \
+    --name docker-compose-ui \
+    -p 5000:5000 \
+    -w /opt/docker-compose-projects/ \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    -e DOCKER_COMPOSE_UI_PREFIX=manage/docker \
+    rururukenken/docker-compose-ui:1.13.6
 
 ### Note about scaling services
 
@@ -100,7 +126,7 @@ Example usage:
         -p 5000:5000 \
         -v /var/run/docker.sock:/var/run/docker.sock  \
         -e 'WEB_CONSOLE_PATTERN=http://localhost:8888/web-console/?cid={containerName}&cmd={command}' \
-        francescou/docker-compose-ui:1.13.0
+        rururukenken/docker-compose-ui:1.13.6
 
 
 ## Remote docker host
@@ -111,7 +137,7 @@ You can also run containers on a remote docker host, e.g.
         --name docker-compose-ui \
         -p 5000:5000 \
         -e DOCKER_HOST=remote-docker-host:2375 \
-        francescou/docker-compose-ui:1.13.0
+        rururukenken/docker-compose-ui:1.13.6
 
 
 ### Docker Swarm or HTTPS Remote docker host
@@ -131,7 +157,7 @@ For example:
         -p 5000:5000 \
         -w /opt/docker-compose-projects/ \
         -v /home/user/.docker/config.json:/root/.docker/config.json:ro \
-        francescou/docker-compose-ui:1.13.0
+        rururukenken/docker-compose-ui:1.13.6
 
 ## Technologies
 
@@ -139,14 +165,9 @@ Docker Compose UI has been developed using Flask (python microframework) to prov
 
 The application uses [Docker Compose](https://docs.docker.com/compose) to monitor and edit the state of a set of docker compose projects (*docker-compose.yml* files).
 
+## Discussions
 
-## API
-
-API docs at <https://francescou.github.io/docker-compose-ui/api.html>
-
-## Issues
-
-If you have any problems with or questions about this image, please open a GitHub issue on https://github.com/francescou/docker-compose-ui
+If you have any problems with or questions about this image, please open a GitHub discussions on https://github.com/nsano-rururu/docker-compose-ui/discussions
 
 ## License - MIT
 
